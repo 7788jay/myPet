@@ -8,7 +8,7 @@ apply plugin: 'war'
 sourceCompatibility = 1.5
 
 repositories {
-    //    使用开源中国的maven仓库
+    //使用开源中国的maven仓库
     maven { url 'http://maven.oschina.net/content/groups/public/' }
 }
 
@@ -17,9 +17,14 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //从maven仓库导入依赖
     compile ('org.springframework:spring-context:4.2.4.RELEASE',
+            'org.springframework:spring-tx:4.2.4.RELEASE',
             'org.springframework:org.springframework.web:3.2.5.RELEASE',
             'org.springframework:org.springframework.web.servlet:3.2.5.RELEASE',
+            'org.springframework:org.springframework.jdbc:3.2.5.RELEASE',
             'com.alibaba:fastjson:1.2.7',
+            'org.mybatis:mybatis-spring:1.2.3',
+            'org.mybatis:mybatis:3.3.0',
+            'com.alibaba.druid:druid-wrapper:0.2.9',
             "mysql:mysql-connector-java:5.1.24")
 }
 
