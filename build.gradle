@@ -1,0 +1,25 @@
+group 'myPet'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.5
+
+repositories {
+    //    使用开源中国的maven仓库
+    maven { url 'http://maven.oschina.net/content/groups/public/' }
+}
+
+dependencies {
+    //导入本地的依赖包
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //从maven仓库导入依赖
+    compile ('org.springframework:spring-context:4.2.4.RELEASE',
+            'org.springframework:org.springframework.web:3.2.5.RELEASE',
+            'org.springframework:org.springframework.web.servlet:3.2.5.RELEASE',
+            'com.alibaba:fastjson:1.2.7',
+            "mysql:mysql-connector-java:5.1.24")
+}
+
