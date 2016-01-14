@@ -40,6 +40,7 @@
             <value>
                 /login.html=anon
                 /index.html=anon
+                /assets/**=anon
                 /**=authc
             </value>
         </property>

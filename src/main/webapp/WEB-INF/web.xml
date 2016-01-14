@@ -27,7 +27,7 @@
     <!--  Spring 服务层的配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring.xml</param-value>
+        <param-value>classpath:spring-service.xml</param-value>
     </context-param>
 
     <!--  Spring 容器启动监听器 -->
@@ -51,6 +51,11 @@
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

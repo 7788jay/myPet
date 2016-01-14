@@ -27,6 +27,8 @@ dependencies {
             'com.alibaba.druid:druid-wrapper:0.2.9',
             'org.apache.shiro:shiro-spring:1.2.4',
             'org.apache.shiro:shiro-web:1.2.4',
+            'org.apache.shiro:shiro-core:1.2.4',
+            'org.slf4j:slf4j-nop:1.7.9',
             "mysql:mysql-connector-java:5.1.24")
 }
 
