@@ -13,7 +13,8 @@ public class test {
 
     @ResponseBody
     @RequestMapping
-    public String login(){
+    public String login(String shiroLoginFailure){
+
         return "ggggggggggggggggggggg";
     }
 }
