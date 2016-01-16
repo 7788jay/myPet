@@ -21,7 +21,7 @@ avalon.ready(function () {
                 return;
             }
             $.ajax({
-                url: "/qky/user/login",
+                url: "/admin/login",
                 cache: false,
                 dataType: "json",
                 data: {username: vm.username, password: vm.password},

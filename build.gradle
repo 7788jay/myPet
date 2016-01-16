@@ -30,6 +30,7 @@ dependencies {
             'org.apache.shiro:shiro-core:1.2.4',
             'org.slf4j:slf4j-nop:1.7.9',
             'javax.servlet:javax.servlet:3.0.0.v201103241009',
+            'apache-lang:commons-lang:2.1',
             "mysql:mysql-connector-java:5.1.24")
 }
 

@@ -10,15 +10,15 @@
 <link href="css/signin.css" rel="stylesheet">
 </head>
 
-<body>
+<body ms-controller="login">
 <div class="signin">
 	<div class="signin-head">
 		<img width="120px" height="120px" src="images/test/head_120.png" alt="" class="img-circle">
 	</div>
-	<form class="form-signin" role="form" action="/login" method="post">
-		<input type="text" name="username" class="form-control" placeholder="用户名" required autofocus />
-		<input type="password" name="passwprd" class="form-control" placeholder="密码" required />
-		<button class="btn btn-lg btn-warning btn-block" type="submit">登录</button>
+	<form class="form-signin" role="form">
+		<input type="text" class="form-control" placeholder="用户名" required autofocus ms-duplex="username"/>
+		<input type="password" class="form-control" placeholder="密码" required ms-duplex="password"/>
+		<button class="btn btn-lg btn-warning btn-block" type="button" ms-click="login">登录</button>
 		<label class="checkbox">
 			<input type="checkbox" value="remember-me"> 记住我
 		</label>
@@ -26,3 +26,7 @@
 </div>
 </body>
 </html>
+<script src="/libs/jquery/jquery.min.js"></script>
+<script src="/libs/avalon/avalon.shim.min.js"></script>
+<script src="/js/login.js"></script>
+<script src="/libs/layer/layer.js"></script>
