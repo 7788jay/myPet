@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pet.lin.dao.sys.IUserDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        code,
+        username,
+        password,
+        phone,
+        salt,
+        locked
+    </sql>
+    <insert id="insert" parameterType="user">
+        INSERT INTO sys_user (
+		    code
+		    ,username
+		    ,password
+		    ,phone
+		    ,salt
+		    ,locked
+        ) VALUES (
+		    	#{code}
+		    	,#{username}
+		    	,#{password}
+		    	,#{phone}
+		    	,#{salt}
+		    	,#{locked}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO sys_user (
+		    code
+		    ,username
+		    ,password
+		    ,phone
+		    ,salt
+		    ,locked
+        ) VALUES (
+		    	#{map.code}
+		    	,#{map.username}
+		    	,#{map.password}
+		    	,#{map.phone}
+		    	,#{map.salt}
+		    	,#{map.locked}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="user">
+        UPDATE sys_user
+        <trim prefix="SET" suffixOverrides=",">
+		    code=#{code},
+		    username=#{username},
+		    password=#{password},
+		    phone=#{phone},
+		    salt=#{salt},
+		    locked=#{locked},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+	
+	<update id="updateMap">
+        UPDATE sys_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.code!=null">
+                code = #{map.code},
+            </if>
+            <if test="map.username!=null">
+                username = #{map.username},
+            </if>
+            <if test="map.password!=null">
+                password = #{map.password},
+            </if>
+            <if test="map.phone!=null">
+                phone = #{map.phone},
+            </if>
+            <if test="map.salt!=null">
+                salt = #{map.salt},
+            </if>
+            <if test="map.locked!=null">
+                locked = #{map.locked},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE sys_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.code!=null">
+                code = #{update.code},
+            </if>
+            <if test="update.username!=null">
+                username = #{update.username},
+            </if>
+            <if test="update.password!=null">
+                password = #{update.password},
+            </if>
+            <if test="update.phone!=null">
+                phone = #{update.phone},
+            </if>
+            <if test="update.salt!=null">
+                salt = #{update.salt},
+            </if>
+            <if test="update.locked!=null">
+                locked = #{update.locked},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.username!=null">
+                AND username = #{condition.username}
+            </if>
+            <if test="condition.password!=null">
+                AND password = #{condition.password}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.salt!=null">
+                AND salt = #{condition.salt}
+            </if>
+            <if test="condition.locked!=null">
+                AND locked = #{condition.locked}
+            </if>
+        </trim>
+    </update>
+
+    <update id="updateNull" parameterType="User">
+        UPDATE sys_user
+        <trim prefix="SET" suffixOverrides=",">
+            code = #{code},
+            username = #{username},
+            password = #{password},
+            phone = #{phone},
+            salt = #{salt},
+            locked = #{locked},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+    
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM sys_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM sys_user
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM sys_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+            <if test="username!=null">
+                AND username = #{username}
+            </if>
+            <if test="password!=null">
+                AND password = #{password}
+            </if>
+            <if test="phone!=null">
+                AND phone = #{phone}
+            </if>
+            <if test="salt!=null">
+                AND salt = #{salt}
+            </if>
+            <if test="locked!=null">
+                AND locked = #{locked}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM sys_user WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Integer" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.code!=null">
+                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            </if>
+            <if test="condition.username!=null">
+                ${condition.groupOp}   username  ${condition.username.op}  #{condition.username.data}
+            </if>
+            <if test="condition.password!=null">
+                ${condition.groupOp}   password  ${condition.password.op}  #{condition.password.data}
+            </if>
+            <if test="condition.phone!=null">
+                ${condition.groupOp}   phone  ${condition.phone.op}  #{condition.phone.data}
+            </if>
+            <if test="condition.salt!=null">
+                ${condition.groupOp}   salt  ${condition.salt.op}  #{condition.salt.data}
+            </if>
+            <if test="condition.locked!=null">
+                ${condition.groupOp}   locked  ${condition.locked.op}  #{condition.locked.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="code!=null">
+                AND code like CONCAT('%', #{code} , '%')
+            </if>
+            <if test="username!=null">
+                AND username like CONCAT('%', #{username} , '%')
+            </if>
+            <if test="password!=null">
+                AND password like CONCAT('%', #{password} , '%')
+            </if>
+            <if test="phone!=null">
+                AND phone like CONCAT('%', #{phone} , '%')
+            </if>
+            <if test="salt!=null">
+                AND salt like CONCAT('%', #{salt} , '%')
+            </if>
+            <if test="locked!=null">
+                AND locked like CONCAT('%', #{locked} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.username!=null">
+                AND username = #{condition.username}
+            </if>
+            <if test="condition.password!=null">
+                AND password = #{condition.password}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.salt!=null">
+                AND salt = #{condition.salt}
+            </if>
+            <if test="condition.locked!=null">
+                AND locked = #{condition.locked}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.username!=null">
+                AND username = #{condition.username}
+            </if>
+            <if test="condition.password!=null">
+                AND password = #{condition.password}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.salt!=null">
+                AND salt = #{condition.salt}
+            </if>
+            <if test="condition.locked!=null">
+                AND locked = #{condition.locked}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM sys_user
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="code!=null">
+               ${groupOp} code ${code.op}  #{code.data}
+           </if>
+           <if test="username!=null">
+               ${groupOp} username ${username.op}  #{username.data}
+           </if>
+           <if test="password!=null">
+               ${groupOp} password ${password.op}  #{password.data}
+           </if>
+           <if test="phone!=null">
+               ${groupOp} phone ${phone.op}  #{phone.data}
+           </if>
+           <if test="salt!=null">
+               ${groupOp} salt ${salt.op}  #{salt.data}
+           </if>
+           <if test="locked!=null">
+               ${groupOp} locked ${locked.op}  #{locked.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Integer">
+        SELECT
+        MAX(id)
+        FROM sys_user
+    </select>
+   
+</mapper>

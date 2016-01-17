@@ -19,8 +19,6 @@
                      http://www.springframework.org/schema/mvc
                      http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-    <context:annotation-config></context:annotation-config>
-
     <!-- springmvc 注解驱动 -->
     <!--<mvc:annotation-driven/>-->
 
@@ -51,6 +49,10 @@
 
     <!-- 扫描器 -->
     <context:component-scan base-package="cn.pet.lin"/>
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+        <property name="caseSensitive" value="true" />
+    </bean>
 
 
     <!-- 配置视图解析器 -->

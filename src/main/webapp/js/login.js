@@ -23,8 +23,9 @@ avalon.ready(function () {
             $.ajax({
                 url: "/admin/login",
                 cache: false,
+                type: "post",
                 dataType: "json",
-                data: {username: vm.username, password: vm.password},
+                data: {code: vm.username, password: vm.password},
                 beforeSend: function () {
                     layer.load(0);
                 },

@@ -43,6 +43,7 @@
                 /js/**=anon
                 /libs/**=anon
                 /images/**=anon
+                /admin/login=anon
                 /logout=logout
                 /**=authc
 
