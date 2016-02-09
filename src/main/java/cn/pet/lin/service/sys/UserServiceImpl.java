@@ -8,37 +8,31 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-01-17  林伟樘        新建	
+{  2016-02-04  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
 
 package cn.pet.lin.service.sys;
 
-import cn.pet.lin.domain.BaseDomain;
-import cn.pet.lin.dao.IBaseDAO;
 import cn.pet.lin.dao.sys.IUserDAO;
 import cn.pet.lin.domain.sys.User;
-import cn.pet.lin.service.sys.IUserService;
-import cn.pet.lin.service.impl.AbstractPageService;
+import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-
  /**
- * 《用户表; InnoDB free: 10240 kB》 业务逻辑服务类
+ * 《用户表》 业务逻辑服务类
  * @author 林伟樘
  *
  */
 @Service("UserServiceImpl")
-public class UserServiceImpl extends AbstractPageService<IBaseDAO<User>, User> implements IUserService<IBaseDAO<User>,User>{
+public class UserServiceImpl extends AbstractBaseService<IUserDAO,User> implements IUserService{
     @Autowired
     private IUserDAO userDAO;
 
     @Override
-    public IBaseDAO<User> getDao() {
+    public IUserDAO getDao() {
         return userDAO;
     }
 
@@ -49,11 +43,6 @@ public class UserServiceImpl extends AbstractPageService<IBaseDAO<User>, User> i
 //
 //    @Override
 //    public void update(BaseDomain entity) {
-//
-//    }
-//
-//    @Override
-//    public void updateNull(BaseDomain entity) {
 //
 //    }
 //
@@ -150,11 +139,6 @@ public class UserServiceImpl extends AbstractPageService<IBaseDAO<User>, User> i
 //    @Override
 //    protected UserDAO getDao() {
 //        return userDAO;
-//    }
-//
-//    @Override
-//    public BizData4Page queryPageByDataPerm(String resUri, Map conditions, int curPage, int offset, int rows) {
-//        return super.doQueryPageByDataPerm(resUri, conditions, curPage, offset, rows);
 //    }
 
 

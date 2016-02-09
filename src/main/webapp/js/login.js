@@ -34,12 +34,11 @@ avalon.ready(function () {
                 },
                 success: function (res) {
                     avalon.log('登录返回成功=', res);
-                    if (res.bizData.success) {
-                        $.cookie("access_token", res.bizData.value);
+                    if (res.success) {
                         sessionStorage.setItem("isLoad", true);
-                        window.location = "/index.html";
+                        window.location = "/html/admin/index.html";
                     } else {
-                        layer.alert(res.bizData.msg);
+                        layer.alert(res.msg);
                     }
                 },
                 error: function (res) {

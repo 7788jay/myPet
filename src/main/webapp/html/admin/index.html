@@ -30,7 +30,7 @@
     <script src="/assets/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="no-skin" ms-controller="QKYADMIN">
+<body class="no-skin" ms-controller="PET_ADMIN">
 <!-- 导航栏 -->
 <div class="navbar" id="header">
     <div id="navbar-container" class="navbar-container">
@@ -180,7 +180,7 @@
                     if (url.indexOf("login") >= 0) {
                         return false;
                     }
-                    return "/html" + url;
+                    return "/html/admin" + url;
                 },
                 default_url: '/welcome.html',
                 loading_icon: "fa-spinner fa-2x blue"
@@ -189,13 +189,11 @@
         }
     })
 
-    var QKYADMIN = avalon.define({
-        $id: "QKYADMIN",
+    var PET_ADMIN = avalon.define({
+        $id: "PET_ADMIN",
         htmlRoot: '/html',
         currentDate: new Date(),
         userName: "",
-        agencyName: "",
-        userRole: "",
         //打开loading
         openLoading: function () {
             layer.load(2);
@@ -210,7 +208,7 @@
         },
         //打开弹窗
         openDialog: function (url, data, title, width, height, callBack) {
-            $.post(QKYADMIN.htmlRoot + url, {}, function (html) {
+            $.post(PET_ADMIN.htmlRoot + url, {}, function (html) {
                 var str = JSON.stringify(data);
                 var hidden = "<input id='param' type='hidden' value='" + str + "' />";
                 layer.open({
@@ -259,9 +257,7 @@
                 dataType: "json",
                 success: function (res) {
                     if (isSuccess(res)) {
-                        QKYADMIN.userRole = res.bizData.userRole;
-                        QKYADMIN.agencyName = res.bizData.agencyName;
-                        QKYADMIN.userName = res.bizData.name;
+                        PET_ADMIN.userName = res.bizData.name;
                     }
                 }
             });
@@ -274,7 +270,7 @@
         }
     });
     avalon.scan();
-//    QKYADMIN.init();
+//    PET_ADMIN.init();
 </script>
 <!-- /主容器 -->
 </body>

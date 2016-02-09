@@ -5,7 +5,6 @@
 <!--
 insert
 update
-updateNull
 deleteById
 deleteByCondition
 deleteByProperty
@@ -14,7 +13,6 @@ findOne
 findList
 findAll
 queryPage
-like
 queryList
 queryOne
 count
@@ -155,22 +153,7 @@ selectList
                 AND locked = #{condition.locked}
             </if>
         </trim>
-    </update>
-
-    <update id="updateNull" parameterType="User">
-        UPDATE sys_user
-        <trim prefix="SET" suffixOverrides=",">
-            code = #{code},
-            username = #{username},
-            password = #{password},
-            phone = #{phone},
-            salt = #{salt},
-            locked = #{locked},
-        </trim>
-        WHERE
-        id = #{id}
-    </update>
-    
+    </update>   
     
     <!-- 按Id删除 -->
     <delete id="deleteById" parameterType="java.lang.Integer">
@@ -301,39 +284,6 @@ selectList
             limit ${offset}, ${rows}
         </if>
     </select>
-
-    <select id="like" parameterType="java.util.Map" resultType="User">
-        SELECT
-        <include refid="Base_Column_List" />
-        FROM sys_user
-        <trim prefix="WHERE" prefixOverrides="AND | OR">
-            <if test="id!=null">
-                AND id like CONCAT('%', #{id} , '%')
-            </if>
-            <if test="code!=null">
-                AND code like CONCAT('%', #{code} , '%')
-            </if>
-            <if test="username!=null">
-                AND username like CONCAT('%', #{username} , '%')
-            </if>
-            <if test="password!=null">
-                AND password like CONCAT('%', #{password} , '%')
-            </if>
-            <if test="phone!=null">
-                AND phone like CONCAT('%', #{phone} , '%')
-            </if>
-            <if test="salt!=null">
-                AND salt like CONCAT('%', #{salt} , '%')
-            </if>
-            <if test="locked!=null">
-                AND locked like CONCAT('%', #{locked} , '%')
-            </if>
-        </trim>
-        <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
-        </if>
-    </select>
-
 
     <select id="queryList" parameterType="java.util.Map" resultType="User">
         SELECT

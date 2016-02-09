@@ -29,7 +29,7 @@ public class BizData4PageBuilder {
         if (conditions.containsKey("sortBy")) {
             sortBy = conditions.get("sortBy").toString();
         }
-        List mainData = dao.queryPage(conditions, offset, rows, orderBy, sortBy,null);
+        List mainData = dao.queryPage(conditions, offset, rows, orderBy, sortBy);
         int records = dao.count(conditions);
 
         BizData4Page bizData4Page = new BizData4Page();

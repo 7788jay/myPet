@@ -37,7 +37,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /login.html=anon
-                /index.html=anon
+                /html/admin/index.html=anon
                 /assets/**=anon
                 /css/**=anon
                 /js/**=anon
@@ -46,7 +46,6 @@
                 /admin/login=anon
                 /logout=logout
                 /**=authc
-
             </value>
         </property>
     </bean>

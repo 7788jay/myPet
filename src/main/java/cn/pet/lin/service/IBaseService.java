@@ -12,14 +12,6 @@ import java.util.Map;
  */
 public interface IBaseService<D extends IBaseDAO, T extends BaseDomain> {
 
-    public D getDao();
-
-    /**
-     * 新增一条数据
-     *
-     * @param entity
-     */
-    public int add(T entity);
 
     /**
      * 修改一条数据
@@ -63,7 +55,7 @@ public interface IBaseService<D extends IBaseDAO, T extends BaseDomain> {
     public int insert(T entity);
 
     /**
-     * 更新对象,如果属性为空，则不会进行对应的属性值更新,如果有属性要更新为null，请参看{@link #updateNull(T)}
+     * 更新对象,如果属性为空，则不会进行对应的属性值更新}
      *
      * @param entity 要更新的实体对象
      */
@@ -73,13 +65,6 @@ public interface IBaseService<D extends IBaseDAO, T extends BaseDomain> {
     public int insertMap(Map<String, Object> entityMap);
 
     public int updateMap(Map<String, Object> entityMap);
-
-    /**
-     * 更新对象,如果属性为空，会进行对应的属性值更新,如果有属性不想更新为null，请参看{@link #update(T)}
-     *
-     * @param entity
-     */
-    public int updateNull(T entity);
 
     /**
      * 根据id删除对象
@@ -159,8 +144,6 @@ public interface IBaseService<D extends IBaseDAO, T extends BaseDomain> {
 
     public List<T> queryPage(Map<String, Object> condition, int offset, int rows, String orderBy, SqlOrderEnum sqlOrderEnum);
 
-    public List<T> queryPage(Map<String, Object> condition, int offset, int rows, String orderBy, SqlOrderEnum sqlOrderEnum, Map<String, Object> selectorpage);
-
     /**
      * 根据任意属性和属性值进行对象模糊查询
      *
@@ -171,8 +154,6 @@ public interface IBaseService<D extends IBaseDAO, T extends BaseDomain> {
 
     public List<T> like(Map<String, Object> condition, String orderBy, SqlOrderEnum sqlOrderEnum);
 
-    public List<T> like(Map<String, Object> condition, String orderBy, SqlOrderEnum sqlOrderEnum, Map<String, Object> selector);
-
     /**
      * 根据条件集合进行指定类型对象集合查询
      *
@@ -180,8 +161,6 @@ public interface IBaseService<D extends IBaseDAO, T extends BaseDomain> {
      * @return 返回泛型参数类型的对象集合
      */
     public List<T> queryList(Map<String, Object> condition, String orderBy, String sortBy);
-
-    public List<T> queryList(Map<String, Object> condition, String orderBy, String sortBy, Map<String, Object> selector);
 
     /**
      * 根据条件集合进行指定类型单一对象查询
@@ -192,8 +171,6 @@ public interface IBaseService<D extends IBaseDAO, T extends BaseDomain> {
     public T queryOne(Map<String, Object> condition);
 
     public T queryOne(Map<String, Object> condition, String orderBy, SqlOrderEnum sqlOrderEnum);
-
-    public T queryOne(Map<String, Object> condition, String orderBy, SqlOrderEnum sqlOrderEnum, Map<String, Object> selector);
 
     /**
      * 根据条件进行数量的查询
@@ -213,39 +190,6 @@ public interface IBaseService<D extends IBaseDAO, T extends BaseDomain> {
      * @exception/throws 如果主键类型不为long，会抛出类型转换异常
      */
     public Object selectMaxId();
-
-    /**
-     * 更新或保存，涉及到Mabatis使用的bean只是一个简单的值对象，不能进行id的注解，不知道哪个是主键，所以，必须同时指定t的主键值
-     *
-     * @param t  要更新或保存的对象
-     * @param id 要更新或保存的对象的id
-     * @return 返回更新或保存的对象。
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws SecurityException
-     * @throws IllegalArgumentException
-     */
-    public void updateOrSave(T t, Object id);
-
-    /**
-     * 根据泛型类型，执行最原始的sql
-     *
-     * @param mapperId
-     * @param obj
-     * @return 返回泛型类型对象，如果返回多个结果集会抛出异常，如果要返回多个结果集，请参看
-     * {@link #selectList(String, Object)}
-     */
-    public T selectOne(String mapperId, Object obj);
-
-    /**
-     * 根据泛型类型，执行最原始的sql
-     *
-     * @param mapperId
-     * @param obj
-     * @return 返回泛型类型对象集合，如果要返回单个结果对象，请参看{@link #selectOne(String, Object)}
-     */
-    public List<T> selectList(String mapperId, Object obj);
-
 
     /**
      * 通用的更新操作
