@@ -9,7 +9,7 @@ var roleMap = {
 };
 /**自定义过滤**/
 avalon.filters.statusFilter = function (value, args, args2) {
-    return value == 0 ? "<font color='green'>启用</font>" : "<font color='red'>停用</font>";
+    return value == 0 ? "<font color='green'>启用</font>" : "<font color='red'>锁定</font>";
 }
 avalon.filters.accessTypeFilter = function (value, args, args2) {
     return value == 0 ? "内部" : "外部";

@@ -3,7 +3,7 @@ package cn.pet.lin.service;
 
 import cn.pet.lin.dao.IBaseDAO;
 import cn.pet.lin.domain.BaseDomain;
-import cn.pet.lin.utils.SqlOrderEnum;
+import cn.pet.lin.utils.enums.SqlOrderEnum;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

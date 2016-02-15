@@ -54,6 +54,12 @@
         <property name="caseSensitive" value="true" />
     </bean>
 
+    <!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="5400000"/>
+    </bean>
+
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

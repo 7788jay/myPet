@@ -1,4 +1,4 @@
-package cn.pet.lin.utils;
+package cn.pet.lin.utils.enums;
 
 /**
  * 查询匹配类型枚举

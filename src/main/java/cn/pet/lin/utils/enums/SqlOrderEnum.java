@@ -1,4 +1,4 @@
-package cn.pet.lin.utils;
+package cn.pet.lin.utils.enums;
 
 /**
  * 功能按钮枚举

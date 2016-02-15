@@ -44,8 +44,7 @@
         <!-- 按钮栏 -->
         <div class="navbar-buttons navbar-header pull-right ">
             <ul class="nav ace-nav">
-                <li class="transparent"><a href="javascript:void(0);">{{agencyName}} </a></li>
-                <li class="transparent"><a href="javascript:void(0);"><i class="ace-icon glyphicon glyphicon-user"></i>&nbsp;<span>[{{userName}}  {{userRole}}]</span></a>
+                <li class="transparent"><a href="javascript:void(0);"><i class="ace-icon glyphicon glyphicon-user"></i>&nbsp;<span>[{{userName}}]</span></a>
                 </li>
                 <li class="transparent"><a href="javascript:void(0);" ms-click="logout" title="返回工作台"><img
                         src="/images/icon_a2.png"/></a>
@@ -71,28 +70,57 @@
         <ul class="nav nav-list">
             <li><a data-url="/welcome.html" href="#/welcome.html"><i class="menu-icon fa fa-home">
             </i><span class="menu-text">主页</span> </a><b class="arrow"></b></li>
-            <li><a href="javascript:void(0)" class="dropdown-toggle"><i class="menu-icon fa fa-cog"></i><span
-                    class="menu-text">系统管理</span><b class="arrow fa fa-angle-down"></b> </a><b class="arrow">
-            </b>
+            <li>
+                <a href="javascript:void(0)" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-cog"></i>
+                    <span class="menu-text">系统管理</span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <b class="arrow"></b>
                 <ul class="submenu">
                     <li>
-                        <a data-url="/menu/listTopMenu.html" href="#/menu/listTopMenu.html">
+                        <a data-url="/sys/user/list.html" href="#/sys/user/list.html">
                         <i class="menu-icon fa fa-caret-right"></i>用户管理 </a>
                         <b class="arrow"></b>
                     </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-cog"></i>
+                    <span class="menu-text">宠物管理</span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <b class="arrow"></b>
+                <ul class="submenu">
                     <li>
-                        <a data-url="/appCategory/listAppCategory.html" href="#/appCategory/listAppCategory.html">
-                        <i class="menu-icon fa fa-caret-right"></i>宠物分类管理 </a>
+                        <a data-url="/pet/animal/list.html" href="#/pet/animal/list.html">
+                        <i class="menu-icon fa fa-caret-right"></i>物种管理 </a>
                         <b class="arrow"></b>
                     </li>
                     <li>
-                        <a data-url="/appFunction/listAppFunction.html" href="#/appFunction/listAppFunction.html">
-                        <i class="menu-icon fa fa-caret-right"></i>宠物信息管理 </a>
+                        <a data-url="/pet/category/list.html" href="#/pet/category/list.html">
+                        <i class="menu-icon fa fa-caret-right"></i>种类管理 </a>
                         <b class="arrow"></b>
                     </li>
                     <li>
-                        <a data-url="/project/listProject.html" href="#/project/listProject.html">
-                        <i class="menu-icon fa fa-caret-right"></i>订单信息管理 </a>
+                        <a data-url="/pet/pet/list.html" href="#/pet/pet/list.html">
+                            <i class="menu-icon fa fa-caret-right"></i>宠物管理 </a>
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-cog"></i>
+                    <span class="menu-text">订单管理</span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <b class="arrow"></b>
+                <ul class="submenu">
+                    <li>
+                        <a data-url="/order/list.html" href="#/order/list.html">
+                        <i class="menu-icon fa fa-caret-right"></i>用户管理 </a>
                         <b class="arrow"></b>
                     </li>
                 </ul>
@@ -166,7 +194,7 @@
 <script src="/libs/zTree/js/jquery.ztree.exhide-3.5.min.js"></script>
 <script src="/assets/js/jquery.validate.min.js"></script>
 <script src="/libs/qtip/jquery.qtip.min.js"></script>
-<script src="/libs/uploadify/jquery.uploadify.min.js"></script>
+<script src="/libs/uploadify/jquery.uploadify.js"></script>
 <script src="/libs/store/store.min.js"></script>
 <!--通用脚本-->
 <script src="/js/common.js"></script>
@@ -191,7 +219,7 @@
 
     var PET_ADMIN = avalon.define({
         $id: "PET_ADMIN",
-        htmlRoot: '/html',
+        htmlRoot: '/html/admin',
         currentDate: new Date(),
         userName: "",
         //打开loading
@@ -249,16 +277,12 @@
             if (!isLoaded) {
                 window.location = ("/login.html");
             }
-            getRoleData();
-            getAppCategoryData();
             $.ajax({
-                url: "/admin/qky/common/getCurrentUser",
+                url: "/common/user/getCurrentUser",
                 type: "get",
                 dataType: "json",
                 success: function (res) {
-                    if (isSuccess(res)) {
-                        PET_ADMIN.userName = res.bizData.name;
-                    }
+                    PET_ADMIN.userName = res.userName;
                 }
             });
         },
@@ -270,7 +294,7 @@
         }
     });
     avalon.scan();
-//    PET_ADMIN.init();
+    PET_ADMIN.init();
 </script>
 <!-- /主容器 -->
 </body>

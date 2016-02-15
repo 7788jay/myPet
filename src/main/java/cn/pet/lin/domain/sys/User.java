@@ -8,20 +8,18 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-02-04  林伟樘        新建	
+{  2016-02-10  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
 
 package cn.pet.lin.domain.sys;
 
+import cn.pet.lin.domain.BaseDomain;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import cn.pet.lin.domain.BaseDomain;
-
-import java.util.*;
 
 /**
  * 《用户表》 实体
@@ -32,9 +30,10 @@ public class User extends BaseDomain<Integer> {
 	private static final long serialVersionUID = 1L;
 	
 	private String code; //账号
-	private String username; //用户名
+	private String userName; //用户名
 	private String password; //密码
 	private String phone; //手机号
+	private Long createTime; //创建时间
 	private String salt; //盐
 	private Integer locked; //是否锁定
     
@@ -58,16 +57,16 @@ public class User extends BaseDomain<Integer> {
 		this.code = code;
 	}
 	/**
-	 * @return username 用户名
+	 * @return userName 用户名
 	 */
-	public String getUsername(){
-		return this.username;
+	public String getUserName(){
+		return this.userName;
 	}
 	/**
-	 * @param username 用户名
+	 * @param userName 用户名
 	 */
-	public void setUsername(String username){
-		this.username = username;
+	public void setUserName(String userName){
+		this.userName = userName;
 	}
 	/**
 	 * @return password 密码
@@ -92,6 +91,18 @@ public class User extends BaseDomain<Integer> {
 	 */
 	public void setPhone(String phone){
 		this.phone = phone;
+	}
+	/**
+	 * @return createTime 创建时间
+	 */
+	public Long getCreateTime(){
+		return this.createTime;
+	}
+	/**
+	 * @param createTime 创建时间
+	 */
+	public void setCreateTime(Long createTime){
+		this.createTime = createTime;
 	}
 	/**
 	 * @return salt 盐
@@ -122,9 +133,10 @@ public class User extends BaseDomain<Integer> {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
 			.append("id",getId())
 			.append("code",getCode())
-			.append("username",getUsername())
+			.append("userName",getUserName())
 			.append("password",getPassword())
 			.append("phone",getPhone())
+			.append("createTime",getCreateTime())
 			.append("salt",getSalt())
 			.append("locked",getLocked())
 			.toString();
@@ -134,9 +146,10 @@ public class User extends BaseDomain<Integer> {
 		return new HashCodeBuilder()
 			.append(getId())
 			.append(getCode())
-			.append(getUsername())
+			.append(getUserName())
 			.append(getPassword())
 			.append(getPhone())
+			.append(getCreateTime())
 			.append(getSalt())
 			.append(getLocked())
 			.toHashCode();

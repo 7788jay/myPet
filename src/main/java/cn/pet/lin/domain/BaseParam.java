@@ -2,7 +2,7 @@ package cn.pet.lin.domain;
 
 
 import cn.pet.lin.domain.view.SearchField;
-import cn.pet.lin.utils.MatchTypeEnum;
+import cn.pet.lin.utils.enums.MatchTypeEnum;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;

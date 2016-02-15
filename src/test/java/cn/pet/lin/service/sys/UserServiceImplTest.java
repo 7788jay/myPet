@@ -2,7 +2,7 @@ package cn.pet.lin.service.sys;
 
 import cn.pet.lin.domain.param.sys.UserParam;
 import cn.pet.lin.domain.sys.User;
-import cn.pet.lin.utils.SqlOrderEnum;
+import cn.pet.lin.utils.enums.SqlOrderEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,10 +21,10 @@ public class UserServiceImplTest extends UserServiceImpl {
     public void testInsert(){
         User user = new User();
         user.setCode("111");
-        user.setUsername("1111");
-        user.setPassword("55555");
+        user.setUserName("1111");
+        user.setPassword("111");
         user.setPhone("55555");
-        user.setLocked(1);
+        user.setLocked(0);
         super.insert(user);
     }
     @Test

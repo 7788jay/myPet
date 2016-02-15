@@ -70,7 +70,7 @@ div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a
 .user-c select,input[type="text"]{ margin:0 10px 0 0;}
 .tj{ width:100%; border-bottom:1px solid #ededed; padding:8px 0; height:45px;}
 
-div.form .user-edit .remark{ padding:0 2%; height:40px; margin-bottom:20px; line-height:40px; background:#f2f2f2; border-bottom:1px solid #ddd; text-align:left;}
+div.form .user-edit .remark{ padding:0 2%; height:40px; margin-bottom:10px; line-height:40px; background:#f2f2f2; border-bottom:1px solid #ddd; text-align:left;}
 .user-edit,.user-check{ width:100%; height:auto;}
 .user-check{ padding-top:20px;}
 .user-edit .table_1{ width:100%; border:1px solid #ddd; border-bottom:none;}
@@ -85,7 +85,7 @@ div.form .user-edit  span{color:#fff; line-height:28px; padding-right:3px;}
 .user-edit td .role-n{ width:130px; height:90px; overflow-y:scroll;}
 .user-edit .btn-role{ width:130px; height:90px;padding:20px; overflow:hidden;}
 .user-edit .btn-role input.main{ width:110px; height:28px; padding:5px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;}
-.user-edit .user-btn{ background:#f2f2f2; border-top:1px solid #ddd; padding:10px; margin-top:20px;text-align: center;}
+.user-edit .user-btn{ background:#f2f2f2; border-top:1px solid #ddd; padding:10px; margin-top:10px;text-align: center;}
 input.oper{background:#F78B54; height:28px; padding:0 20px;  margin: 0 10px 0 0; color:#fff; border:none;}
 input.oper:hover{background:#F4A582;}
 

@@ -1,0 +1,87 @@
+<!--样式区-->
+<style>
+    .ms-controller, .ms-important, [ms-controller], [ms-important] {
+        visibility: hidden;
+    }
+</style>
+
+<!--标签区-->
+<div id="addSysUser" ms-important="addSysUser">
+    <div class="form">
+        <form id="addForm">
+            <div class=" user-edit ">
+                <div class="remark"> 注：带 * 号为必填项</div>
+                <table class="table_1" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th width="20%"><span>*</span>用户账号：</th>
+                        <td width="30%"><input type="text" name="code"/></td>
+                        <th width="20%"><span>*</span> 创建时间：</th>
+                        <td width="30%">{{currentDate|date}}</td>
+                    </tr>
+                    <tr>
+                        <th width="20%"><span>*</span>用户昵称：</th>
+                        <td width="30%"><input type="text" name="userName"/></td>
+                        <th width="20%"><span>*</span>手机号码：</th>
+                        <td width="30%"><input type="text" name="phone"/></td>
+                    </tr>
+                    <tr>
+                        <th width="20%"><span>*</span>密码：</th>
+                        <td width="30%" style="border-right: none;"><input type="text" name="password"/></td>
+                        <td colspan="2"></td>
+                    </tr>
+                </table>
+                <div class="user-btn">
+                    <input type="button" value="保存" class="oper" ms-click="save"/>
+                    <input type="button" value="返回" class="oper" ms-click="back"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--脚本区-->
+<script type="text/javascript">
+    $(function () {
+        //表单校验
+        var validator = $("#addForm").validate({
+            rules: {
+                code: {required: true, maxlength: 12},
+                userName: {required: true},
+                password: {required: true, isURL: true}
+            },
+            messages: {
+                code: {required: "必填", maxlength: "最大输入11字符长度"},
+                userName: {required: "必选"},
+                password: {required: "必填"}
+            },
+            errorPlacement: errorPlacement,
+            success: "valid"
+        });
+
+        var vm = avalon.define({
+            $id: "addSysUser",
+            currentDate: new Date(),
+            //保存
+            save: function () {
+                if (validator.form()) {
+                    $.ajax({
+                        url: "/admin/sys/user/add",
+                        type: "POST",
+                        dataType: 'json',
+                        data: $("#addForm").serializeArray(),
+                        success: function (result) {
+                            if(result.success){
+                                PET_ADMIN.closeDialog();
+                            }
+                            layer.alert(result.msg);
+                        }
+                    });
+                }
+            },
+            back: function () {
+                PET_ADMIN.cancelDialog();
+            }
+        });
+        avalon.scan($("#addSysUser")[0], vm);
+    })
+</script>

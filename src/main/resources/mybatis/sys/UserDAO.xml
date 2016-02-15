@@ -24,25 +24,28 @@ selectList
     <sql id="Base_Column_List">
         id,
         code,
-        username,
+        userName,
         password,
         phone,
+        createTime,
         salt,
         locked
     </sql>
     <insert id="insert" parameterType="user">
         INSERT INTO sys_user (
 		    code
-		    ,username
+		    ,userName
 		    ,password
 		    ,phone
+		    ,createTime
 		    ,salt
 		    ,locked
         ) VALUES (
 		    	#{code}
-		    	,#{username}
+		    	,#{userName}
 		    	,#{password}
 		    	,#{phone}
+		    	,#{createTime}
 		    	,#{salt}
 		    	,#{locked}
         )
@@ -54,16 +57,18 @@ selectList
     <insert id="insertMap" >
         INSERT INTO sys_user (
 		    code
-		    ,username
+		    ,userName
 		    ,password
 		    ,phone
+		    ,createTime
 		    ,salt
 		    ,locked
         ) VALUES (
 		    	#{map.code}
-		    	,#{map.username}
+		    	,#{map.userName}
 		    	,#{map.password}
 		    	,#{map.phone}
+		    	,#{map.createTime}
 		    	,#{map.salt}
 		    	,#{map.locked}
         )
@@ -74,9 +79,10 @@ selectList
         UPDATE sys_user
         <trim prefix="SET" suffixOverrides=",">
 		    code=#{code},
-		    username=#{username},
+		    userName=#{userName},
 		    password=#{password},
 		    phone=#{phone},
+		    createTime=#{createTime},
 		    salt=#{salt},
 		    locked=#{locked},
         </trim>
@@ -90,14 +96,17 @@ selectList
             <if test="map.code!=null">
                 code = #{map.code},
             </if>
-            <if test="map.username!=null">
-                username = #{map.username},
+            <if test="map.userName!=null">
+                userName = #{map.userName},
             </if>
             <if test="map.password!=null">
                 password = #{map.password},
             </if>
             <if test="map.phone!=null">
                 phone = #{map.phone},
+            </if>
+            <if test="map.createTime!=null">
+                createTime = #{map.createTime},
             </if>
             <if test="map.salt!=null">
                 salt = #{map.salt},
@@ -116,14 +125,17 @@ selectList
             <if test="update.code!=null">
                 code = #{update.code},
             </if>
-            <if test="update.username!=null">
-                username = #{update.username},
+            <if test="update.userName!=null">
+                userName = #{update.userName},
             </if>
             <if test="update.password!=null">
                 password = #{update.password},
             </if>
             <if test="update.phone!=null">
                 phone = #{update.phone},
+            </if>
+            <if test="update.createTime!=null">
+                createTime = #{update.createTime},
             </if>
             <if test="update.salt!=null">
                 salt = #{update.salt},
@@ -137,14 +149,17 @@ selectList
             <if test="condition.code!=null">
                 AND code = #{condition.code}
             </if>
-            <if test="condition.username!=null">
-                AND username = #{condition.username}
+            <if test="condition.userName!=null">
+                AND userName = #{condition.userName}
             </if>
             <if test="condition.password!=null">
                 AND password = #{condition.password}
             </if>
             <if test="condition.phone!=null">
                 AND phone = #{condition.phone}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
             </if>
             <if test="condition.salt!=null">
                 AND salt = #{condition.salt}
@@ -179,14 +194,17 @@ selectList
             <if test="code!=null">
                 AND code = #{code}
             </if>
-            <if test="username!=null">
-                AND username = #{username}
+            <if test="userName!=null">
+                AND userName = #{userName}
             </if>
             <if test="password!=null">
                 AND password = #{password}
             </if>
             <if test="phone!=null">
                 AND phone = #{phone}
+            </if>
+            <if test="createTime!=null">
+                AND createTime = #{createTime}
             </if>
             <if test="salt!=null">
                 AND salt = #{salt}
@@ -258,14 +276,17 @@ selectList
             <if test="condition.code!=null">
                 ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
             </if>
-            <if test="condition.username!=null">
-                ${condition.groupOp}   username  ${condition.username.op}  #{condition.username.data}
+            <if test="condition.userName!=null">
+                ${condition.groupOp}   userName  ${condition.userName.op}  #{condition.userName.data}
             </if>
             <if test="condition.password!=null">
                 ${condition.groupOp}   password  ${condition.password.op}  #{condition.password.data}
             </if>
             <if test="condition.phone!=null">
                 ${condition.groupOp}   phone  ${condition.phone.op}  #{condition.phone.data}
+            </if>
+            <if test="condition.createTime!=null">
+                ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
             </if>
             <if test="condition.salt!=null">
                 ${condition.groupOp}   salt  ${condition.salt.op}  #{condition.salt.data}
@@ -296,14 +317,17 @@ selectList
             <if test="condition.code!=null">
                 AND code = #{condition.code}
             </if>
-            <if test="condition.username!=null">
-                AND username = #{condition.username}
+            <if test="condition.userName!=null">
+                AND userName = #{condition.userName}
             </if>
             <if test="condition.password!=null">
                 AND password = #{condition.password}
             </if>
             <if test="condition.phone!=null">
                 AND phone = #{condition.phone}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
             </if>
             <if test="condition.salt!=null">
                 AND salt = #{condition.salt}
@@ -328,14 +352,17 @@ selectList
             <if test="condition.code!=null">
                 AND code = #{condition.code}
             </if>
-            <if test="condition.username!=null">
-                AND username = #{condition.username}
+            <if test="condition.userName!=null">
+                AND userName = #{condition.userName}
             </if>
             <if test="condition.password!=null">
                 AND password = #{condition.password}
             </if>
             <if test="condition.phone!=null">
                 AND phone = #{condition.phone}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
             </if>
             <if test="condition.salt!=null">
                 AND salt = #{condition.salt}
@@ -356,14 +383,17 @@ selectList
            <if test="code!=null">
                ${groupOp} code ${code.op}  #{code.data}
            </if>
-           <if test="username!=null">
-               ${groupOp} username ${username.op}  #{username.data}
+           <if test="userName!=null">
+               ${groupOp} userName ${userName.op}  #{userName.data}
            </if>
            <if test="password!=null">
                ${groupOp} password ${password.op}  #{password.data}
            </if>
            <if test="phone!=null">
                ${groupOp} phone ${phone.op}  #{phone.data}
+           </if>
+           <if test="createTime!=null">
+               ${groupOp} createTime ${createTime.op}  #{createTime.data}
            </if>
            <if test="salt!=null">
                ${groupOp} salt ${salt.op}  #{salt.data}

@@ -48,7 +48,7 @@ public class AuthRealm extends AuthorizingRealm {
         String password = user.getPassword();
 
         //查询到就返回认证信息
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userCode,password,"88");
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user,password,this.getName());
 
         return simpleAuthenticationInfo;
     }

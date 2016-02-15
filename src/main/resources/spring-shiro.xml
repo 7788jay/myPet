@@ -37,7 +37,6 @@
         <property name="filterChainDefinitions">
             <value>
                 /login.html=anon
-                /html/admin/index.html=anon
                 /assets/**=anon
                 /css/**=anon
                 /js/**=anon
