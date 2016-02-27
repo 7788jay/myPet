@@ -791,7 +791,7 @@ SWFUpload.prototype.initSettings = function () {
     }
     if (!this.settings.preserve_relative_urls) {
         this.settings.upload_url = SWFUpload.completeURL(this.settings.upload_url);
-        this.settings.button_image_url = SWFUpload.completeURL(this.settings.button_image_url)
+        this.settings.button_image_url = this.settings.button_image_url ? SWFUpload.completeURL(this.settings.button_image_url) : this.settings.button_image_url
     }
     delete this.ensureDefault
 };
@@ -1755,13 +1755,14 @@ SWFUpload.Console.writeLine = function (d) {
             if (settings.onDialogClose) settings.onDialogClose.call(this, this.queueData);
 
             // Upload the files if auto is true
-            if(filesSelected>0){
+            if (filesSelected > 0) {
                 if (settings.auto) $('#' + settings.id).uploadify('upload', '*');
             }
         },
 
         // Triggered once for each file added to the queue
         onSelect: function (file) {
+            console.log(file);
             // Load the swfupload settings
             var settings = this.settings;
 

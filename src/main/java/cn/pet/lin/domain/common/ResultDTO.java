@@ -14,19 +14,19 @@ public class ResultDTO implements Serializable {
     //信息
     private String msg;
     //值
-    private String value;
+    private Object value;
 
-    public ResultDTO(boolean isSuccess, String msg, String value) {
+    public ResultDTO(boolean isSuccess, String msg, Object value) {
         this.isSuccess = isSuccess;
         this.msg = msg;
         this.value = value;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 

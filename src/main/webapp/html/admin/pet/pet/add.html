@@ -3,50 +3,46 @@
     .ms-controller, .ms-important, [ms-controller], [ms-important] {
         visibility: hidden;
     }
-    font{
-        clear:both;
-    }
 </style>
+<link rel="stylesheet" type="text/css" href="/libs/wangEditor/dist/css/wangEditor.css"/>
+<link rel="stylesheet" type="text/css" href="/css/upload.css"/>
 
 <!--标签区-->
 <div id="addPet" ms-important="addPet">
     <div class="form">
         <form id="addForm">
             <div class=" user-edit ">
-                <div class="remark"> 注：带 * 号为必填项</div>
                 <table class="table_1" cellpadding="0" cellspacing="0">
                     <tr>
-                        <th width="15%"><span>*</span>物种：</th>
-                        <td width="35%"><input type="text"/></td>
-                        <th width="15%"><span>*</span> 宠物种类：</th>
-                        <td width="35%">
+                        <th width="10%"><span>*</span>宠物名称：</th>
+                        <td width="23%"><input type="text" name="name"/></td>
+                        <th width="10%"><span>*</span>物种：</th>
+                        <td width="23%"><input type="text"/></td>
+                        <th width="10%"><span>*</span> 宠物种类：</th>
+                        <td width="23%">
                             <select name="categoryCode">
                                 <option ms-repeat="categories" ms-attr-value="el.code">{{el.name}}</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <th width="15%"><span>*</span>宠物名称：</th>
-                        <td width="35%"><input type="text" name="name"/></td>
-                        <th width="15%"><span>*</span>重量：</th>
-                        <td width="35%"><input type="text" name="weight"/></td>
+                        <th width="10%"><span>*</span>重量：</th>
+                        <td width="23%"><input type="text" name="weight"/></td>
+                        <th width="10%"><span>*</span>寿命：</th>
+                        <td width="23%"><input type="text" name="life"/></td>
+                        <th width="10%"><span>*</span>价格：</th>
+                        <td width="23%"><input type="text" name="price"/></td>
                     </tr>
                     <tr>
-                        <th width="15%"><span>*</span>寿命：</th>
-                        <td width="35%"><input type="text" name="life"/></td>
-                        <th width="15%"><span>*</span>价格：</th>
-                        <td width="35%"><input type="text" name="price"/></td>
-                    </tr>
-                    <tr>
-                        <th width="15%"><span>*</span>图片：</th>
-                        <td width="35%" colspan="3">
-                            <input type="hidden" name="icon" id="icon" value="/images/empty_icon.png"/>
+                        <th width="10%"><span>*</span>图片：</th>
+                        <td colspan="5" height="160px">
+                            <!--<input type="hidden" name="image" id="icon" ms-attr-value="images"/>-->
                             <table class="upload_pic">
                                 <tr>
                                     <td rowspan="2">
-                                        <div id="img">
-                                            <img style="margin-right: 5px;" width='130px' height='130px'
-                                                 ms-repeat="images" ms-attr-src="el"/>
+                                        <div id="uploaderImg" ms-repeat="images">
+                                            <div class="file-panel"><span ms-click="removeImg(el)"></span></div>
+                                            <img style="margin-right: 5px;" width='130px' height='130px' ms-attr-src="el"/>
                                         </div>
                                     </td>
                                     <td><input type="file" id="uploadify" name="uploadify"/></td>
@@ -63,16 +59,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <th width="15%"><span>*</span>描述：</th>
-                        <td colspan="3">
-                            <textarea id="area1" style="width: 100%;height: 200px;"/>
-                            <!--<p>请输入内容...</p>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; 加载编辑器的容器 &ndash;&gt;-->
-                            <!--<script id="description" name="content" type="text/plain" style="width:600px;height:200px;">-->
-                            <!--这里写你的初始化内容-->
-                            <!--</script>-->
-                            <!--<textarea name="description"/>-->
+                        <th width="10%"><span>*</span>描述：</th>
+                        <td colspan="5">
+                            <div style="height: 270px">
+                                <textarea id="description" name="description" style="width: 95%;height: 270px;"/>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -86,27 +77,47 @@
 </div>
 
 <!--脚本区-->
-<script type="text/javascript" src="/libs/nicEdit/nicEdit.js"></script>
-<script>
-    new nicEditor({iconsPath : '/libs/nicEdit/nicEditorIcons.gif'}).panelInstance('area1');
-</script>
-<!--<script type="text/javascript" src="/libs/wangEditor/dist/js/wangEditor.js"></script>-->
-<!--<script type="text/javascript">-->
-    <!--$(function () {-->
-        <!--var editor = new wangEditor('div1');-->
-        <!--editor.create();-->
-    <!--});-->
-<!--</script>-->
-<!--&lt;!&ndash; 配置文件 &ndash;&gt;-->
-<!--<script type="text/javascript" src="/libs/umeditor/umeditor.config.js"></script>-->
-<!--&lt;!&ndash; 编辑器源码文件 &ndash;&gt;-->
-<!--<script type="text/javascript" src="/libs/umeditor/umeditor.js"></script>-->
-<!--<script type="text/javascript" src="/libs/umeditor/lang/zh-cn/zh-cn.js"></script>-->
-<!--&lt;!&ndash; 实例化编辑器 &ndash;&gt;-->
-<!--<script type="text/javascript">-->
-<!--var ue = UM.getEditor('description');-->
-<!--</script>-->
 <script type="text/javascript">
+    $(function () {
+        var editor = new wangEditor('description');
+        // 上传图片
+        editor.config.uploadImgUrl = '/common/upload/editorImg';
+        // 自定义菜单
+        editor.config.menus = [
+            'source',
+            '|',
+            'bold',
+            'underline',
+            'italic',
+            'strikethrough',
+            'eraser',
+            'forecolor',
+            'bgcolor',
+            '|',
+            'fontfamily',
+            'fontsize',
+            'head',
+            'unorderlist',
+            'orderlist',
+            'alignleft',
+            'aligncenter',
+            'alignright',
+            '|',
+            'link',
+            'unlink',
+            'table',
+            'emotion',
+            '|',
+            'img',
+            'vedio',
+            '|',
+            'fullscreen'
+        ];
+        editor.create();
+    });
+</script>
+<script type="text/javascript">
+    var uploadLimit = 4;
     $(function () {
         $("#uploadify").uploadify({
             height: 25,
@@ -122,10 +133,12 @@
             multi: true,
             uploadLimit: 4,
             fileSizeLimit: '1MB',
+            //是否缓存swf文件。默认为true
+            preventCaching:true,
             overrideEvents: ['onDialogClose', 'onSelectError', 'onUploadProgress', 'onUploadError'],
             removeCompleted: 'true',
             onUploadStart: function (file) {
-                console.log(1);
+                avalon.log(1,file);
                 $("#uploadProgress").attr("data-percent", "0%");
                 $("#uploadProgress").find(".progress-bar").css("width", "0%");
             },
@@ -140,10 +153,14 @@
                 console.log(jsonData);
                 if (jsonData.success) {
                     vm.images.push(jsonData.msg);
-//                    $("#showImage").attr("src", jsonData.msg);
-//                    $("#icon").val(jsonData.msg);
                 } else {
                     layer.alert("上传失败！");
+                }
+            },
+            onSelect: function(){
+                if(vm.images.length==4){
+                    layer.alert("只能上传4张图片！");
+                    return false;
                 }
             },
             onSelectError: function (file, errorCode, errorMsg) {
@@ -219,6 +236,10 @@
                         }
                     });
                 }
+            },
+            removeImg: function(url){
+                vm.images.remove(url);
+                $('#uploadify').uploadify('settings','uploadLimit', ++uploadLimit);
             },
             back: function () {
                 PET_ADMIN.cancelDialog();
