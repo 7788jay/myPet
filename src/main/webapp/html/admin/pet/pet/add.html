@@ -6,6 +6,7 @@
 </style>
 <link rel="stylesheet" type="text/css" href="/libs/wangEditor/dist/css/wangEditor.css"/>
 <link rel="stylesheet" type="text/css" href="/css/upload.css"/>
+<link rel="stylesheet" type="text/css" href="/libs/webuploader/webuploader.css"/>
 
 <!--标签区-->
 <div id="addPet" ms-important="addPet">
@@ -36,16 +37,19 @@
                     <tr>
                         <th width="10%"><span>*</span>图片：</th>
                         <td colspan="5" height="160px">
-                            <!--<input type="hidden" name="image" id="icon" ms-attr-value="images"/>-->
+                            <input type="hidden" name="image" id="image" ms-attr-value="images"/>
                             <table class="upload_pic">
                                 <tr>
                                     <td rowspan="2">
                                         <div id="uploaderImg" ms-repeat="images">
-                                            <div class="file-panel"><span ms-click="removeImg(el)"></span></div>
-                                            <img style="margin-right: 5px;" width='130px' height='130px' ms-attr-src="el"/>
+                                            <div class="file-panel"><a href="javascript:void(0)" ms-click="removeImg($index)"></a></div>
+                                            <img style="margin-right: 5px;" width='130px' height='130px'
+                                                 ms-attr-src="el"/>
                                         </div>
                                     </td>
-                                    <td><input type="file" id="uploadify" name="uploadify"/></td>
+                                    <td>
+                                        <div type="file" id="picker" name="picker">选择图片</div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -77,6 +81,7 @@
 </div>
 
 <!--脚本区-->
+<script type="text/javascript" src="/libs/webuploader/webuploader.js"/>
 <script type="text/javascript">
     $(function () {
         var editor = new wangEditor('description');
@@ -119,75 +124,36 @@
 <script type="text/javascript">
     var uploadLimit = 4;
     $(function () {
-        $("#uploadify").uploadify({
-            height: 25,
-            swf: '/libs/uploadify/uploadify.swf',
-            uploader: '/common/upload/img',
-            fileTypeExts: '*.png;*.jpg;*.jpeg;*.gif;*.bmp',
-            queueID: 'queue',
-            fileObjName: 'file',
-            method: 'post',
+        var uploader = WebUploader.create({
+            // swf文件路径
+            swf: '/libs/webuploader/Uploader.swf',
+            // 文件接收服务端。
+            server: '/common/upload/img',
+            //设置为 true 后，不需要手动调用上传，有文件选择即开始上传。
             auto: true,
-            itemTemplate: false,
-            buttonText: '选择图片',
-            multi: true,
-            uploadLimit: 4,
-            fileSizeLimit: '1MB',
-            //是否缓存swf文件。默认为true
-            preventCaching:true,
-            overrideEvents: ['onDialogClose', 'onSelectError', 'onUploadProgress', 'onUploadError'],
-            removeCompleted: 'true',
-            onUploadStart: function (file) {
-                avalon.log(1,file);
-                $("#uploadProgress").attr("data-percent", "0%");
-                $("#uploadProgress").find(".progress-bar").css("width", "0%");
-            },
-            onUploadProgress: function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-                avalon.log(2, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal);
-                var precent = (totalBytesUploaded / totalBytesTotal * 100).toFixed(0) + "%";
-                $("#uploadProgress").attr("data-percent", precent);
-                $("#uploadProgress").find(".progress-bar").css("width", precent);
-            },
-            onUploadSuccess: function (file, data, response) {
-                var jsonData = JSON.parse(data);
-                console.log(jsonData);
-                if (jsonData.success) {
-                    vm.images.push(jsonData.msg);
-                } else {
-                    layer.alert("上传失败！");
-                }
-            },
-            onSelect: function(){
-                if(vm.images.length==4){
-                    layer.alert("只能上传4张图片！");
-                    return false;
-                }
-            },
-            onSelectError: function (file, errorCode, errorMsg) {
-                switch (errorCode) {
-                    case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
-                        layer.alert("图标大小不能超过1MB");
-                        break;
-                    case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
-                        layer.alert("图片数量超过限制！");
-                        break;
-                    default :
-                        layer.alert("图标文件读取失败");
-                        break;
-                }
-                return false;
-            },
-            onUploadError: function (file, errorCode, errorMsg) {
-                switch (errorCode) {
-                    case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
-                        layer.alert("图片数量超过限制！");
-                        break;
-                    default :
-                        layer.alert("图标文件读取失败");
-                        break;
-                }
-                return false;
-            }
+            method: "POST",
+            // 选择文件的按钮。可选。
+            pick: '#picker',
+            //验证文件总数量, 超出则不允许加入队列。
+            fileNumLimit: 4,
+            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: false
+        });
+        // 当有文件添加进来的时候
+        uploader.on('fileQueued', function (file) {
+            $("#uploadProgress").attr("data-percent", "0%");
+            $("#uploadProgress").find(".progress-bar").css("width", "0%");
+        });
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on('uploadSuccess', function (file, res) {
+            console.log(file);
+            vm.images.push(res.msg);
+        });
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on('uploadProgress', function (file, percentage) {
+            console.log(percentage)
+            $("#uploadProgress").attr("data-percent", percentage*100+"%");
+            $("#uploadProgress").find(".progress-bar").css("width", percentage*100+"%");
         });
 
         //表单校验
@@ -237,9 +203,9 @@
                     });
                 }
             },
-            removeImg: function(url){
-                vm.images.remove(url);
-                $('#uploadify').uploadify('settings','uploadLimit', ++uploadLimit);
+            removeImg: function (index) {
+                vm.images.removeAt(index);
+                uploader.removeFile("WU_FILE_"+index);
             },
             back: function () {
                 PET_ADMIN.cancelDialog();

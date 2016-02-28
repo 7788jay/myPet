@@ -22,7 +22,7 @@
     overflow: hidden;
     z-index: 300;
 }
-.upload_pic #uploaderImg .file-panel span{
+.upload_pic #uploaderImg .file-panel a{
     width: 26px;
     height: 26px;
     display: inline;
