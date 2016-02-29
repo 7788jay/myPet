@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pet.lin.dao.pet.IPetDAO">
+<!--
+insert
+update
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        code,
+        name,
+        image,
+        weight,
+        life,
+        price,
+        description,
+        createTime,
+        categoryCode
+    </sql>
+    <insert id="insert" parameterType="pet">
+        INSERT INTO pet_pet (
+		    code
+		    ,name
+		    ,image
+		    ,weight
+		    ,life
+		    ,price
+		    ,description
+		    ,createTime
+		    ,categoryCode
+        ) VALUES (
+		    	#{code}
+		    	,#{name}
+		    	,#{image}
+		    	,#{weight}
+		    	,#{life}
+		    	,#{price}
+		    	,#{description}
+		    	,#{createTime}
+		    	,#{categoryCode}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO pet_pet (
+		    code
+		    ,name
+		    ,image
+		    ,weight
+		    ,life
+		    ,price
+		    ,description
+		    ,createTime
+		    ,categoryCode
+        ) VALUES (
+		    	#{map.code}
+		    	,#{map.name}
+		    	,#{map.image}
+		    	,#{map.weight}
+		    	,#{map.life}
+		    	,#{map.price}
+		    	,#{map.description}
+		    	,#{map.createTime}
+		    	,#{map.categoryCode}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="pet">
+        UPDATE pet_pet
+        <trim prefix="SET" suffixOverrides=",">
+		    code=#{code},
+		    name=#{name},
+		    image=#{image},
+		    weight=#{weight},
+		    life=#{life},
+		    price=#{price},
+		    description=#{description},
+		    createTime=#{createTime},
+		    categoryCode=#{categoryCode},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+	
+	<update id="updateMap">
+        UPDATE pet_pet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.code!=null">
+                code = #{map.code},
+            </if>
+            <if test="map.name!=null">
+                name = #{map.name},
+            </if>
+            <if test="map.image!=null">
+                image = #{map.image},
+            </if>
+            <if test="map.weight!=null">
+                weight = #{map.weight},
+            </if>
+            <if test="map.life!=null">
+                life = #{map.life},
+            </if>
+            <if test="map.price!=null">
+                price = #{map.price},
+            </if>
+            <if test="map.description!=null">
+                description = #{map.description},
+            </if>
+            <if test="map.createTime!=null">
+                createTime = #{map.createTime},
+            </if>
+            <if test="map.categoryCode!=null">
+                categoryCode = #{map.categoryCode},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE pet_pet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.code!=null">
+                code = #{update.code},
+            </if>
+            <if test="update.name!=null">
+                name = #{update.name},
+            </if>
+            <if test="update.image!=null">
+                image = #{update.image},
+            </if>
+            <if test="update.weight!=null">
+                weight = #{update.weight},
+            </if>
+            <if test="update.life!=null">
+                life = #{update.life},
+            </if>
+            <if test="update.price!=null">
+                price = #{update.price},
+            </if>
+            <if test="update.description!=null">
+                description = #{update.description},
+            </if>
+            <if test="update.createTime!=null">
+                createTime = #{update.createTime},
+            </if>
+            <if test="update.categoryCode!=null">
+                categoryCode = #{update.categoryCode},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.image!=null">
+                AND image = #{condition.image}
+            </if>
+            <if test="condition.weight!=null">
+                AND weight = #{condition.weight}
+            </if>
+            <if test="condition.life!=null">
+                AND life = #{condition.life}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+            <if test="condition.description!=null">
+                AND description = #{condition.description}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.categoryCode!=null">
+                AND categoryCode = #{condition.categoryCode}
+            </if>
+        </trim>
+    </update>   
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM pet_pet
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM pet_pet
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM pet_pet
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+            <if test="name!=null">
+                AND name = #{name}
+            </if>
+            <if test="image!=null">
+                AND image = #{image}
+            </if>
+            <if test="weight!=null">
+                AND weight = #{weight}
+            </if>
+            <if test="life!=null">
+                AND life = #{life}
+            </if>
+            <if test="price!=null">
+                AND price = #{price}
+            </if>
+            <if test="description!=null">
+                AND description = #{description}
+            </if>
+            <if test="createTime!=null">
+                AND createTime = #{createTime}
+            </if>
+            <if test="categoryCode!=null">
+                AND categoryCode = #{categoryCode}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM pet_pet WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Long" resultType="Pet">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM pet_pet
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="Pet">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM pet_pet WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="Pet">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM pet_pet WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="Pet">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM pet_pet
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="Pet">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM pet_pet
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.code!=null">
+                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            </if>
+            <if test="condition.name!=null">
+                ${condition.groupOp}   name  ${condition.name.op}  #{condition.name.data}
+            </if>
+            <if test="condition.image!=null">
+                ${condition.groupOp}   image  ${condition.image.op}  #{condition.image.data}
+            </if>
+            <if test="condition.weight!=null">
+                ${condition.groupOp}   weight  ${condition.weight.op}  #{condition.weight.data}
+            </if>
+            <if test="condition.life!=null">
+                ${condition.groupOp}   life  ${condition.life.op}  #{condition.life.data}
+            </if>
+            <if test="condition.price!=null">
+                ${condition.groupOp}   price  ${condition.price.op}  #{condition.price.data}
+            </if>
+            <if test="condition.description!=null">
+                ${condition.groupOp}   description  ${condition.description.op}  #{condition.description.data}
+            </if>
+            <if test="condition.createTime!=null">
+                ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
+            </if>
+            <if test="condition.categoryCode!=null">
+                ${condition.groupOp}   categoryCode  ${condition.categoryCode.op}  #{condition.categoryCode.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="queryList" parameterType="java.util.Map" resultType="Pet">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM pet_pet
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.image!=null">
+                AND image = #{condition.image}
+            </if>
+            <if test="condition.weight!=null">
+                AND weight = #{condition.weight}
+            </if>
+            <if test="condition.life!=null">
+                AND life = #{condition.life}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+            <if test="condition.description!=null">
+                AND description = #{condition.description}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.categoryCode!=null">
+                AND categoryCode = #{condition.categoryCode}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="Pet">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM pet_pet
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.image!=null">
+                AND image = #{condition.image}
+            </if>
+            <if test="condition.weight!=null">
+                AND weight = #{condition.weight}
+            </if>
+            <if test="condition.life!=null">
+                AND life = #{condition.life}
+            </if>
+            <if test="condition.price!=null">
+                AND price = #{condition.price}
+            </if>
+            <if test="condition.description!=null">
+                AND description = #{condition.description}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.categoryCode!=null">
+                AND categoryCode = #{condition.categoryCode}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM pet_pet
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="code!=null">
+               ${groupOp} code ${code.op}  #{code.data}
+           </if>
+           <if test="name!=null">
+               ${groupOp} name ${name.op}  #{name.data}
+           </if>
+           <if test="image!=null">
+               ${groupOp} image ${image.op}  #{image.data}
+           </if>
+           <if test="weight!=null">
+               ${groupOp} weight ${weight.op}  #{weight.data}
+           </if>
+           <if test="life!=null">
+               ${groupOp} life ${life.op}  #{life.data}
+           </if>
+           <if test="price!=null">
+               ${groupOp} price ${price.op}  #{price.data}
+           </if>
+           <if test="description!=null">
+               ${groupOp} description ${description.op}  #{description.data}
+           </if>
+           <if test="createTime!=null">
+               ${groupOp} createTime ${createTime.op}  #{createTime.data}
+           </if>
+           <if test="categoryCode!=null">
+               ${groupOp} categoryCode ${categoryCode.op}  #{categoryCode.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM pet_pet
+    </select>
+   
+</mapper>
