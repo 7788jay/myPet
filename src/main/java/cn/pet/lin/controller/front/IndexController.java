@@ -17,7 +17,7 @@ import java.util.List;
  * 前台页面展示
  */
 @Controller
-@RequestMapping("/front/pet/index")
+@RequestMapping("/pet/front/index")
 public class IndexController {
     @Autowired
     IPetService petService;

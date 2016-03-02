@@ -844,7 +844,6 @@ Header and header elements
 .price-availability-block {
 	border-bottom: 1px solid #f4f4f4;
 	padding-bottom: 12px;
-	margin-bottom: 17px;
 }
 .price-availability-block .price {
 	float: left;
@@ -879,7 +878,6 @@ Header and header elements
     margin-top: 1px;
 }
 .product-page-options {
-	border-top: 1px solid #f4f4f4;
 	border-bottom: 1px solid #f4f4f4;
 	padding: 20px 0;
 	margin-bottom: 20px;

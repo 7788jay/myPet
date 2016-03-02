@@ -597,7 +597,7 @@
             //初始化
             init: function(){
                 $.ajax({
-                    url: "/front/pet/index/getNewPets?num="+6,
+                    url: "/pet/front/index/getNewPets?num="+6,
                     type: "GET",
                     dataType: "json",
                     success: function (result) {
@@ -617,6 +617,7 @@
                 Layout.initTouchspin();
             }
         });
+        avalon.scan();
         vm.init();
     });
 </script>
