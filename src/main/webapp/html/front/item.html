@@ -32,7 +32,7 @@
   <link href="/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
   <link href="/assets/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet">
   <link href="/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
-  <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
+  <link href="/assets/css/uncompressed/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
   <link href="/assets/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin styles END -->
 
@@ -49,6 +49,7 @@
 
 <!-- Body BEGIN -->
 <body class="ecommerce" ms-important="pet-item">
+    <!--头部-->
     <div ms-include-src="'public/head.html'"></div>
 
     <div class="main">
@@ -164,7 +165,7 @@
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
                     </div>
-                    <button class="btn btn-primary" type="submit">加入购物车</button>
+                    <button class="btn btn-primary" type="button" ms-click="addToCart">加入购物车</button>
                   </div>
                   <div class="review">
                     <input type="range" value="4" step="0.25" id="backing4">
@@ -272,7 +273,7 @@
         </div>
         <!-- END SIDEBAR & CONTENT -->
 
-        <!-- BEGIN SIMILAR PRODUCTS -->
+        <!-- BEGIN 相似宠物 -->
         <div class="row margin-bottom-40">
           <div class="col-md-12 col-sm-12">
             <h2>Most popular products</h2>
@@ -366,7 +367,7 @@
             </div>
           </div>
         </div>
-        <!-- END SIMILAR PRODUCTS -->
+        <!-- END 相似宠物 -->
       </div>
     </div>
 
