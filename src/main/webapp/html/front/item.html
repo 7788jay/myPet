@@ -165,7 +165,7 @@
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
                     </div>
-                    <button class="btn btn-primary" type="button" ms-click="addToCart">加入购物车</button>
+                    <button class="btn btn-primary" type="button" ms-click="addToCart(data.code)">加入购物车</button>
                   </div>
                   <div class="review">
                     <input type="range" value="4" step="0.25" id="backing4">
@@ -464,6 +464,7 @@ Nostrud duis molestie at dolore.</p>
             $id: "pet-item",
             currentImage: "",   //当前显示图片
             data: {
+              code: "",   //代码
               name: "",
               price: "",
               weight: "",  //重量
@@ -478,6 +479,7 @@ Nostrud duis molestie at dolore.</p>
                 type: "GET",
                 dataType: "json",
                 success: function (result) {
+                  vm.data.code = result.code;
                   vm.data.name = result.name;
                   vm.data.price = result.price;
                   vm.data.weight = result.weight;
@@ -489,10 +491,23 @@ Nostrud duis molestie at dolore.</p>
                 }
               });
             },
+            //切换图片
             switchPic: function(url){
               vm.currentImage = url;
               $('.product-main-image').zoom({url: url});
             },
+            //加入购物车
+            addToCart: function(code){
+              $.ajax({
+                url: "/pet/front/cart/add?code="+code,
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                  layer.alert(result.msg);
+                }
+              });
+            },
+            //界面初始化
             layoutInit: function(){
               Layout.init();
               Layout.initOWL();
