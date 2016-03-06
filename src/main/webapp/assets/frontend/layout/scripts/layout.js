@@ -526,13 +526,12 @@ var Layout = function () {
         //取消弹窗
         cancelDialog: function () {
             $(".layui-layer-close").trigger("click");
-        },
-        //关闭所有提示
-        closeAllTip: function() {
+        }
+    };
+    //关闭所有提示
+    function closeAllTip() {
         $('.qtip').each(function () {
             $(this).data('qtip').destroy();
         })
-    }
-
     };
 }();

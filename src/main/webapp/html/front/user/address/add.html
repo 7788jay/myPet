@@ -10,15 +10,15 @@
             <div style="height: 35px;">
                 <select name="province" ms-change="change1" class="form-control address-select">
                     <option value="">请选择</option>
-                    <option ms-repeat="provinces" ms-attr-value="el.code"> {{ el.name }}</option>
+                    <option ms-repeat="provinces" ms-attr-value=el.code+":"+el.name> {{ el.name }}</option>
                 </select>
                 <select name="city" ms-change="change2" class="form-control address-select">
                     <option value="">请选择</option>
-                    <option ms-repeat="cities" ms-attr-value="el.code"> {{ el.name }}</option>
+                    <option ms-repeat="cities" ms-attr-value=el.code+":"+el.name> {{ el.name }}</option>
                 </select>
                 <select name="area" ms-change="change3" class="form-control address-select">
                     <option value="">请选择</option>
-                    <option ms-repeat="areas" ms-attr-value="el.code"> {{ el.name }}</option>
+                    <option ms-repeat="areas" ms-attr-value=el.code+":"+el.name> {{ el.name }}</option>
                 </select>
             </div>
         </div>
@@ -112,7 +112,16 @@
             },
             //添加地址
             addAddress: function(){
-
+                $.ajax({
+                    url: "/pet/front/user/addAddress",
+                    type: "POST",
+                    data: $('#address').serializeArray(),
+                    dataType: "json",
+                    success: function (result) {
+                        layer.alert(result.msg);
+                        Layout.closeDialog();
+                    }
+                });
             }
 
         });
