@@ -8,57 +8,28 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-02-10  林伟樘        新建	
+{  2016-03-06  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
 
-package cn.pet.lin.domain.param.sys;
+package cn.pet.lin.domain.user;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import cn.pet.lin.domain.BaseParam;
+import cn.pet.lin.domain.BaseDomain;
 
 import java.util.*;
 
 /**
- * 《用户表》 查询参数实体
+ * 《用户表》 实体
  * @author 林伟樘
  *
  */
-public class UserParam extends BaseParam<Integer> {
+public class User extends BaseDomain<Integer> {
 	private static final long serialVersionUID = 1L;
-	
-	/**
-	*字段常量——账号
-	*/
-	public static final String F_Code="code";
-	/**
-	*字段常量——用户名
-	*/
-	public static final String F_UserName="userName";
-	/**
-	*字段常量——密码
-	*/
-	public static final String F_Password="password";
-	/**
-	*字段常量——手机号
-	*/
-	public static final String F_Phone="phone";
-	/**
-	*字段常量——创建时间
-	*/
-	public static final String F_CreateTime="createTime";
-	/**
-	*字段常量——盐
-	*/
-	public static final String F_Salt="salt";
-	/**
-	*字段常量——是否锁定
-	*/
-	public static final String F_Locked="locked";
 	
 	private String code; //账号
 	private String userName; //用户名
@@ -71,7 +42,7 @@ public class UserParam extends BaseParam<Integer> {
 	/**
 	 *默认空构造函数
 	 */
-	public UserParam() {
+	public User() {
 		super();
 	}
 	 
@@ -173,4 +144,25 @@ public class UserParam extends BaseParam<Integer> {
 			.toString();
 	}
 	
+	public int hashCode() {
+		return new HashCodeBuilder()
+			.append(getId())
+			.append(getCode())
+			.append(getUserName())
+			.append(getPassword())
+			.append(getPhone())
+			.append(getCreateTime())
+			.append(getSalt())
+			.append(getLocked())
+			.toHashCode();
+	}
+	
+	public boolean equals(Object obj) {
+		if(obj instanceof User == false) return false;
+		if(this == obj) return true;
+		User other = (User)obj;
+		return new EqualsBuilder()
+			.append(getId(),other.getId())
+			.isEquals();
+	}
 }

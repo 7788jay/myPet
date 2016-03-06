@@ -1,7 +1,7 @@
-package cn.pet.lin.service.sys;
+package cn.pet.lin.service.user;
 
-import cn.pet.lin.domain.param.sys.UserParam;
-import cn.pet.lin.domain.sys.User;
+import cn.pet.lin.domain.param.user.UserParam;
+import cn.pet.lin.domain.user.User;
 import cn.pet.lin.utils.enums.SqlOrderEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,10 +1,10 @@
-package cn.pet.lin.controller.admin.sys;
+package cn.pet.lin.controller.admin.user;
 
 import cn.pet.lin.domain.BizData4Page;
 import cn.pet.lin.domain.common.ResultDTO;
-import cn.pet.lin.domain.param.sys.UserParam;
-import cn.pet.lin.domain.sys.User;
-import cn.pet.lin.service.sys.IUserService;
+import cn.pet.lin.domain.param.user.UserParam;
+import cn.pet.lin.domain.user.User;
+import cn.pet.lin.service.user.IUserService;
 import cn.pet.lin.utils.PageUtils;
 import cn.pet.lin.utils.enums.ERRORMSG;
 import cn.pet.lin.utils.enums.SUCCESSMSG;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin/sys/user")
-public class SysUserController {
+public class UserController {
     @Autowired
     IUserService userService;
 

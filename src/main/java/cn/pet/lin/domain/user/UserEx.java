@@ -8,22 +8,27 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-02-10  林伟樘        新建	
+{  2016-03-06  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
 
-package cn.pet.lin.service.sys;
+package cn.pet.lin.domain.user;
 
-import cn.pet.lin.domain.sys.User;
-import cn.pet.lin.dao.sys.IUserDAO;
-import cn.pet.lin.service.IBaseService;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
- /**
- * 《用户表》 业务逻辑服务接口
+import java.util.*;
+
+/**
+ * 《用户表》扩展实体
  * @author 林伟樘
  *
  */
-public interface IUserService extends IBaseService<IUserDAO, User>{
-
+public class UserEx extends User {
+	private static final long serialVersionUID = 1L;
+	
+	//针对User实体在这里增加额外的属性和对应的get和set方法
 }

@@ -1133,6 +1133,36 @@ table .product-quantity .input-group {
 	margin-bottom: 14px;
 }
 
+/**用户信息**/
+.user-info{
+	border: 1px solid #f4f4f4;
+	padding: 10px 10px;
+	margin: 15px 0px;
+	width: 100%;
+	overflow: hidden;
+}
+.user-info .pull-left{
+	width: 50%;
+	height: 30px;
+	line-height: 30px;
+}
+.user-info .pull-left .control-label{
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #8e9ca8;
+	margin-right: 10px;
+	padding-top: 2px;
+}
+/**添加收货地址**/
+.user-info-address{
+	padding: 20px;
+}
+.address-select{
+	width: 20%;
+	margin-right: 20px;
+	float: left;
+
+}
 /***
 Shop Stype Buttons
 ***/

@@ -8,15 +8,15 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-02-10  林伟樘        新建	
+{  2016-03-06  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
 
-package cn.pet.lin.service.sys;
+package cn.pet.lin.service.user;
 
-import cn.pet.lin.dao.sys.IUserDAO;
-import cn.pet.lin.domain.sys.User;
+import cn.pet.lin.dao.user.IUserDAO;
+import cn.pet.lin.domain.user.User;
 import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
