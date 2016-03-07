@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pet.lin.dao.user.IDeliveryDAO">
+<!--
+insert
+update
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        code,
+        userCode,
+        name,
+        province,
+        city,
+        area,
+        detail,
+        phone,
+        postCode,
+        isDefault
+    </sql>
+    <insert id="insert" parameterType="delivery">
+        INSERT INTO user_delivery (
+		    code
+		    ,userCode
+		    ,name
+		    ,province
+		    ,city
+		    ,area
+		    ,detail
+		    ,phone
+		    ,postCode
+		    ,isDefault
+        ) VALUES (
+		    	#{code}
+		    	,#{userCode}
+		    	,#{name}
+		    	,#{province}
+		    	,#{city}
+		    	,#{area}
+		    	,#{detail}
+		    	,#{phone}
+		    	,#{postCode}
+		    	,#{isDefault}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO user_delivery (
+		    code
+		    ,userCode
+		    ,name
+		    ,province
+		    ,city
+		    ,area
+		    ,detail
+		    ,phone
+		    ,postCode
+		    ,isDefault
+        ) VALUES (
+		    	#{map.code}
+		    	,#{map.userCode}
+		    	,#{map.name}
+		    	,#{map.province}
+		    	,#{map.city}
+		    	,#{map.area}
+		    	,#{map.detail}
+		    	,#{map.phone}
+		    	,#{map.postCode}
+		    	,#{map.isDefault}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="delivery">
+        UPDATE user_delivery
+        <trim prefix="SET" suffixOverrides=",">
+		    code=#{code},
+		    userCode=#{userCode},
+		    name=#{name},
+		    province=#{province},
+		    city=#{city},
+		    area=#{area},
+		    detail=#{detail},
+		    phone=#{phone},
+		    postCode=#{postCode},
+		    isDefault=#{isDefault},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+	
+	<update id="updateMap">
+        UPDATE user_delivery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.code!=null">
+                code = #{map.code},
+            </if>
+            <if test="map.userCode!=null">
+                userCode = #{map.userCode},
+            </if>
+            <if test="map.name!=null">
+                name = #{map.name},
+            </if>
+            <if test="map.province!=null">
+                province = #{map.province},
+            </if>
+            <if test="map.city!=null">
+                city = #{map.city},
+            </if>
+            <if test="map.area!=null">
+                area = #{map.area},
+            </if>
+            <if test="map.detail!=null">
+                detail = #{map.detail},
+            </if>
+            <if test="map.phone!=null">
+                phone = #{map.phone},
+            </if>
+            <if test="map.postCode!=null">
+                postCode = #{map.postCode},
+            </if>
+            <if test="map.isDefault!=null">
+                isDefault = #{map.isDefault},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE user_delivery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.code!=null">
+                code = #{update.code},
+            </if>
+            <if test="update.userCode!=null">
+                userCode = #{update.userCode},
+            </if>
+            <if test="update.name!=null">
+                name = #{update.name},
+            </if>
+            <if test="update.province!=null">
+                province = #{update.province},
+            </if>
+            <if test="update.city!=null">
+                city = #{update.city},
+            </if>
+            <if test="update.area!=null">
+                area = #{update.area},
+            </if>
+            <if test="update.detail!=null">
+                detail = #{update.detail},
+            </if>
+            <if test="update.phone!=null">
+                phone = #{update.phone},
+            </if>
+            <if test="update.postCode!=null">
+                postCode = #{update.postCode},
+            </if>
+            <if test="update.isDefault!=null">
+                isDefault = #{update.isDefault},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.userCode!=null">
+                AND userCode = #{condition.userCode}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.province!=null">
+                AND province = #{condition.province}
+            </if>
+            <if test="condition.city!=null">
+                AND city = #{condition.city}
+            </if>
+            <if test="condition.area!=null">
+                AND area = #{condition.area}
+            </if>
+            <if test="condition.detail!=null">
+                AND detail = #{condition.detail}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.postCode!=null">
+                AND postCode = #{condition.postCode}
+            </if>
+            <if test="condition.isDefault!=null">
+                AND isDefault = #{condition.isDefault}
+            </if>
+        </trim>
+    </update>   
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM user_delivery
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM user_delivery
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM user_delivery
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+            <if test="userCode!=null">
+                AND userCode = #{userCode}
+            </if>
+            <if test="name!=null">
+                AND name = #{name}
+            </if>
+            <if test="province!=null">
+                AND province = #{province}
+            </if>
+            <if test="city!=null">
+                AND city = #{city}
+            </if>
+            <if test="area!=null">
+                AND area = #{area}
+            </if>
+            <if test="detail!=null">
+                AND detail = #{detail}
+            </if>
+            <if test="phone!=null">
+                AND phone = #{phone}
+            </if>
+            <if test="postCode!=null">
+                AND postCode = #{postCode}
+            </if>
+            <if test="isDefault!=null">
+                AND isDefault = #{isDefault}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM user_delivery WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Integer" resultType="Delivery">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_delivery
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="Delivery">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_delivery WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="Delivery">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_delivery WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="Delivery">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_delivery
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="Delivery">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_delivery
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.code!=null">
+                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            </if>
+            <if test="condition.userCode!=null">
+                ${condition.groupOp}   userCode  ${condition.userCode.op}  #{condition.userCode.data}
+            </if>
+            <if test="condition.name!=null">
+                ${condition.groupOp}   name  ${condition.name.op}  #{condition.name.data}
+            </if>
+            <if test="condition.province!=null">
+                ${condition.groupOp}   province  ${condition.province.op}  #{condition.province.data}
+            </if>
+            <if test="condition.city!=null">
+                ${condition.groupOp}   city  ${condition.city.op}  #{condition.city.data}
+            </if>
+            <if test="condition.area!=null">
+                ${condition.groupOp}   area  ${condition.area.op}  #{condition.area.data}
+            </if>
+            <if test="condition.detail!=null">
+                ${condition.groupOp}   detail  ${condition.detail.op}  #{condition.detail.data}
+            </if>
+            <if test="condition.phone!=null">
+                ${condition.groupOp}   phone  ${condition.phone.op}  #{condition.phone.data}
+            </if>
+            <if test="condition.postCode!=null">
+                ${condition.groupOp}   postCode  ${condition.postCode.op}  #{condition.postCode.data}
+            </if>
+            <if test="condition.isDefault!=null">
+                ${condition.groupOp}   isDefault  ${condition.isDefault.op}  #{condition.isDefault.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="queryList" parameterType="java.util.Map" resultType="Delivery">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_delivery
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.userCode!=null">
+                AND userCode = #{condition.userCode}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.province!=null">
+                AND province = #{condition.province}
+            </if>
+            <if test="condition.city!=null">
+                AND city = #{condition.city}
+            </if>
+            <if test="condition.area!=null">
+                AND area = #{condition.area}
+            </if>
+            <if test="condition.detail!=null">
+                AND detail = #{condition.detail}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.postCode!=null">
+                AND postCode = #{condition.postCode}
+            </if>
+            <if test="condition.isDefault!=null">
+                AND isDefault = #{condition.isDefault}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="Delivery">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_delivery
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.userCode!=null">
+                AND userCode = #{condition.userCode}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.province!=null">
+                AND province = #{condition.province}
+            </if>
+            <if test="condition.city!=null">
+                AND city = #{condition.city}
+            </if>
+            <if test="condition.area!=null">
+                AND area = #{condition.area}
+            </if>
+            <if test="condition.detail!=null">
+                AND detail = #{condition.detail}
+            </if>
+            <if test="condition.phone!=null">
+                AND phone = #{condition.phone}
+            </if>
+            <if test="condition.postCode!=null">
+                AND postCode = #{condition.postCode}
+            </if>
+            <if test="condition.isDefault!=null">
+                AND isDefault = #{condition.isDefault}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM user_delivery
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="code!=null">
+               ${groupOp} code ${code.op}  #{code.data}
+           </if>
+           <if test="userCode!=null">
+               ${groupOp} userCode ${userCode.op}  #{userCode.data}
+           </if>
+           <if test="name!=null">
+               ${groupOp} name ${name.op}  #{name.data}
+           </if>
+           <if test="province!=null">
+               ${groupOp} province ${province.op}  #{province.data}
+           </if>
+           <if test="city!=null">
+               ${groupOp} city ${city.op}  #{city.data}
+           </if>
+           <if test="area!=null">
+               ${groupOp} area ${area.op}  #{area.data}
+           </if>
+           <if test="detail!=null">
+               ${groupOp} detail ${detail.op}  #{detail.data}
+           </if>
+           <if test="phone!=null">
+               ${groupOp} phone ${phone.op}  #{phone.data}
+           </if>
+           <if test="postCode!=null">
+               ${groupOp} postCode ${postCode.op}  #{postCode.data}
+           </if>
+           <if test="isDefault!=null">
+               ${groupOp} isDefault ${isDefault.op}  #{isDefault.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Integer">
+        SELECT
+        MAX(id)
+        FROM user_delivery
+    </select>
+   
+</mapper>

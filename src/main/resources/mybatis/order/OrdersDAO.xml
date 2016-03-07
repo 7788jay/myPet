@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pet.lin.dao.order.IOrdersDAO">
+<!--
+insert
+update
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        userCode,
+        code,
+        createTime,
+        payTime,
+        payType,
+        sendTime,
+        completeTime,
+        deliveryType,
+        deliveryTime,
+        deliveryCode,
+        totalPrice,
+        supplyCode,
+        description,
+        status
+    </sql>
+    <insert id="insert" parameterType="orders">
+        INSERT INTO order_orders (
+		    userCode
+		    ,code
+		    ,createTime
+		    ,payTime
+		    ,payType
+		    ,sendTime
+		    ,completeTime
+		    ,deliveryType
+		    ,deliveryTime
+		    ,deliveryCode
+		    ,totalPrice
+		    ,supplyCode
+		    ,description
+		    ,status
+        ) VALUES (
+		    	#{userCode}
+		    	,#{code}
+		    	,#{createTime}
+		    	,#{payTime}
+		    	,#{payType}
+		    	,#{sendTime}
+		    	,#{completeTime}
+		    	,#{deliveryType}
+		    	,#{deliveryTime}
+		    	,#{deliveryCode}
+		    	,#{totalPrice}
+		    	,#{supplyCode}
+		    	,#{description}
+		    	,#{status}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO order_orders (
+		    userCode
+		    ,code
+		    ,createTime
+		    ,payTime
+		    ,payType
+		    ,sendTime
+		    ,completeTime
+		    ,deliveryType
+		    ,deliveryTime
+		    ,deliveryCode
+		    ,totalPrice
+		    ,supplyCode
+		    ,description
+		    ,status
+        ) VALUES (
+		    	#{map.userCode}
+		    	,#{map.code}
+		    	,#{map.createTime}
+		    	,#{map.payTime}
+		    	,#{map.payType}
+		    	,#{map.sendTime}
+		    	,#{map.completeTime}
+		    	,#{map.deliveryType}
+		    	,#{map.deliveryTime}
+		    	,#{map.deliveryCode}
+		    	,#{map.totalPrice}
+		    	,#{map.supplyCode}
+		    	,#{map.description}
+		    	,#{map.status}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="orders">
+        UPDATE order_orders
+        <trim prefix="SET" suffixOverrides=",">
+		    userCode=#{userCode},
+		    code=#{code},
+		    createTime=#{createTime},
+		    payTime=#{payTime},
+		    payType=#{payType},
+		    sendTime=#{sendTime},
+		    completeTime=#{completeTime},
+		    deliveryType=#{deliveryType},
+		    deliveryTime=#{deliveryTime},
+		    deliveryCode=#{deliveryCode},
+		    totalPrice=#{totalPrice},
+		    supplyCode=#{supplyCode},
+		    description=#{description},
+		    status=#{status},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+	
+	<update id="updateMap">
+        UPDATE order_orders
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.userCode!=null">
+                userCode = #{map.userCode},
+            </if>
+            <if test="map.code!=null">
+                code = #{map.code},
+            </if>
+            <if test="map.createTime!=null">
+                createTime = #{map.createTime},
+            </if>
+            <if test="map.payTime!=null">
+                payTime = #{map.payTime},
+            </if>
+            <if test="map.payType!=null">
+                payType = #{map.payType},
+            </if>
+            <if test="map.sendTime!=null">
+                sendTime = #{map.sendTime},
+            </if>
+            <if test="map.completeTime!=null">
+                completeTime = #{map.completeTime},
+            </if>
+            <if test="map.deliveryType!=null">
+                deliveryType = #{map.deliveryType},
+            </if>
+            <if test="map.deliveryTime!=null">
+                deliveryTime = #{map.deliveryTime},
+            </if>
+            <if test="map.deliveryCode!=null">
+                deliveryCode = #{map.deliveryCode},
+            </if>
+            <if test="map.totalPrice!=null">
+                totalPrice = #{map.totalPrice},
+            </if>
+            <if test="map.supplyCode!=null">
+                supplyCode = #{map.supplyCode},
+            </if>
+            <if test="map.description!=null">
+                description = #{map.description},
+            </if>
+            <if test="map.status!=null">
+                status = #{map.status},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE order_orders
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.userCode!=null">
+                userCode = #{update.userCode},
+            </if>
+            <if test="update.code!=null">
+                code = #{update.code},
+            </if>
+            <if test="update.createTime!=null">
+                createTime = #{update.createTime},
+            </if>
+            <if test="update.payTime!=null">
+                payTime = #{update.payTime},
+            </if>
+            <if test="update.payType!=null">
+                payType = #{update.payType},
+            </if>
+            <if test="update.sendTime!=null">
+                sendTime = #{update.sendTime},
+            </if>
+            <if test="update.completeTime!=null">
+                completeTime = #{update.completeTime},
+            </if>
+            <if test="update.deliveryType!=null">
+                deliveryType = #{update.deliveryType},
+            </if>
+            <if test="update.deliveryTime!=null">
+                deliveryTime = #{update.deliveryTime},
+            </if>
+            <if test="update.deliveryCode!=null">
+                deliveryCode = #{update.deliveryCode},
+            </if>
+            <if test="update.totalPrice!=null">
+                totalPrice = #{update.totalPrice},
+            </if>
+            <if test="update.supplyCode!=null">
+                supplyCode = #{update.supplyCode},
+            </if>
+            <if test="update.description!=null">
+                description = #{update.description},
+            </if>
+            <if test="update.status!=null">
+                status = #{update.status},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.userCode!=null">
+                AND userCode = #{condition.userCode}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.payTime!=null">
+                AND payTime = #{condition.payTime}
+            </if>
+            <if test="condition.payType!=null">
+                AND payType = #{condition.payType}
+            </if>
+            <if test="condition.sendTime!=null">
+                AND sendTime = #{condition.sendTime}
+            </if>
+            <if test="condition.completeTime!=null">
+                AND completeTime = #{condition.completeTime}
+            </if>
+            <if test="condition.deliveryType!=null">
+                AND deliveryType = #{condition.deliveryType}
+            </if>
+            <if test="condition.deliveryTime!=null">
+                AND deliveryTime = #{condition.deliveryTime}
+            </if>
+            <if test="condition.deliveryCode!=null">
+                AND deliveryCode = #{condition.deliveryCode}
+            </if>
+            <if test="condition.totalPrice!=null">
+                AND totalPrice = #{condition.totalPrice}
+            </if>
+            <if test="condition.supplyCode!=null">
+                AND supplyCode = #{condition.supplyCode}
+            </if>
+            <if test="condition.description!=null">
+                AND description = #{condition.description}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+    </update>   
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM order_orders
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM order_orders
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM order_orders
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="userCode!=null">
+                AND userCode = #{userCode}
+            </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+            <if test="createTime!=null">
+                AND createTime = #{createTime}
+            </if>
+            <if test="payTime!=null">
+                AND payTime = #{payTime}
+            </if>
+            <if test="payType!=null">
+                AND payType = #{payType}
+            </if>
+            <if test="sendTime!=null">
+                AND sendTime = #{sendTime}
+            </if>
+            <if test="completeTime!=null">
+                AND completeTime = #{completeTime}
+            </if>
+            <if test="deliveryType!=null">
+                AND deliveryType = #{deliveryType}
+            </if>
+            <if test="deliveryTime!=null">
+                AND deliveryTime = #{deliveryTime}
+            </if>
+            <if test="deliveryCode!=null">
+                AND deliveryCode = #{deliveryCode}
+            </if>
+            <if test="totalPrice!=null">
+                AND totalPrice = #{totalPrice}
+            </if>
+            <if test="supplyCode!=null">
+                AND supplyCode = #{supplyCode}
+            </if>
+            <if test="description!=null">
+                AND description = #{description}
+            </if>
+            <if test="status!=null">
+                AND status = #{status}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM order_orders WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Integer" resultType="Orders">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_orders
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="Orders">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_orders WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="Orders">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_orders WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="Orders">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_orders
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="Orders">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_orders
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.userCode!=null">
+                ${condition.groupOp}   userCode  ${condition.userCode.op}  #{condition.userCode.data}
+            </if>
+            <if test="condition.code!=null">
+                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            </if>
+            <if test="condition.createTime!=null">
+                ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
+            </if>
+            <if test="condition.payTime!=null">
+                ${condition.groupOp}   payTime  ${condition.payTime.op}  #{condition.payTime.data}
+            </if>
+            <if test="condition.payType!=null">
+                ${condition.groupOp}   payType  ${condition.payType.op}  #{condition.payType.data}
+            </if>
+            <if test="condition.sendTime!=null">
+                ${condition.groupOp}   sendTime  ${condition.sendTime.op}  #{condition.sendTime.data}
+            </if>
+            <if test="condition.completeTime!=null">
+                ${condition.groupOp}   completeTime  ${condition.completeTime.op}  #{condition.completeTime.data}
+            </if>
+            <if test="condition.deliveryType!=null">
+                ${condition.groupOp}   deliveryType  ${condition.deliveryType.op}  #{condition.deliveryType.data}
+            </if>
+            <if test="condition.deliveryTime!=null">
+                ${condition.groupOp}   deliveryTime  ${condition.deliveryTime.op}  #{condition.deliveryTime.data}
+            </if>
+            <if test="condition.deliveryCode!=null">
+                ${condition.groupOp}   deliveryCode  ${condition.deliveryCode.op}  #{condition.deliveryCode.data}
+            </if>
+            <if test="condition.totalPrice!=null">
+                ${condition.groupOp}   totalPrice  ${condition.totalPrice.op}  #{condition.totalPrice.data}
+            </if>
+            <if test="condition.supplyCode!=null">
+                ${condition.groupOp}   supplyCode  ${condition.supplyCode.op}  #{condition.supplyCode.data}
+            </if>
+            <if test="condition.description!=null">
+                ${condition.groupOp}   description  ${condition.description.op}  #{condition.description.data}
+            </if>
+            <if test="condition.status!=null">
+                ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="queryList" parameterType="java.util.Map" resultType="Orders">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_orders
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.userCode!=null">
+                AND userCode = #{condition.userCode}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.payTime!=null">
+                AND payTime = #{condition.payTime}
+            </if>
+            <if test="condition.payType!=null">
+                AND payType = #{condition.payType}
+            </if>
+            <if test="condition.sendTime!=null">
+                AND sendTime = #{condition.sendTime}
+            </if>
+            <if test="condition.completeTime!=null">
+                AND completeTime = #{condition.completeTime}
+            </if>
+            <if test="condition.deliveryType!=null">
+                AND deliveryType = #{condition.deliveryType}
+            </if>
+            <if test="condition.deliveryTime!=null">
+                AND deliveryTime = #{condition.deliveryTime}
+            </if>
+            <if test="condition.deliveryCode!=null">
+                AND deliveryCode = #{condition.deliveryCode}
+            </if>
+            <if test="condition.totalPrice!=null">
+                AND totalPrice = #{condition.totalPrice}
+            </if>
+            <if test="condition.supplyCode!=null">
+                AND supplyCode = #{condition.supplyCode}
+            </if>
+            <if test="condition.description!=null">
+                AND description = #{condition.description}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="Orders">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM order_orders
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.userCode!=null">
+                AND userCode = #{condition.userCode}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.payTime!=null">
+                AND payTime = #{condition.payTime}
+            </if>
+            <if test="condition.payType!=null">
+                AND payType = #{condition.payType}
+            </if>
+            <if test="condition.sendTime!=null">
+                AND sendTime = #{condition.sendTime}
+            </if>
+            <if test="condition.completeTime!=null">
+                AND completeTime = #{condition.completeTime}
+            </if>
+            <if test="condition.deliveryType!=null">
+                AND deliveryType = #{condition.deliveryType}
+            </if>
+            <if test="condition.deliveryTime!=null">
+                AND deliveryTime = #{condition.deliveryTime}
+            </if>
+            <if test="condition.deliveryCode!=null">
+                AND deliveryCode = #{condition.deliveryCode}
+            </if>
+            <if test="condition.totalPrice!=null">
+                AND totalPrice = #{condition.totalPrice}
+            </if>
+            <if test="condition.supplyCode!=null">
+                AND supplyCode = #{condition.supplyCode}
+            </if>
+            <if test="condition.description!=null">
+                AND description = #{condition.description}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM order_orders
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="userCode!=null">
+               ${groupOp} userCode ${userCode.op}  #{userCode.data}
+           </if>
+           <if test="code!=null">
+               ${groupOp} code ${code.op}  #{code.data}
+           </if>
+           <if test="createTime!=null">
+               ${groupOp} createTime ${createTime.op}  #{createTime.data}
+           </if>
+           <if test="payTime!=null">
+               ${groupOp} payTime ${payTime.op}  #{payTime.data}
+           </if>
+           <if test="payType!=null">
+               ${groupOp} payType ${payType.op}  #{payType.data}
+           </if>
+           <if test="sendTime!=null">
+               ${groupOp} sendTime ${sendTime.op}  #{sendTime.data}
+           </if>
+           <if test="completeTime!=null">
+               ${groupOp} completeTime ${completeTime.op}  #{completeTime.data}
+           </if>
+           <if test="deliveryType!=null">
+               ${groupOp} deliveryType ${deliveryType.op}  #{deliveryType.data}
+           </if>
+           <if test="deliveryTime!=null">
+               ${groupOp} deliveryTime ${deliveryTime.op}  #{deliveryTime.data}
+           </if>
+           <if test="deliveryCode!=null">
+               ${groupOp} deliveryCode ${deliveryCode.op}  #{deliveryCode.data}
+           </if>
+           <if test="totalPrice!=null">
+               ${groupOp} totalPrice ${totalPrice.op}  #{totalPrice.data}
+           </if>
+           <if test="supplyCode!=null">
+               ${groupOp} supplyCode ${supplyCode.op}  #{supplyCode.data}
+           </if>
+           <if test="description!=null">
+               ${groupOp} description ${description.op}  #{description.data}
+           </if>
+           <if test="status!=null">
+               ${groupOp} status ${status.op}  #{status.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Integer">
+        SELECT
+        MAX(id)
+        FROM order_orders
+    </select>
+   
+</mapper>
