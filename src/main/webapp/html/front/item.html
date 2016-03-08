@@ -474,8 +474,11 @@ Nostrud duis molestie at dolore.</p>
             },
             //初始化
             init: function(){
+              var reg = new RegExp("(^|&)code=([^&]*)(&|$)","i");
+              var r = window.location.search.substr(1).match(reg);
+
               $.ajax({
-                url: "/pet/front/item/queryOne?code=2d254ad4ff6546c387001e417bdac028",
+                url: "/pet/front/item/queryOne?code="+r[2],
                 type: "GET",
                 dataType: "json",
                 success: function (result) {

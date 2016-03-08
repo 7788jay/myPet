@@ -5,7 +5,6 @@
 ###############
 /build/
 /classes/
-/upload/
 
 
 ###############
@@ -55,4 +54,3 @@
 ##idea##
 /.idea/
 *.iml
-rebel*.xml

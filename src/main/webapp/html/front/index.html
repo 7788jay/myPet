@@ -233,7 +233,7 @@
                                     <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">查看</a>
                                 </div>
                             </div>
-                            <h3><a href="javascript:;">{{el.name}}</a></h3>
+                            <h3><a href="javascript:;" ms-click="showItem(el.code)">{{el.name}}</a></h3>
                             <div class="pi-price">￥{{el.price}}</div>
                             <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
                             <div class="sticker sticker-new"></div>
@@ -608,6 +608,9 @@
                         vm.newPets = result;
                     }
                 });
+            },
+            showItem: function(code){
+                window.location.href = 'item.html?code='+code;
             },
             layoutInit: function(){
                 Layout.init();
