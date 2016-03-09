@@ -15,12 +15,7 @@
 
 package cn.pet.lin.domain.order;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
-import java.util.*;
+import cn.pet.lin.domain.pet.Pet;
 
 /**
  * 《订单项》扩展实体
@@ -29,6 +24,16 @@ import java.util.*;
  */
 public class ItemEx extends Item {
 	private static final long serialVersionUID = 1L;
+
+	private Pet pet;
 	
 	//针对Item实体在这里增加额外的属性和对应的get和set方法
+
+	public Pet getPet() {
+		return pet;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
 }

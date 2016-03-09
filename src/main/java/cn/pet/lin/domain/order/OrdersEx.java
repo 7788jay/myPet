@@ -15,12 +15,9 @@
 
 package cn.pet.lin.domain.order;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import cn.pet.lin.domain.user.User;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * 《订单表》扩展实体
@@ -29,6 +26,25 @@ import java.util.*;
  */
 public class OrdersEx extends Orders {
 	private static final long serialVersionUID = 1L;
+
+	private User user;
+	private List<ItemEx> itemExs;
 	
 	//针对Orders实体在这里增加额外的属性和对应的get和set方法
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<ItemEx> getItemExs() {
+		return itemExs;
+	}
+
+	public void setItemExs(List<ItemEx> itemExs) {
+		this.itemExs = itemExs;
+	}
 }
