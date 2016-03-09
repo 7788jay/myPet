@@ -15,8 +15,6 @@
 
 package cn.pet.lin.domain.order;
 
-import cn.pet.lin.domain.user.User;
-
 import java.util.List;
 
 /**
@@ -27,17 +25,27 @@ import java.util.List;
 public class OrdersEx extends Orders {
 	private static final long serialVersionUID = 1L;
 
-	private User user;
+	private String userName;
+	private String phone;
 	private List<ItemEx> itemExs;
 	
 	//针对Orders实体在这里增加额外的属性和对应的get和set方法
 
-	public User getUser() {
-		return user;
+
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public List<ItemEx> getItemExs() {

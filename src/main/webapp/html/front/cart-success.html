@@ -10,7 +10,7 @@
 <!-- Head BEGIN -->
 <head>
     <meta charset="utf-8">
-    <title>购物车</title>
+    <title>成功加入购物车</title>
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -52,7 +52,7 @@
 <!-- Head END -->
 
 <!-- Body BEGIN -->
-<body class="ecommerce" ms-controller="pet-cart">
+<body class="ecommerce" ms-controller="pet-cart-success" id="pet-cart-success">
 <!-- BEGIN STYLE CUSTOMIZER -->
 <div class="color-panel hidden-sm">
     <div class="color-mode-icons icon-color"></div>
@@ -80,81 +80,16 @@
         <div class="row margin-bottom-40">
             <!-- BEGIN CONTENT -->
             <div class="col-md-12 col-sm-12">
-                <h1>购物车</h1>
                 <div class="goods-page">
                     <div class="goods-data clearfix">
                         <div class="table-wrapper-responsive">
-                            <table summary="Shopping cart">
-                                <tr>
-                                    <th class="goods-page-image">图片</th>
-                                    <th class="goods-page-description">描述</th>
-                                    <th class="goods-page-ref-no">Ref No</th>
-                                    <th class="goods-page-quantity">数量</th>
-                                    <th class="goods-page-price">单价</th>
-                                    <th class="goods-page-total" colspan="2">总价</th>
-                                </tr>
-                                <tr ms-repeat="cart.cartItems" data-repeat-rendered="layoutInit">
-                                    <td class="goods-page-image">
-                                        <a href="javascript:;">
-                                            <img ms-attr-src="$val.pet.image.split(',')[0]" alt="Berry Lace Dress">
-                                        </a>
-                                    </td>
-                                    <td class="goods-page-description">
-                                        <h3><a href="javascript:;">{{$val.pet.name}}</a></h3>
-                                        <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                                        <em>More info is here</em>
-                                    </td>
-                                    <td class="goods-page-ref-no">
-                                        javc2133
-                                    </td>
-                                    <td class="goods-page-quantity">
-                                        <div class="product-quantity">
-                                            <!--选择数量-->
-                                            <span class="input-group-btn">
-                                                <button ms-click="changeNum($val.pet.code,$val.quantity-1)" class="btn quantity-down bootstrap-touchspin-down" type="button"><i class="fa fa-angle-down"></i></button>
-                                            </span>
-                                            <input id="product-quantity" type="text" ms-duplex-number="$val.quantity"  class="form-control input-sm">
-                                            <!--选择数量-->
-                                            <span class="input-group-btn">
-                                                <button ms-click="changeNum($val.pet.code,$val.quantity+1)" class="btn quantity-up bootstrap-touchspin-up" type="button"><i class="fa fa-angle-up"></i></button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="goods-page-price">
-                                        <strong><span>￥</span>{{$val.pet.price}}</strong>
-                                    </td>
-                                    <td class="goods-page-total">
-                                        <strong><span>￥</span>{{$val.pet.price * $val.quantity}}</strong>
-                                    </td>
-                                    <td class="del-goods-col">
-                                        <a class="del-goods" href="javascript:;">&nbsp;</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <div class="shopping-total">
-                            <ul>
-                                <li>
-                                    <em>Sub total</em>
-                                    <strong class="price">
-                                        <span>￥</span>{{cart.totalPrice}}
-                                    </strong>
-                                </li>
-                                <li>
-                                    <em>Shipping cost</em>
-                                    <strong class="price"><span>$</span>3.00</strong>
-                                </li>
-                                <li class="shopping-total-price">
-                                    <em>Total</em>
-                                    <strong class="price"><span>$</span>50.00</strong>
-                                </li>
-                            </ul>
+                            <span></span>
+                            <h1 style="margin-left:40%;font-size: 30px;color: #7ABD54;font-weight: bold;">已成功加入购物车!</h1>
                         </div>
                     </div>
                     <button class="btn btn-default" type="submit">继续购物 <i class="fa fa-shopping-cart"></i>
                     </button>
-                    <a class="btn btn-primary" href="order.html" type="button">去结算 <i class="fa fa-check"></i></a>
+                    <a class="btn btn-primary" href="cart.html" type="button">去购物车结算 <i class="fa fa-check"></i></a>
                 </div>
             </div>
             <!-- END CONTENT -->
@@ -367,46 +302,9 @@
 <script type="text/javascript">
     jQuery(document).ready(function () {
         var vm = avalon.define({
-            $id: "pet-cart",
-            cart: {cartItems: {},totalPrice: null},   //购物车
-
-            //初始化
-            init: function () {
-                $.ajax({
-                    url: "/pet/front/cart/queryCart",
-                    type: "GET",
-                    dataType: "json",
-                    success: function (result) {
-                        vm.cart = result;
-                        avalon.log(vm.cart);
-                    }
-                });
-            },
-            //改变数量
-            changeNum: function(code,quantity){
-                if(quantity<1){
-                    return;
-                }
-                avalon.log(code,quantity);
-                $.ajax({
-                    url: "/pet/front/cart/changeNum",
-                    type: "POST",
-                    data:{code:code,quantity:quantity},
-                    dataType: "json",
-                    success: function (result) {
-                        vm.cart = result;
-                        avalon.log(vm.cart);
-                    }
-                });
-            },
-
-            layoutInit: function(){
-                //数量初始化
-                Layout.initOWL();
-            }
+            $id: "pet-cart-success"
         });
-        avalon.scan();
-        vm.init();
+        avalon.scan($('#pet-cart-success')[0],vm);
         //界面初始化
         Layout.init();
         Layout.initOWL();

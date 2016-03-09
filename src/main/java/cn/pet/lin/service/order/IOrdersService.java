@@ -15,15 +15,26 @@
 
 package cn.pet.lin.service.order;
 
-import cn.pet.lin.domain.order.Orders;
 import cn.pet.lin.dao.order.IOrdersDAO;
+import cn.pet.lin.domain.order.Orders;
+import cn.pet.lin.domain.order.OrdersEx;
 import cn.pet.lin.service.IBaseService;
 
- /**
- * 《订单表》 业务逻辑服务接口
- * @author 林伟樘
- *
- */
-public interface IOrdersService extends IBaseService<IOrdersDAO, Orders>{
+import java.util.List;
+import java.util.Map;
 
+/**
+ * 《订单表》 业务逻辑服务接口
+ *
+ * @author 林伟樘
+ */
+public interface IOrdersService extends IBaseService<IOrdersDAO, Orders> {
+
+    List<OrdersEx> queryPageEx(Map<String, Object> condition, int offset, int rows,String orderBy, String sortBy);
+    /**
+     * 单个获取拓展
+     * @param orderCode 订单编号
+     * @return
+     */
+    OrdersEx queryOneEx(String orderCode);
 }

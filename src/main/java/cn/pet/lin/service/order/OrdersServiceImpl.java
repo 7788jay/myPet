@@ -17,6 +17,7 @@ package cn.pet.lin.service.order;
 
 import cn.pet.lin.dao.order.IOrdersDAO;
 import cn.pet.lin.domain.order.Orders;
+import cn.pet.lin.domain.order.OrdersEx;
 import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,16 @@ public class OrdersServiceImpl extends AbstractBaseService<IOrdersDAO,Orders> im
     public IOrdersDAO getDao() {
         return ordersDAO;
     }
+
+     @Override
+     public List<OrdersEx> queryPageEx(Map<String, Object> condition, int offset, int rows,String orderBy, String sortBy) {
+         return ordersDAO.queryPageEx(condition,offset,rows,orderBy,sortBy);
+     }
+
+     @Override
+     public OrdersEx queryOneEx(String orderCode) {
+         return ordersDAO.queryOneEx(orderCode);
+     }
 
 //    @Override
 //    public void insert(BaseDomain entity) {

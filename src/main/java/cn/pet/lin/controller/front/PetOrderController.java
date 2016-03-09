@@ -10,6 +10,7 @@ import cn.pet.lin.service.order.IItemService;
 import cn.pet.lin.service.order.IOrdersService;
 import cn.pet.lin.service.pet.IPetService;
 import cn.pet.lin.utils.CommonUtils;
+import cn.pet.lin.utils.enums.OrderStatus;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,15 +38,16 @@ public class PetOrderController {
     public ResultDTO createOrder(Orders orders, HttpSession session) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         Cart cart = (Cart) session.getAttribute("cart");
+        Map<String, CartItem> cartItemMap = cart.getCartItems();
+        if (cartItemMap.size() <= 0) {
+            return new ResultDTO(false, "购物车为空！");
+        }
         //订单
         orders.setCode(CommonUtils.makeUUID());
         orders.setUserCode(user.getCode());
         orders.setCreateTime(System.currentTimeMillis());
         orders.setTotalPrice(cart.getTotalPrice());
-        Map<String, CartItem> cartItemMap = cart.getCartItems();
-        if (cartItemMap.size() <= 0) {
-            return new ResultDTO(false, "购物车为空！");
-        }
+        orders.setStatus(OrderStatus.NO_CHECKED.getStatus());
         for (Map.Entry<String, CartItem> entry : cartItemMap.entrySet()) {
             CartItem cartItem = entry.getValue();
             //订单项

@@ -17,12 +17,12 @@ package cn.pet.lin.service.order;
 
 import cn.pet.lin.dao.order.IItemDAO;
 import cn.pet.lin.domain.order.Item;
+import cn.pet.lin.domain.order.ItemEx;
 import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
  /**
  * 《订单项》 业务逻辑服务类
@@ -38,6 +38,11 @@ public class ItemServiceImpl extends AbstractBaseService<IItemDAO,Item> implemen
     public IItemDAO getDao() {
         return itemDAO;
     }
+
+     @Override
+     public List<ItemEx> queryByOrderCode(String orderCode) {
+         return itemDAO.queryByOrderCode(orderCode);
+     }
 
 //    @Override
 //    public void insert(BaseDomain entity) {

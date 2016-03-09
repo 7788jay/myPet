@@ -4,4 +4,30 @@
 <mapper namespace="cn.pet.lin.dao.order.IOrdersDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：OrdersDAO.xml里各节点的ID不能在这里重复出现）  -->
 	
+	<select id="queryPageEx" resultType="cn.pet.lin.domain.order.OrdersEx">
+		SELECT
+			uu.userName,
+			uu.phone,
+			oo.*
+		FROM order_orders oo
+		LEFT JOIN user_user uu
+		ON oo.userCode = uu.code
+		<if test="orderBy!=null">
+			ORDER BY ${orderBy} ${sortBy}
+		</if>
+		<if test="offset != null">
+			limit ${offset}, ${rows}
+		</if>
+	</select>
+	<select id="queryOneEx" resultType="cn.pet.lin.domain.order.OrdersEx">
+		SELECT
+			uu.userName,
+			uu.phone,
+			oo.*
+		FROM order_orders oo
+		LEFT JOIN user_user uu
+		ON oo.userCode = uu.code
+		WHERE oo.code = #{orderCode}
+	</select>
+	
 </mapper>

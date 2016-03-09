@@ -1,12 +1,14 @@
 package cn.pet.lin.controller.admin.order;
 
 import cn.pet.lin.domain.BizData4Page;
-import cn.pet.lin.domain.order.Orders;
+import cn.pet.lin.domain.order.ItemEx;
 import cn.pet.lin.domain.order.OrdersEx;
+import cn.pet.lin.domain.param.order.ItemParam;
 import cn.pet.lin.domain.param.order.OrdersParam;
+import cn.pet.lin.service.order.IItemService;
 import cn.pet.lin.service.order.IOrdersService;
 import cn.pet.lin.utils.PageUtils;
-import cn.pet.lin.utils.enums.MatchTypeEnum;
+import cn.pet.lin.utils.enums.SqlOrderEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,8 @@ import java.util.List;
 public class OrdersController {
     @Autowired
     IOrdersService ordersService;
+    @Autowired
+    IItemService itemService;
 
     /**
      * 分页查询订单
@@ -33,8 +37,8 @@ public class OrdersController {
      */
     @ResponseBody
     @RequestMapping(value = "/queryPage")
-    public BizData4Page<Orders> queryPage(OrdersParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10")int PageSize) {
-        List<Orders> animals = ordersService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY),(PageNo-1)*PageSize,PageSize);
+    public BizData4Page<OrdersEx> queryPage(OrdersParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10")int PageSize) {
+        List<OrdersEx> animals = ordersService.queryPageEx(param.toMap(),(PageNo-1)*PageSize,PageSize,param.F_CreateTime, SqlOrderEnum.DESC.getAction());
         int record = ordersService.count(param.toSearchFieldMap());
         return PageUtils.toBizData4Page(animals,PageNo,PageSize,record);
     }
@@ -43,12 +47,13 @@ public class OrdersController {
     @RequestMapping(value = "/queryOne")
     public OrdersEx queryOne(String orderCode) {
         //查询订单信息
-        Orders orders = ordersService.findOne(OrdersParam.F_Code,orderCode);
+        OrdersEx ordersEx = ordersService.queryOneEx(orderCode);
 
         //查询订单项信息
+        ItemParam itemParam = new ItemParam();
+        itemParam.setOrderCode(orderCode);
+        List<ItemEx> itemExs = itemService.queryByOrderCode(orderCode);
 
-
-        //查询用户信息
         return null;
     }
 }

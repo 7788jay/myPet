@@ -4,4 +4,12 @@
 <mapper namespace="cn.pet.lin.dao.order.IItemDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：ItemDAO.xml里各节点的ID不能在这里重复出现）  -->
 	
+	<select id="queryByOrderCode" resultType="cn.pet.lin.domain.order.ItemEx">
+		SELECT oi.*,pp.name as pet.name
+		FROM order_item oi
+		LEFT JOIN pet_pet pp
+		ON oi.petCode = pp.code
+		WHERE oi.orderCode = #{orderCode}
+	</select>
+	
 </mapper>

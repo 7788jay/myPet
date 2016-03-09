@@ -15,15 +15,19 @@
 
 package cn.pet.lin.service.order;
 
-import cn.pet.lin.domain.order.Item;
 import cn.pet.lin.dao.order.IItemDAO;
+import cn.pet.lin.domain.order.Item;
+import cn.pet.lin.domain.order.ItemEx;
 import cn.pet.lin.service.IBaseService;
 
- /**
- * 《订单项》 业务逻辑服务接口
- * @author 林伟樘
- *
- */
-public interface IItemService extends IBaseService<IItemDAO, Item>{
+import java.util.List;
 
+/**
+ * 《订单项》 业务逻辑服务接口
+ *
+ * @author 林伟樘
+ */
+public interface IItemService extends IBaseService<IItemDAO, Item> {
+
+    List<ItemEx> queryByOrderCode(String orderCode);
 }
