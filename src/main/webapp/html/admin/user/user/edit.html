@@ -6,7 +6,7 @@
 </style>
 
 <!--标签区-->
-<div id="editTopMenu" ms-important="editTopMenu">
+<div id="editUser" ms-important="editUser">
     <div class="form">
         <form id="editForm">
             <input type="hidden" name="id" ms-duplex-number="data.id"/>
@@ -15,38 +15,21 @@
                 <div class="remark"> 注：带 * 号为必填项</div>
                 <table class="table_1" cellpadding="0" cellspacing="0">
                     <tr>
-                        <th width="20%"><span>*</span>菜单名称：</th>
-                        <td width="30%"><input type="text" name="name" ms-duplex-string="data.name"/></td>
+                        <th width="20%"><span>*</span>用户账号：</th>
+                        <td width="30%"><input type="text" name="code" ms-duplex-string="data.code"/></td>
                         <th width="20%"><span>*</span> 创建时间：</th>
-                        <td width="30%">{{data.createDate|date}}</td>
+                        <td width="30%">{{data.createTime|date}}</td>
                     </tr>
                     <tr>
-                        <th width="20%"><span>*</span> 适用身份：</th>
-                        <td colspan="3">
-                            <label ms-repeat="userTypeData">
-                                <input type="checkbox" ms-attr-value="$key" name="userType"
-                                       ms-duplex-number="selected"/>{{$val}} &nbsp;
-                            </label>
-                        </td>
+                        <th width="20%"><span>*</span>用户昵称：</th>
+                        <td width="30%"><input type="text" name="userName" ms-duplex-string="data.userName"/></td>
+                        <th width="20%"><span>*</span>手机号码：</th>
+                        <td width="30%"><input type="text" name="phone" ms-duplex-string="data.phone"/></td>
                     </tr>
                     <tr>
-                        <th width="20%"><span>*</span>跳转地址：</th>
-                        <td colspan="3">
-                            <input type="text" name="url" ms-duplex-string="data.url"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th width="20%"><span>*</span>排序：</th>
-                        <td width="30%" style="border-right: none;">
-                            <input type="text" name="priority" ms-duplex-number="data.priority"/>
-                        </td>
+                        <th width="20%"><span>*</span>密码：</th>
+                        <td width="30%" style="border-right: none;"><input type="text" name="password" ms-duplex-string="data.password"/></td>
                         <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <th width="20%"><span></span>应用描述：</th>
-                        <td colspan="3">
-                            <textarea name="description" ms-duplex-string="data.description"/>
-                        </td>
                     </tr>
                 </table>
                 <div class="user-btn">
@@ -66,51 +49,39 @@
         //表单校验
         var validator = $("#editForm").validate({
             rules: {
-                name: {required: true, maxlength: 12},
-                userType: {required: true},
-                priority: {required: true, digits: true, max: 999, min: 1},
-                url: {required: true, isURL: true}
+                code: {required: true, maxlength: 12},
+                userName: {required: true},
+                password: {required: true, isURL: true}
             },
             messages: {
-                name: {required: "必填", maxlength: "最大输入12字符长度"},
-                userType: {required: "必选"},
-                priority: {required: "必填", digits: "请输入数字", max: "不能大于999", min: "不能小于1"},
-                url: {required: "必填"}
+                code: {required: "必填", maxlength: "最大输入11字符长度"},
+                userName: {required: "必选"},
+                password: {required: "必填"}
             },
             errorPlacement: errorPlacement,
             success: "valid"
         });
 
         var vm = avalon.define({
-            $id: "editTopMenu",
-            userTypeData: userTypeMap,
-            selected: [],
+            $id: "editUser",
             //先列出绑定属性，保证绑定成功
-            data: {id: null, name: null, url: null, description: null, createDate: null, priority: null},
+            data: {},
             //初始化
             init: function () {
-                vm.data.id = QKYADMIN.getParam("id");
-                avalon.log(vm.userTypeData[1]);
+                vm.data.id = PET_ADMIN.getParam("id");
                 $.ajax({
-                    url: "/admin/qky/app/appMenu/queryOne?id=" + vm.data.id,
+                    url: "/admin/user/user/queryOne?id=" + vm.data.id,
                     type: "GET",
                     cache: false,
                     dataType: 'json',
                     beforeSend: function () {
-                        QKYADMIN.openLoading();
+                        PET_ADMIN.openLoading();
                     },
                     complete: function () {
-                        QKYADMIN.closeLoading();
+                        PET_ADMIN.closeLoading();
                     },
                     success: function (result) {
-                        if (isSuccess(result)) {
-                            vm.data.name = result.bizData.name;
-                            vm.data.url = result.bizData.url;
-                            vm.data.description = result.bizData.description;
-                            vm.data.createDate = result.bizData.createDate;
-                            vm.data.priority = result.bizData.priority;
-                            vm.selected = getUserTypeInt(result.bizData.userTypes);
-                        }
+                       vm.data = result;
                     }
                 })
             },
@@ -118,14 +89,14 @@
             save: function () {
                 if (validator.form()) {
                     $.ajax({
-                        url: "/admin/qky/app/appMenu/update",
+                        url: "/admin/user/user/update",
                         type: "POST",
                         dataType: 'json',
                         data: $("#editForm").serializeArray(),
                         success: function (result) {
-                            if (isSuccess(result)) {
+                            if (result.success) {
                                 layer.alert("修改成功！");
-                                QKYADMIN.closeDialog();
+                                PET_ADMIN.closeDialog();
                             } else {
                                 layer.alert("修改失败！"+result.msg);
                             }
@@ -134,11 +105,11 @@
                 }
             },
             back: function () {
-                QKYADMIN.cancelDialog();
+                PET_ADMIN.cancelDialog();
             }
         });
 
-        avalon.scan($("#editTopMenu")[0], vm);
+        avalon.scan($("#editUser")[0], vm);
         vm.init();
     })
 

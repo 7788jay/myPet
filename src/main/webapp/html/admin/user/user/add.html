@@ -65,7 +65,7 @@
             save: function () {
                 if (validator.form()) {
                     $.ajax({
-                        url: "/admin/sys/user/add",
+                        url: "/admin/user/user/add",
                         type: "POST",
                         dataType: 'json',
                         data: $("#addForm").serializeArray(),

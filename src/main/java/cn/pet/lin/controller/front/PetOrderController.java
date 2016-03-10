@@ -56,7 +56,7 @@ public class PetOrderController {
             item.setOrderCode(orders.getCode());
             item.setPetCode(cartItem.getPet().getCode());
             item.setQuantity(cartItem.getQuantity());
-            item.setTotlalPrice((long) (cartItem.getQuantity() * cartItem.getPet().getPrice()));
+            item.setTotalPrice((long) (cartItem.getQuantity() * cartItem.getPet().getPrice()));
 
             itemService.insert(item);
         }

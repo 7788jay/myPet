@@ -1,27 +1,25 @@
 /*
 {*****************************************************************************
 {  宠物商店 v1.0																		
-{  模块：订单项; InnoDB free: 10240 kB											
+{  模块：订单项											
 {  功能描述:										
 {															
 {  ---------------------------------------------------------------------------	
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-03-07  林伟樘        新建	
+{  2016-03-11  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
 
 package cn.pet.lin.domain.order;
 
+import cn.pet.lin.domain.BaseDomain;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import cn.pet.lin.domain.BaseDomain;
-
-import java.util.*;
 
 /**
  * 《订单项》 实体
@@ -35,7 +33,7 @@ public class Item extends BaseDomain<Integer> {
 	private String orderCode; //
 	private String petCode; //
 	private Integer quantity; //数量
-	private Long totlalPrice; //总价
+	private Long totalPrice; //总价
     
 	/**
 	 *默认空构造函数
@@ -93,16 +91,16 @@ public class Item extends BaseDomain<Integer> {
 		this.quantity = quantity;
 	}
 	/**
-	 * @return totlalPrice 总价
+	 * @return totalPrice 总价
 	 */
-	public Long getTotlalPrice(){
-		return this.totlalPrice;
+	public Long getTotalPrice(){
+		return this.totalPrice;
 	}
 	/**
-	 * @param totlalPrice 总价
+	 * @param totalPrice 总价
 	 */
-	public void setTotlalPrice(Long totlalPrice){
-		this.totlalPrice = totlalPrice;
+	public void setTotalPrice(Long totalPrice){
+		this.totalPrice = totalPrice;
 	}
 	
 	public String toString() {
@@ -112,7 +110,7 @@ public class Item extends BaseDomain<Integer> {
 			.append("orderCode",getOrderCode())
 			.append("petCode",getPetCode())
 			.append("quantity",getQuantity())
-			.append("totlalPrice",getTotlalPrice())
+			.append("totalPrice",getTotalPrice())
 			.toString();
 	}
 	
@@ -123,7 +121,7 @@ public class Item extends BaseDomain<Integer> {
 			.append(getOrderCode())
 			.append(getPetCode())
 			.append(getQuantity())
-			.append(getTotlalPrice())
+			.append(getTotalPrice())
 			.toHashCode();
 	}
 	

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ public class PetController {
 
     /**
      * 查询物种分页
+     *
      * @param param
      * @param PageNo
      * @param PageSize
@@ -36,26 +38,27 @@ public class PetController {
      */
     @ResponseBody
     @RequestMapping(value = "/queryPage")
-    public BizData4Page<Pet> queryPage(PetParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10")int PageSize) {
-        List<Pet> pets = petService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY),(PageNo-1)*PageSize,PageSize);
+    public BizData4Page<Pet> queryPage(PetParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10") int PageSize) {
+        List<Pet> pets = petService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY), (PageNo - 1) * PageSize, PageSize);
         int record = petService.count(param.toSearchFieldMap());
-        return PageUtils.toBizData4Page(pets,PageNo,PageSize,record);
+        return PageUtils.toBizData4Page(pets, PageNo, PageSize, record);
     }
 
     @ResponseBody
     @RequestMapping(value = "/queryAll")
-    public List<Pet> queryAll(){
+    public List<Pet> queryAll() {
         return petService.findAll();
     }
 
     /**
      * 添加物种
+     *
      * @param pet
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/add")
-    public ResultDTO add(Pet pet){
+    public ResultDTO add(Pet pet) {
         try {
             pet.setCode(CommonUtils.makeUUID());
             pet.setCreateTime(System.currentTimeMillis());
@@ -65,5 +68,59 @@ public class PetController {
             return new ResultDTO(false, ERRORMSG.ADD_ERROR.getMessage());
         }
         return new ResultDTO(true, SUCCESSMSG.ADD_COMPLETE.getMessage());
+    }
+
+    /**
+     * 单个获取宠物信息
+     *
+     * @param code
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryOne")
+    public Pet queryOne(String code) {
+        return petService.findOne(PetParam.F_Code, code);
+    }
+
+    /**
+     * 更新宠物分类信息
+     *
+     * @param pet
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/update")
+    public ResultDTO update(Pet pet) {
+        Pet queryPet = petService.findOne(PetParam.F_Code, pet.getCode());
+        queryPet.setName(pet.getName());
+
+        petService.update(queryPet);
+        return new ResultDTO(true, "更新成功！");
+    }
+
+    /**
+     * 单个删除
+     *
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ResultDTO delete(Integer id) {
+        petService.delete(id);
+        return new ResultDTO(true, "删除成功！");
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/deleteByIds")
+    public ResultDTO deleteByIds(Integer[] ids) {
+        petService.deleteByIds(Arrays.asList(ids));
+        return new ResultDTO(true, "删除成功！");
     }
 }

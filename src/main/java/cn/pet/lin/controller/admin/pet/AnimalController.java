@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -65,5 +66,56 @@ public class AnimalController {
             return new ResultDTO(false, ERRORMSG.ADD_ERROR.getMessage());
         }
         return new ResultDTO(true, SUCCESSMSG.ADD_COMPLETE.getMessage());
+    }
+
+    /**
+     * 单个获取动物信息
+     *
+     * @param code
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryOne")
+    public Animal queryOne(String code) {
+        return animalService.findOne(AnimalParam.F_Code,code);
+    }
+
+    /**
+     * 更新动物信息
+     *
+     * @param animal
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/update")
+    public ResultDTO update(Animal animal) {
+        Animal queryAnimal = animalService.findOne(AnimalParam.F_Code,animal.getCode());
+        queryAnimal.setName(animal.getName());
+
+        animalService.update(queryAnimal);
+        return new ResultDTO(true,"更新成功！");
+    }
+    /**
+     * 单个删除
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ResultDTO delete(Integer id) {
+        animalService.delete(id);
+        return new ResultDTO(true,"删除成功！");
+    }
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/deleteByIds")
+    public ResultDTO deleteByIds(Integer[] ids) {
+        animalService.deleteByIds(Arrays.asList(ids));
+        return new ResultDTO(true,"删除成功！");
     }
 }

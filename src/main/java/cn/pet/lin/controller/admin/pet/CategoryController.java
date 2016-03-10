@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -65,5 +66,56 @@ public class CategoryController {
             return new ResultDTO(false, ERRORMSG.ADD_ERROR.getMessage());
         }
         return new ResultDTO(true, SUCCESSMSG.ADD_COMPLETE.getMessage());
+    }
+
+    /**
+     * 单个获取宠物分类信息
+     *
+     * @param code
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryOne")
+    public Category queryOne(String code) {
+        return categoryService.findOne(CategoryParam.F_Code,code);
+    }
+
+    /**
+     * 更新宠物分类信息
+     *
+     * @param category
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/update")
+    public ResultDTO update(Category category) {
+        Category queryCategory = categoryService.findOne(CategoryParam.F_Code,category.getCode());
+        queryCategory.setName(category.getName());
+
+        categoryService.update(queryCategory);
+        return new ResultDTO(true,"更新成功！");
+    }
+    /**
+     * 单个删除
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ResultDTO delete(Integer id) {
+        categoryService.delete(id);
+        return new ResultDTO(true,"删除成功！");
+    }
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/deleteByIds")
+    public ResultDTO deleteByIds(Integer[] ids) {
+        categoryService.deleteByIds(Arrays.asList(ids));
+        return new ResultDTO(true,"删除成功！");
     }
 }

@@ -27,7 +27,7 @@ selectList
         orderCode,
         petCode,
         quantity,
-        totlalPrice
+        totalPrice
     </sql>
     <insert id="insert" parameterType="item">
         INSERT INTO order_item (
@@ -35,13 +35,13 @@ selectList
 		    ,orderCode
 		    ,petCode
 		    ,quantity
-		    ,totlalPrice
+		    ,totalPrice
         ) VALUES (
 		    	#{code}
 		    	,#{orderCode}
 		    	,#{petCode}
 		    	,#{quantity}
-		    	,#{totlalPrice}
+		    	,#{totalPrice}
         )
         <selectKey resultType="java.lang.Long" keyProperty="id">
         	SELECT LAST_INSERT_ID() AS ID
@@ -54,13 +54,13 @@ selectList
 		    ,orderCode
 		    ,petCode
 		    ,quantity
-		    ,totlalPrice
+		    ,totalPrice
         ) VALUES (
 		    	#{map.code}
 		    	,#{map.orderCode}
 		    	,#{map.petCode}
 		    	,#{map.quantity}
-		    	,#{map.totlalPrice}
+		    	,#{map.totalPrice}
         )
     </insert>
     
@@ -72,7 +72,7 @@ selectList
 		    orderCode=#{orderCode},
 		    petCode=#{petCode},
 		    quantity=#{quantity},
-		    totlalPrice=#{totlalPrice},
+		    totalPrice=#{totalPrice},
         </trim>
         WHERE
         id = #{id}
@@ -93,8 +93,8 @@ selectList
             <if test="map.quantity!=null">
                 quantity = #{map.quantity},
             </if>
-            <if test="map.totlalPrice!=null">
-                totlalPrice = #{map.totlalPrice},
+            <if test="map.totalPrice!=null">
+                totalPrice = #{map.totalPrice},
             </if>
         </trim>
         WHERE
@@ -116,8 +116,8 @@ selectList
             <if test="update.quantity!=null">
                 quantity = #{update.quantity},
             </if>
-            <if test="update.totlalPrice!=null">
-                totlalPrice = #{update.totlalPrice},
+            <if test="update.totalPrice!=null">
+                totalPrice = #{update.totalPrice},
             </if>
         </trim>
 
@@ -134,8 +134,8 @@ selectList
             <if test="condition.quantity!=null">
                 AND quantity = #{condition.quantity}
             </if>
-            <if test="condition.totlalPrice!=null">
-                AND totlalPrice = #{condition.totlalPrice}
+            <if test="condition.totalPrice!=null">
+                AND totalPrice = #{condition.totalPrice}
             </if>
         </trim>
     </update>   
@@ -173,8 +173,8 @@ selectList
             <if test="quantity!=null">
                 AND quantity = #{quantity}
             </if>
-            <if test="totlalPrice!=null">
-                AND totlalPrice = #{totlalPrice}
+            <if test="totalPrice!=null">
+                AND totalPrice = #{totalPrice}
             </if>
         </trim>
     </delete>
@@ -192,9 +192,6 @@ selectList
         <trim prefix="WHERE" prefixOverrides="AND | OR">
             AND id = #{id}
         </trim>
-        <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
-        </if>
     </select>
 
     <select id="findOne" parameterType="java.util.Map" resultType="Item">
@@ -249,8 +246,8 @@ selectList
             <if test="condition.quantity!=null">
                 ${condition.groupOp}   quantity  ${condition.quantity.op}  #{condition.quantity.data}
             </if>
-            <if test="condition.totlalPrice!=null">
-                ${condition.groupOp}   totlalPrice  ${condition.totlalPrice.op}  #{condition.totlalPrice.data}
+            <if test="condition.totalPrice!=null">
+                ${condition.groupOp}   totalPrice  ${condition.totalPrice.op}  #{condition.totalPrice.data}
             </if>
 
 
@@ -284,8 +281,8 @@ selectList
             <if test="condition.quantity!=null">
                 AND quantity = #{condition.quantity}
             </if>
-            <if test="condition.totlalPrice!=null">
-                AND totlalPrice = #{condition.totlalPrice}
+            <if test="condition.totalPrice!=null">
+                AND totalPrice = #{condition.totalPrice}
             </if>
         </trim>
         <if test="orderBy!=null">
@@ -313,8 +310,8 @@ selectList
             <if test="condition.quantity!=null">
                 AND quantity = #{condition.quantity}
             </if>
-            <if test="condition.totlalPrice!=null">
-                AND totlalPrice = #{condition.totlalPrice}
+            <if test="condition.totalPrice!=null">
+                AND totalPrice = #{condition.totalPrice}
             </if>
         </trim>
         limit 0,1
@@ -338,8 +335,8 @@ selectList
            <if test="quantity!=null">
                ${groupOp} quantity ${quantity.op}  #{quantity.data}
            </if>
-           <if test="totlalPrice!=null">
-               ${groupOp} totlalPrice ${totlalPrice.op}  #{totlalPrice.data}
+           <if test="totalPrice!=null">
+               ${groupOp} totalPrice ${totalPrice.op}  #{totalPrice.data}
            </if>
 
        </where>

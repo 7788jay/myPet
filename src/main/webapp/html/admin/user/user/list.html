@@ -10,14 +10,14 @@
 </style>
 
 <!--标签区-->
-<div id="listSysUser" ms-important="listSysUser" class="page-content">
+<div id="listUser" ms-important="listUser" class="page-content">
     <div class=" search user-c-box">
         <form id="searchCondition">
             <div class="user-c">
                 <div class="tj">
                     <span class="search-label">
                         <b>用户名称：</b>
-                        <input class="txt" name="name" ms-keydown="enter($event)" type="text" placeholder="请输入"/>
+                        <input class="txt" name="userName" ms-keydown="enter($event)" type="text" placeholder="请输入"/>
                     </span>
                     <a href="javascript:void(0)" ms-click="query(1)" class=" bt_org">查询</a>
                     <a href="javascript:void(0)" ms-click="clear" class=" bt_org">重置</a>
@@ -52,10 +52,6 @@
             <td>{{el.locked | statusFilter|html}}</td>
             <td>
                 <input name="" type="button" value="修改" ms-click="edit(pageNo,el.id)"/>
-                <input name="" type="button" value="启用" ms-if="el.locked==1" ms-click="disableOrEnable(pageNo,el.id)"/>
-                <input name="" type="button" value="停用" ms-if="el.locked==0" ms-click="disableOrEnable(pageNo,el.id)"/>
-                <input name="" type="button" value="删除" ms-if="el.locked==1" ms-click="deleteOne(pageNo,el.id)"/>
-            </td>
         </tr>
     </table>
     <div class="page_num"><a ms-class="disabled:pageNo===1" ms-click="selectPage(-9999)">首页</a> <a
@@ -84,7 +80,7 @@
         //DOM加载完
         avalon.ready(function () {
             var vm = avalon.define({
-                $id: "listSysUser",
+                $id: "listUser",
                 allChecked: false, //全选
                 condition: [],       //查询条件
                 data: [],              //数据
@@ -135,7 +131,7 @@
                 queryPage: function (data) {
                     vm.allChecked = false;
                     $.ajax({
-                        url: "/admin/sys/user/queryPage?pageNo=" + vm.pageNo + "&pageSize=" + vm.pageSize,
+                        url: "/admin/user/user/queryPage?pageNo=" + vm.pageNo + "&pageSize=" + vm.pageSize,
                         type: "POST",
                         data: data,
                         dataType: "json",
@@ -185,13 +181,13 @@
                 },
                 //添加
                 add: function () {
-                    PET_ADMIN.openDialog("/sys/user/add.html", {}, "添加", "700px", "310px", function () {
+                    PET_ADMIN.openDialog("/user/user/add.html", {}, "添加", "700px", "290px", function () {
                         vm.clear();    //重置
                     });
                 },
                 //修改
                 edit: function (pageNum, id) {
-                    PET_ADMIN.openDialog("/app/appMenu/edit.html", {id: id}, "修改", "800px", "440px", function () {
+                    PET_ADMIN.openDialog("/user/user/edit.html", {id: id}, "修改", "800px", "290px", function () {
                         vm.query(pageNum);    //重置
                     });
                 },
@@ -208,7 +204,7 @@
                             return;
                         }
                         $.ajax({
-                            url: "/admin/qky/app/appMenu/deleteByIds",
+                            url: "/admin/user/user/deleteByIds",
                             type: "POST",
                             dataType: 'json',
                             data: {ids: ids.join(",")},
@@ -217,7 +213,7 @@
                                 vm.query(1);
                             },
                             success: function (result) {
-                                if (isSuccess(result)) {
+                                if (result.success) {
                                     layer.alert("删除成功！");
                                 }
                             }
@@ -227,7 +223,7 @@
                 deleteOne: function (pageNum, id) {
                     layer.confirm('确定要删除该记录？', function (index) {
                         $.ajax({
-                            url: "/admin/qky/app/appMenu/deleteOne?id=" + id,
+                            url: "/admin/user/user/deleteOne?id=" + id,
                             type: "GET",
                             dataType: "json",
                             complete: function () {
@@ -235,31 +231,15 @@
                                 vm.query(pageNum);
                             },
                             success: function (result) {
-                                if (isSuccess(result)) {
+                                if (result.success) {
                                     layer.alert("删除成功！");
                                 }
                             }
                         });
                     });
-                },
-                //停用/启用
-                disableOrEnable: function (pageNum, id) {
-                    $.ajax({
-                        url: "/admin/qky/app/appMenu/disableOrEnable?id=" + id,
-                        type: "GET",
-                        dataType: "json",
-                        complete: function () {
-                            vm.query(pageNum);
-                        },
-                        success: function (result) {
-                            if (isSuccess(result)) {
-                                layer.alert("修改成功！");
-                            }
-                        }
-                    });
                 }
             });
-            avalon.scan($("#listSysUser")[0], vm);
+            avalon.scan($("#listUser")[0], vm);
             vm.query(1);
         });
     });
