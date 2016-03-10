@@ -3,9 +3,45 @@
 
 <mapper namespace="cn.pet.lin.dao.order.IItemDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：ItemDAO.xml里各节点的ID不能在这里重复出现）  -->
-	
-	<select id="queryByOrderCode" resultType="cn.pet.lin.domain.order.ItemEx">
-		SELECT oi.*,pp.name as pet.name
+	<resultMap id="petResultMap" type="cn.pet.lin.domain.pet.Pet">
+		<!-- 属性名和数据库列名映射 -->
+		<id property="id" column="pet_id"  />
+		<result property="code" column="pet_code"  />
+		<result property="name" column="pet_name"  />
+		<result property="image" column="image"  />
+		<result property="weight" column="weight"  />
+		<result property="life" column="life"  />
+		<result property="price" column="price"  />
+		<result property="description" column="description"  />
+		<result property="createTime" column="createTime"  />
+		<result property="categoryCode" column="categoryCode"  />
+	</resultMap>
+
+	<resultMap id="itemExResultMap" type="cn.pet.lin.domain.order.ItemEx">
+		<id property="id" column="item_id" />
+		<result property="code" column="item.code" />
+		<!-- 将article的user属性映射到userResultMap -->
+		<association property="pet" javaType="cn.pet.lin.domain.pet.Pet" resultMap="petResultMap"/>
+	</resultMap>
+
+	<select id="queryByOrderCode" resultMap="itemExResultMap">
+		SELECT
+			oi.id AS item_id,
+			oi.code AS item_code,
+			oi.orderCode,
+			oi.petCode,
+			oi.quantity,
+			oi.totlalPrice,
+			pp.id AS pet_id,
+			pp.code AS pet_code,
+			pp.name AS pet_name,
+			pp.image,
+			pp.weight,
+			pp.life,
+			pp.price,
+			pp.description,
+			pp.createTime,
+			pp.categoryCode
 		FROM order_item oi
 		LEFT JOIN pet_pet pp
 		ON oi.petCode = pp.code
