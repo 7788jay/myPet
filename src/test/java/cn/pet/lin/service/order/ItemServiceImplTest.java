@@ -19,7 +19,7 @@ public class ItemServiceImplTest extends ItemServiceImpl {
     public void testQueryByOrderCode() throws Exception {
         List<ItemEx> itemExs = this.queryByOrderCode("3110c87b821d45b9bb6860a48aa5181e");
         for (ItemEx itemEx : itemExs) {
-            System.out.println(itemEx.getTotlalPrice());
+            System.out.println(itemEx.getTotalPrice());
         }
     }
 }
