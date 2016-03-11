@@ -51,7 +51,8 @@
             <td>{{el.createTime | date}}</td>
             <td>{{el.locked | statusFilter|html}}</td>
             <td>
-                <input name="" type="button" value="修改" ms-click="edit(pageNo,el.id)"/>
+                <input type="button" value="修改" ms-click="edit(pageNo,el.id)"/>
+                <input type="button" value="删除" ms-click="deleteOne(pageNo,el.id)"/>
         </tr>
     </table>
     <div class="page_num"><a ms-class="disabled:pageNo===1" ms-click="selectPage(-9999)">首页</a> <a
@@ -100,18 +101,14 @@
                         vm.allChecked = false;
                     } else {
                         vm.allChecked = vm.data.every(function (el) {
-                            return isSelectedAll(el);
+                            return el.checked;
                         });
                     }
                 },
                 //全选
                 checkAll: function () {
                     vm.data.forEach(function (el) {
-                        if (el.status == 1) {
-                            el.checked = vm.allChecked;
-                        } else {
-                            el.checked = false;
-                        }
+                        el.checked = vm.allChecked;
                     });
                 },
                 //查询
@@ -215,6 +212,8 @@
                             success: function (result) {
                                 if (result.success) {
                                     layer.alert("删除成功！");
+                                }else {
+                                    layer.alert("删除失败！");
                                 }
                             }
                         });
@@ -233,6 +232,8 @@
                             success: function (result) {
                                 if (result.success) {
                                     layer.alert("删除成功！");
+                                }else {
+                                    layer.alert("删除失败！");
                                 }
                             }
                         });

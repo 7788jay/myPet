@@ -6,21 +6,23 @@
 </style>
 
 <!--标签区-->
-<div id="addAnimal" ms-important="addAnimal">
+<div id="editAnimal" ms-important="editAnimal">
     <div class="form">
-        <form id="addForm">
+        <form id="editForm">
+            <input type="hidden" name="code" ms-duplex-number="data.code"/>
+
             <div class=" user-edit ">
                 <div class="remark"> 注：带 * 号为必填项</div>
                 <table class="table_1" cellpadding="0" cellspacing="0">
                     <tr>
                         <th width="20%"><span>*</span>物种名称：</th>
-                        <td width="30%"><input type="text" name="name"/></td>
+                        <td width="30%"><input type="text" name="name" ms-duplex-string="data.name"/></td>
                         <th width="20%"><span>*</span> 创建时间：</th>
-                        <td width="30%">{{currentDate|date}}</td>
+                        <td width="30%">{{data.createTime|date}}</td>
                     </tr>
                     <tr>
-                        <th width="20%">描述：</th>
-                        <td colspan="3"><textarea name="description"/></td>
+                        <th width="20%"><span>*</span>描述：</th>
+                        <td colspan="3"><textarea name="description" ms-duplex-string="data.description"/></td>
                     </tr>
                 </table>
                 <div class="user-btn">
@@ -32,11 +34,13 @@
     </div>
 </div>
 
+
 <!--脚本区-->
 <script type="text/javascript">
+
     $(function () {
         //表单校验
-        var validator = $("#addForm").validate({
+        var validator = $("#editForm").validate({
             rules: {
                 name: {required: true, maxlength: 12}
             },
@@ -48,21 +52,43 @@
         });
 
         var vm = avalon.define({
-            $id: "addAnimal",
-            currentDate: new Date(),
+            $id: "editAnimal",
+            //先列出绑定属性，保证绑定成功
+            data: {},
+            //初始化
+            init: function () {
+                vm.data.code = PET_ADMIN.getParam("code");
+                $.ajax({
+                    url: "/admin/pet/animal/queryOne?code=" + vm.data.code,
+                    type: "GET",
+                    cache: false,
+                    dataType: 'json',
+                    beforeSend: function () {
+                        PET_ADMIN.openLoading();
+                    },
+                    complete: function () {
+                        PET_ADMIN.closeLoading();
+                    },
+                    success: function (result) {
+                       vm.data = result;
+                    }
+                })
+            },
             //保存
             save: function () {
                 if (validator.form()) {
                     $.ajax({
-                        url: "/admin/pet/animal/add",
+                        url: "/admin/pet/animal/update",
                         type: "POST",
                         dataType: 'json',
-                        data: $("#addForm").serializeArray(),
+                        data: $("#editForm").serializeArray(),
                         success: function (result) {
-                            if(result.success){
+                            if (result.success) {
+                                layer.alert("修改成功！");
                                 PET_ADMIN.closeDialog();
+                            } else {
+                                layer.alert("修改失败！"+result.msg);
                             }
-                            layer.alert(result.msg);
                         }
                     });
                 }
@@ -71,6 +97,10 @@
                 PET_ADMIN.cancelDialog();
             }
         });
-        avalon.scan($("#addAnimal")[0], vm);
+
+        avalon.scan($("#editAnimal")[0], vm);
+        vm.init();
     })
+
+
 </script>

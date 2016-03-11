@@ -3,7 +3,6 @@ package cn.pet.lin.controller.admin.order;
 import cn.pet.lin.domain.BizData4Page;
 import cn.pet.lin.domain.order.ItemEx;
 import cn.pet.lin.domain.order.OrdersEx;
-import cn.pet.lin.domain.param.order.ItemParam;
 import cn.pet.lin.domain.param.order.OrdersParam;
 import cn.pet.lin.service.order.IItemService;
 import cn.pet.lin.service.order.IOrdersService;
@@ -21,7 +20,7 @@ import java.util.List;
  * Created by lin on 2016/3/9.
  */
 @Controller
-@RequestMapping("/pet/admin/order")
+@RequestMapping("/admin/pet/order")
 public class OrdersController {
     @Autowired
     IOrdersService ordersService;
@@ -43,6 +42,11 @@ public class OrdersController {
         return PageUtils.toBizData4Page(animals,PageNo,PageSize,record);
     }
 
+    /**
+     * 查询订单详情
+     * @param orderCode
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/queryOne")
     public OrdersEx queryOne(String orderCode) {
@@ -50,10 +54,9 @@ public class OrdersController {
         OrdersEx ordersEx = ordersService.queryOneEx(orderCode);
 
         //查询订单项信息
-        ItemParam itemParam = new ItemParam();
-        itemParam.setOrderCode(orderCode);
         List<ItemEx> itemExs = itemService.queryByOrderCode(orderCode);
+        ordersEx.setItemExs(itemExs);
 
-        return null;
+        return ordersEx;
     }
 }

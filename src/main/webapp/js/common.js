@@ -5,6 +5,10 @@ $.fn.qtip.zindex = 99999999;
 avalon.filters.statusFilter = function (value, args, args2) {
     return value == 0 ? "<font color='green'>启用</font>" : "<font color='red'>锁定</font>";
 }
+avalon.filters.OrderStatusFilter = function (value, args, args2) {
+    var arr = ["未审核","已确认","已发货","完成","已取消"];
+    return arr[value];
+}
 /******************************************************************
  *                    扩展方法                                  *
  **********************************************************************/

@@ -35,7 +35,8 @@
             <th width="5%"><input type="checkbox" ms-duplex-checked="allChecked"
                                   data-duplex-changed="checkAll"/></th>
             <th width="20%">宠物名称</th>
-            <th width="30%">描述</th>
+            <th width="15%">重量</th>
+            <th width="15%">重量</th>
             <th width="10%">价格</th>
             <th width="10%">创建时间</th>
             <th width="25%">操作</th>
@@ -45,11 +46,13 @@
                 <input type="checkbox" ms-duplex-checked="el.checked" data-duplex-changed="checkOne" ms-attr-disabled="el.status===0"/>
             </td>
             <td>{{el.name}}</td>
-            <td>{{el.description}}</td>
-            <td>{{el.price}}</td>
+            <td>{{el.weight}}KG</td>
+            <td>{{el.life}}年</td>
+            <td>￥{{el.price}}</td>
             <td>{{el.createTime | date}}</td>
             <td>
-                <input name="" type="button" value="修改" ms-click="edit(pageNo,el.id)"/>
+                <input type="button" value="修改" ms-click="edit(pageNo,el.id)"/>
+                <input type="button" value="删除" ms-click="deleteOne(pageNo,el.id)"/>
             </td>
         </tr>
     </table>
@@ -99,18 +102,14 @@
                         vm.allChecked = false;
                     } else {
                         vm.allChecked = vm.data.every(function (el) {
-                            return isSelectedAll(el);
+                            return el.checked;
                         });
                     }
                 },
                 //全选
                 checkAll: function () {
                     vm.data.forEach(function (el) {
-                        if (el.status == 1) {
-                            el.checked = vm.allChecked;
-                        } else {
-                            el.checked = false;
-                        }
+                        el.checked = vm.allChecked;
                     });
                 },
                 //查询
@@ -212,8 +211,10 @@
                                 vm.query(1);
                             },
                             success: function (result) {
-                                if (isSuccess(result)) {
+                                if (result.success) {
                                     layer.alert("删除成功！");
+                                }else {
+                                    layer.alert("删除失败！");
                                 }
                             }
                         });
@@ -230,27 +231,13 @@
                                 vm.query(pageNum);
                             },
                             success: function (result) {
-                                if (isSuccess(result)) {
+                                if (result.success) {
                                     layer.alert("删除成功！");
+                                }else {
+                                    layer.alert("删除失败！");
                                 }
                             }
                         });
-                    });
-                },
-                //停用/启用
-                disableOrEnable: function (pageNum, id) {
-                    $.ajax({
-                        url: "/admin/qky/app/appMenu/disableOrEnable?id=" + id,
-                        type: "GET",
-                        dataType: "json",
-                        complete: function () {
-                            vm.query(pageNum);
-                        },
-                        success: function (result) {
-                            if (isSuccess(result)) {
-                                layer.alert("修改成功！");
-                            }
-                        }
                     });
                 }
             });

@@ -105,8 +105,8 @@ public class PetController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/delete")
-    public ResultDTO delete(Integer id) {
+    @RequestMapping(value = "/deleteOne")
+    public ResultDTO deleteOne(Integer id) {
         petService.delete(id);
         return new ResultDTO(true, "删除成功！");
     }

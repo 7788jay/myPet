@@ -10,7 +10,7 @@ import cn.pet.lin.service.order.IItemService;
 import cn.pet.lin.service.order.IOrdersService;
 import cn.pet.lin.service.pet.IPetService;
 import cn.pet.lin.utils.CommonUtils;
-import cn.pet.lin.utils.enums.OrderStatus;
+import cn.pet.lin.utils.enums.OrderStatusEnum;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,7 +47,7 @@ public class PetOrderController {
         orders.setUserCode(user.getCode());
         orders.setCreateTime(System.currentTimeMillis());
         orders.setTotalPrice(cart.getTotalPrice());
-        orders.setStatus(OrderStatus.NO_CHECKED.getStatus());
+        orders.setStatus(OrderStatusEnum.NO_CHECKED.getStatus());
         for (Map.Entry<String, CartItem> entry : cartItemMap.entrySet()) {
             CartItem cartItem = entry.getValue();
             //订单项

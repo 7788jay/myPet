@@ -18,7 +18,11 @@
                         <th width="10%"><span>*</span>宠物名称：</th>
                         <td width="23%"><input type="text" name="name"/></td>
                         <th width="10%"><span>*</span>物种：</th>
-                        <td width="23%"><input type="text"/></td>
+                        <td width="23%">
+                            <select name="animalCode" ms-change="queryCategory" ms-duplex-string="animalCode">
+                                <option ms-repeat="animals" ms-attr-value="el.code">{{el.name}}</option>
+                            </select>
+                        </td>
                         <th width="10%"><span>*</span> 宠物种类：</th>
                         <td width="23%">
                             <select name="categoryCode">
@@ -159,12 +163,16 @@
         //表单校验
         var validator = $("#addForm").validate({
             rules: {
-                userName: {required: true},
-                password: {required: true, isURL: true}
+                name: {required: true},
+                weight: {required: true,number:true},
+                life: {required: true,number:true},
+                price: {required: true,number:true}
             },
             messages: {
-                userName: {required: "必选"},
-                password: {required: "必填"}
+                name: {required: "必填"},
+                weight: {required: "必填",number:"请填入数据"},
+                life: {required: "必填",number:"请填入数据"},
+                price: {required: "必填",number:"请填入数据"}
             },
             errorPlacement: errorPlacement,
             success: "valid"
@@ -172,13 +180,28 @@
 
         var vm = avalon.define({
             $id: "addPet",
+            animals: [],           //物种
+            animalCode: "",   //物种code
             categories: [],            //种类
             images: [],                //图片
             currentDate: new Date(),
             //初始化
             init: function () {
+                //获取动物种类
                 $.ajax({
-                    url: "/admin/pet/category/queryAll",
+                    url: "/admin/pet/animal/queryAll",
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (result) {
+                        vm.animals = result;
+                        vm.animalCode = result[0].code;
+                        vm.queryCategory();
+                    }
+                })
+            },
+            queryCategory:function(){
+                $.ajax({
+                    url: "/admin/pet/category/queryByAnimalCode?animalCode="+vm.animalCode,
                     type: "GET",
                     dataType: 'json',
                     success: function (result) {

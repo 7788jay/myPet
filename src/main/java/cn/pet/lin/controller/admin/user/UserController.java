@@ -98,8 +98,8 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/delete")
-    public ResultDTO delete(Integer id) {
+    @RequestMapping(value = "/deleteOne")
+    public ResultDTO deleteOne(Integer id) {
         userService.delete(id);
         return new ResultDTO(true,"删除成功！");
     }

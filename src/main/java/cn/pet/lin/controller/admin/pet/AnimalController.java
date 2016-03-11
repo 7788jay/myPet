@@ -91,6 +91,7 @@ public class AnimalController {
     public ResultDTO update(Animal animal) {
         Animal queryAnimal = animalService.findOne(AnimalParam.F_Code,animal.getCode());
         queryAnimal.setName(animal.getName());
+        queryAnimal.setDescription(animal.getDescription());
 
         animalService.update(queryAnimal);
         return new ResultDTO(true,"更新成功！");
@@ -101,8 +102,8 @@ public class AnimalController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/delete")
-    public ResultDTO delete(Integer id) {
+    @RequestMapping(value = "/deleteOne")
+    public ResultDTO deleteOne(Integer id) {
         animalService.delete(id);
         return new ResultDTO(true,"删除成功！");
     }

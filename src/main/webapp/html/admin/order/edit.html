@@ -1,0 +1,143 @@
+<!--样式区-->
+<style>
+    .ms-controller, .ms-important, [ms-controller], [ms-important] {
+        visibility: hidden;
+    }
+</style>
+
+<!--标签区-->
+<div id="editOrder" ms-important="editOrder">
+    <div class="form">
+        <input type="hidden" name="code" ms-duplex-number="data.code"/>
+        <div class=" user-edit ">
+            <table class="table_1" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th width="10%">会员名：</th>
+                    <td width="23%">{{data.userName}}</td>
+                    <th width="10%">手机号：</th>
+                    <td width="23%">{{data.phone}}</td>
+                    <th width="10%">创建时间：</th>
+                    <td width="24%">{{data.createTime|date}}</td>
+                </tr>
+                <tr>
+                    <th width="10%">订单状态：</th>
+                    <td width="23%">{{data.status | OrderStatusFilter}}</td>
+                    <th width="10%">订单总价：</th>
+                    <td width="23%">￥{{data.totalPrice}}</td>
+                    <th width="10%">支付时间：</th>
+                    <td width="24%">{{data.payTime|date}}</td>
+                </tr>
+                <tr>
+                    <th width="10%">收货人：</th>
+                    <td width="23%">{{data.status | OrderStatusFilter}}</td>
+                    <th width="10%">收货号码：</th>
+                    <td width="23%">￥{{data.totalPrice}}</td>
+                    <th width="10%">发货时间：</th>
+                    <td width="24%">{{data.sendTime|date}}</td>
+                </tr>
+                <tr>
+                    <th width="10%">收货地址：</th>
+                    <td colspan="5">{{data.status | OrderStatusFilter}}</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="padding: 0px;">
+                        <div style="height: 215px;overflow: auto;">
+                            <table width="100%">
+                                <tr>
+                                    <th width="10%">宠物名</th>
+                                    <th width="10%">重量</th>
+                                    <th width="10%">售价</th>
+                                    <th width="10%">数量</th>
+                                    <th width="10%">小计</th>
+                                    <th width="10%">操作</th>
+                                </tr>
+                                <tr ms-repeat="data.itemExs">
+                                    <td style="text-align: center">{{el.pet.name}}</td>
+                                    <td style="text-align: center">{{el.pet.weight}}KG</td>
+                                    <td style="text-align: center">￥{{el.pet.price}}</td>
+                                    <td style="text-align: center">{{el.quantity}}</td>
+                                    <td style="text-align: center">￥{{el.pet.price * el.quantity}}</td>
+                                    <td style="text-align: center"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="user-btn">
+                <input type="button" value="关闭" class="oper" ms-click="back"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--脚本区-->
+<script type="text/javascript">
+
+    $(function () {
+        //表单校验
+        var validator = $("#editForm").validate({
+            rules: {
+                name: {required: true, maxlength: 12}
+            },
+            messages: {
+                name: {required: "必填", maxlength: "最大输入11字符长度"}
+            },
+            errorPlacement: errorPlacement,
+            success: "valid"
+        });
+
+        var vm = avalon.define({
+            $id: "editOrder",
+            //先列出绑定属性，保证绑定成功
+            data: {},
+            //初始化
+            init: function () {
+                vm.data.code = PET_ADMIN.getParam("code");
+                $.ajax({
+                    url: "/admin/pet/order/queryOne?orderCode=" + vm.data.code,
+                    type: "GET",
+                    cache: false,
+                    dataType: 'json',
+                    beforeSend: function () {
+                        PET_ADMIN.openLoading();
+                    },
+                    complete: function () {
+                        PET_ADMIN.closeLoading();
+                    },
+                    success: function (result) {
+                        vm.data = result;
+                    }
+                })
+            },
+            //保存
+            save: function () {
+                if (validator.form()) {
+                    $.ajax({
+                        url: "/admin/pet/animal/update",
+                        type: "POST",
+                        dataType: 'json',
+                        data: $("#editForm").serializeArray(),
+                        success: function (result) {
+                            if (result.success) {
+                                layer.alert("修改成功！");
+                                PET_ADMIN.closeDialog();
+                            } else {
+                                layer.alert("修改失败！" + result.msg);
+                            }
+                        }
+                    });
+                }
+            },
+            back: function () {
+                PET_ADMIN.cancelDialog();
+            }
+        });
+
+        avalon.scan($("#editOrder")[0], vm);
+        vm.init();
+    })
+
+
+</script>

@@ -26,10 +26,6 @@
         </form>
     </div>
     <!-- 顶部操作-->
-    <div class="top_bt">
-        <a href="javascript:void(0);" ms-click="add">添 加</a>
-        <a href="javascript:void(0);" ms-click="deleteBatch">删 除</a>
-    </div>
     <table class="table_1" cellpadding="0" cellspacing="0">
         <tr>
             <th width="5%"><input type="checkbox" ms-duplex-checked="allChecked"
@@ -49,11 +45,11 @@
             <td>{{el.userName}}</td>
             <td>{{el.payType}}</td>
             <td>{{el.deliveryType}}</td>
-            <td>{{el.totalPrice}}</td>
-            <td>{{el.status}}</td>
+            <td>￥{{el.totalPrice}}</td>
+            <td>{{el.status | OrderStatusFilter}}</td>
             <td>{{el.createTime | date}}</td>
             <td>
-                <input name="" type="button" value="修改" ms-click="edit(pageNo,el.id)"/>
+                <input type="button" value="查看" ms-click="show(pageNo,el.code)"/>
             </td>
         </tr>
     </table>
@@ -103,18 +99,14 @@
                         vm.allChecked = false;
                     } else {
                         vm.allChecked = vm.data.every(function (el) {
-                            return isSelectedAll(el);
+                            return el.checked;
                         });
                     }
                 },
                 //全选
                 checkAll: function () {
                     vm.data.forEach(function (el) {
-                        if (el.status == 1) {
-                            el.checked = vm.allChecked;
-                        } else {
-                            el.checked = false;
-                        }
+                        el.checked = vm.allChecked;
                     });
                 },
                 //查询
@@ -134,7 +126,7 @@
                 queryPage: function (data) {
                     vm.allChecked = false;
                     $.ajax({
-                        url: "/pet/admin/order/queryPage?pageNo=" + vm.pageNo + "&pageSize=" + vm.pageSize,
+                        url: "/admin/pet/order/queryPage?pageNo=" + vm.pageNo + "&pageSize=" + vm.pageSize,
                         type: "POST",
                         data: data,
                         dataType: "json",
@@ -182,79 +174,10 @@
                     vm.pageNo = parseInt(val);
                     vm.queryPage(vm.condition);
                 },
-                //添加
-                add: function () {
-                    PET_ADMIN.openDialog("/pet/pet/add.html", {}, "添加", "80%", "650px", function () {
-                        vm.clear();    //重置
-                    });
-                },
-                //修改
-                edit: function (pageNum, id) {
-                    PET_ADMIN.openDialog("/app/appMenu/edit.html", {id: id}, "修改", "800px", "440px", function () {
+                //查看
+                show: function (pageNum, code) {
+                    PET_ADMIN.openDialog("/order/edit.html", {code: code}, "查看订单详情", "900px", "470px", function () {
                         vm.query(pageNum);    //重置
-                    });
-                },
-                deleteBatch: function () {
-                    layer.confirm('确定要删除所选？', function (index) {
-                        var ids = [];
-                        vm.data.forEach(function (el) {
-                            if (el.checked) {
-                                ids.push(el.id);
-                            }
-                        });
-                        if (ids.length <= 0) {
-                            layer.alert("请勾选记录！");
-                            return;
-                        }
-                        $.ajax({
-                            url: "/admin/qky/app/appMenu/deleteByIds",
-                            type: "POST",
-                            dataType: 'json',
-                            data: {ids: ids.join(",")},
-                            complete: function () {
-                                layer.close(index);
-                                vm.query(1);
-                            },
-                            success: function (result) {
-                                if (isSuccess(result)) {
-                                    layer.alert("删除成功！");
-                                }
-                            }
-                        });
-                    });
-                },
-                deleteOne: function (pageNum, id) {
-                    layer.confirm('确定要删除该记录？', function (index) {
-                        $.ajax({
-                            url: "/admin/qky/app/appMenu/deleteOne?id=" + id,
-                            type: "GET",
-                            dataType: "json",
-                            complete: function () {
-                                layer.close(index);
-                                vm.query(pageNum);
-                            },
-                            success: function (result) {
-                                if (isSuccess(result)) {
-                                    layer.alert("删除成功！");
-                                }
-                            }
-                        });
-                    });
-                },
-                //停用/启用
-                disableOrEnable: function (pageNum, id) {
-                    $.ajax({
-                        url: "/admin/qky/app/appMenu/disableOrEnable?id=" + id,
-                        type: "GET",
-                        dataType: "json",
-                        complete: function () {
-                            vm.query(pageNum);
-                        },
-                        success: function (result) {
-                            if (isSuccess(result)) {
-                                layer.alert("修改成功！");
-                            }
-                        }
                     });
                 }
             });

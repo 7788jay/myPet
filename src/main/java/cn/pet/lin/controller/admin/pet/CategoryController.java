@@ -50,6 +50,17 @@ public class CategoryController {
     }
 
     /**
+     * 根据动物获取其分类
+     * @param animalCode
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryByAnimalCode")
+    public List<Category> queryByAnimalCode(String animalCode){
+        return categoryService.findList(CategoryParam.F_AnimalCode,animalCode);
+    }
+
+    /**
      * 添加物种
      * @param category
      * @return
@@ -91,6 +102,8 @@ public class CategoryController {
     public ResultDTO update(Category category) {
         Category queryCategory = categoryService.findOne(CategoryParam.F_Code,category.getCode());
         queryCategory.setName(category.getName());
+        queryCategory.setDescription(category.getDescription());
+        queryCategory.setAnimalCode(category.getAnimalCode());
 
         categoryService.update(queryCategory);
         return new ResultDTO(true,"更新成功！");
@@ -101,8 +114,8 @@ public class CategoryController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/delete")
-    public ResultDTO delete(Integer id) {
+    @RequestMapping(value = "/deleteOne")
+    public ResultDTO deleteOne(Integer id) {
         categoryService.delete(id);
         return new ResultDTO(true,"删除成功！");
     }
