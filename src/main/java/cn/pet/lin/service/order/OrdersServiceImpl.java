@@ -50,6 +50,11 @@ public class OrdersServiceImpl extends AbstractBaseService<IOrdersDAO,Orders> im
          return ordersDAO.queryOneEx(orderCode);
      }
 
+     @Override
+     public int countEx(Map<String, Object> condition) {
+         return ordersDAO.countEx(condition);
+     }
+
 //    @Override
 //    public void insert(BaseDomain entity) {
 //

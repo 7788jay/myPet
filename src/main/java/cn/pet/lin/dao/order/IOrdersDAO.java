@@ -43,6 +43,13 @@ public interface IOrdersDAO extends IBaseDAO<Orders> {
             , @Param("rows")int rows,@Param("orderBy")String orderBy, @Param("sortBy")String sortBy);
 
     /**
+     * 条数查询拓展
+     * @param condition
+     * @return
+     */
+    int countEx(@Param("condition") Map<String, Object> condition);
+
+    /**
      * 单个获取拓展
      * @param orderCode 订单编号
      * @return

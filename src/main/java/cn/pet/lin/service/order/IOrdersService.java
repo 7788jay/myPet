@@ -30,11 +30,21 @@ import java.util.Map;
  */
 public interface IOrdersService extends IBaseService<IOrdersDAO, Orders> {
 
-    List<OrdersEx> queryPageEx(Map<String, Object> condition, int offset, int rows,String orderBy, String sortBy);
+    List<OrdersEx> queryPageEx(Map<String, Object> condition, int offset, int rows, String orderBy, String sortBy);
+
     /**
      * 单个获取拓展
+     *
      * @param orderCode 订单编号
      * @return
      */
     OrdersEx queryOneEx(String orderCode);
+
+    /**
+     * 条数查询拓展
+     *
+     * @param condition
+     * @return
+     */
+    int countEx(Map<String, Object> condition);
 }

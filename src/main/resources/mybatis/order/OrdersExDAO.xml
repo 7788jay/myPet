@@ -43,12 +43,96 @@
         FROM order_orders oo
         LEFT JOIN user_user uu
         ON oo.userCode = uu.code
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.userCode!=null">
+                AND userCode = #{condition.userCode}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.payTime!=null">
+                AND payTime = #{condition.payTime}
+            </if>
+            <if test="condition.payType!=null">
+                AND payType = #{condition.payType}
+            </if>
+            <if test="condition.sendTime!=null">
+                AND sendTime = #{condition.sendTime}
+            </if>
+            <if test="condition.completeTime!=null">
+                AND completeTime = #{condition.completeTime}
+            </if>
+            <if test="condition.deliveryType!=null">
+                AND deliveryType = #{condition.deliveryType}
+            </if>
+            <if test="condition.deliveryTime!=null">
+                AND deliveryTime = #{condition.deliveryTime}
+            </if>
+            <if test="condition.deliveryCode!=null">
+                AND deliveryCode = #{condition.deliveryCode}
+            </if>
+            <if test="condition.totalPrice!=null">
+                AND totalPrice = #{condition.totalPrice}
+            </if>
+            <if test="condition.supplyCode!=null">
+                AND supplyCode = #{condition.supplyCode}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
         <if test="orderBy!=null">
             ORDER BY ${orderBy} ${sortBy}
         </if>
         <if test="offset != null">
             limit ${offset}, ${rows}
         </if>
+    </select>
+
+    <select id="countEx" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM order_orders oo
+        LEFT JOIN user_user uu
+        ON oo.userCode = uu.code
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.userCode!=null">
+                AND userCode = #{condition.userCode}
+            </if>
+            <if test="condition.createTime!=null">
+                AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.payTime!=null">
+                AND payTime = #{condition.payTime}
+            </if>
+            <if test="condition.payType!=null">
+                AND payType = #{condition.payType}
+            </if>
+            <if test="condition.sendTime!=null">
+                AND sendTime = #{condition.sendTime}
+            </if>
+            <if test="condition.completeTime!=null">
+                AND completeTime = #{condition.completeTime}
+            </if>
+            <if test="condition.deliveryType!=null">
+                AND deliveryType = #{condition.deliveryType}
+            </if>
+            <if test="condition.deliveryTime!=null">
+                AND deliveryTime = #{condition.deliveryTime}
+            </if>
+            <if test="condition.deliveryCode!=null">
+                AND deliveryCode = #{condition.deliveryCode}
+            </if>
+            <if test="condition.totalPrice!=null">
+                AND totalPrice = #{condition.totalPrice}
+            </if>
+            <if test="condition.supplyCode!=null">
+                AND supplyCode = #{condition.supplyCode}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
     </select>
 
     <select id="queryOneEx" resultMap="OrdersExResult">

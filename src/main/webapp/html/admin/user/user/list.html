@@ -36,10 +36,11 @@
                                   data-duplex-changed="checkAll"/></th>
             <th width="15%">用户账号</th>
             <th width="15%">用户名称</th>
-            <th width="20%">手机号码</th>
+            <th width="15%">手机号码</th>
+            <th width="10%">用户类型</th>
             <th width="10%">创建时间</th>
             <th width="5%">状态</th>
-            <th width="25%">操作</th>
+            <th width="20%">操作</th>
         </tr>
         <tr ms-repeat="data">
             <td width="5%">
@@ -48,6 +49,7 @@
             <td>{{el.code}}</td>
             <td>{{el.userName}}</td>
             <td>{{el.phone}}</td>
+            <td>{{el.userType | userTypeFilter}}</td>
             <td>{{el.createTime | date}}</td>
             <td>{{el.locked | statusFilter|html}}</td>
             <td>

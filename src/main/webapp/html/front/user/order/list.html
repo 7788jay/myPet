@@ -1,0 +1,76 @@
+<!-- begin收货地址 -->
+<div ms-important="listOrders" id="listOrders" class="col-md-9 col-sm-7">
+    <div class="product-page" ms-repeat="data" style="margin-bottom: 10px;">
+        <div class="row">
+            <!-- BEGIN CONTENT -->
+            <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 col-sm-12" style="border-bottom: 1px dotted rgba(0, 0, 0, 0.33);">
+                    <div class="user-order">订单编号：{{el.id}}</div>
+                    <div class="user-order">创建时间：{{el.createTime | date}}</div>
+                    <div class="user-order">订单状态：{{el.status | OrderStatusFilter}}</div>
+                </div>
+                <div class="goods-page">
+                    <div class="goods-data clearfix">
+                        <div class="table-wrapper-responsive">
+                            <table summary="Shopping cart">
+                                <tr>
+                                    <th class="goods-page-image">图片</th>
+                                    <th class="goods-page-description">描述</th>
+                                    <th class="goods-page-price">单价</th>
+                                    <th class="goods-page-total" colspan="2">总价</th>
+                                </tr>
+                                <tr ms-repeat="el.itemExs" data-repeat-rendered="layoutInit">
+                                    <td class="goods-page-image">
+                                        <a href="javascript:;">
+                                            <img ms-attr-src="el.pet.image.split(',')[0]" alt="Berry Lace Dress">
+                                        </a>
+                                    </td>
+                                    <td class="goods-page-description">
+                                        <h3>
+                                            <a href="javascript:;">{{el.pet.name}}</a>
+                                            &nbsp;X {{el.quantity}}
+                                        </h3>
+                                    </td>
+                                    <td class="goods-page-price">
+                                        <strong><span>￥</span>{{el.pet.price}}</strong>
+                                    </td>
+                                    <td class="goods-page-total">
+                                        <strong><span>￥</span>{{el.pet.price * el.quantity}}</strong>
+                                    </td>
+                                    <td class="del-goods-col">
+                                        <a class="del-goods" href="javascript:;">&nbsp;</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTENT -->
+        </div>
+    </div>
+</div>
+<!--end 收货地址-->
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var vm = avalon.define({
+            $id: "listOrders",
+            data: [],
+
+            //初始化
+            init: function () {
+                $.ajax({
+                    url: "/pet/front/order/queryByUser",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        vm.data = result.rows;
+                    }
+                });
+            }
+        });
+        avalon.scan($('#listOrders')[0],vm);
+        vm.init();
+    });
+</script>

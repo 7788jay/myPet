@@ -28,6 +28,7 @@ selectList
         password,
         phone,
         createTime,
+        userType,
         salt,
         locked
     </sql>
@@ -38,6 +39,7 @@ selectList
 		    ,password
 		    ,phone
 		    ,createTime
+		    ,userType
 		    ,salt
 		    ,locked
         ) VALUES (
@@ -46,6 +48,7 @@ selectList
 		    	,#{password}
 		    	,#{phone}
 		    	,#{createTime}
+		    	,#{userType}
 		    	,#{salt}
 		    	,#{locked}
         )
@@ -61,6 +64,7 @@ selectList
 		    ,password
 		    ,phone
 		    ,createTime
+		    ,userType
 		    ,salt
 		    ,locked
         ) VALUES (
@@ -69,6 +73,7 @@ selectList
 		    	,#{map.password}
 		    	,#{map.phone}
 		    	,#{map.createTime}
+		    	,#{map.userType}
 		    	,#{map.salt}
 		    	,#{map.locked}
         )
@@ -83,6 +88,7 @@ selectList
 		    password=#{password},
 		    phone=#{phone},
 		    createTime=#{createTime},
+		    userType=#{userType},
 		    salt=#{salt},
 		    locked=#{locked},
         </trim>
@@ -107,6 +113,9 @@ selectList
             </if>
             <if test="map.createTime!=null">
                 createTime = #{map.createTime},
+            </if>
+            <if test="map.userType!=null">
+                userType = #{map.userType},
             </if>
             <if test="map.salt!=null">
                 salt = #{map.salt},
@@ -137,6 +146,9 @@ selectList
             <if test="update.createTime!=null">
                 createTime = #{update.createTime},
             </if>
+            <if test="update.userType!=null">
+                userType = #{update.userType},
+            </if>
             <if test="update.salt!=null">
                 salt = #{update.salt},
             </if>
@@ -160,6 +172,9 @@ selectList
             </if>
             <if test="condition.createTime!=null">
                 AND createTime = #{condition.createTime}
+            </if>
+            <if test="condition.userType!=null">
+                AND userType = #{condition.userType}
             </if>
             <if test="condition.salt!=null">
                 AND salt = #{condition.salt}
@@ -205,6 +220,9 @@ selectList
             </if>
             <if test="createTime!=null">
                 AND createTime = #{createTime}
+            </if>
+            <if test="userType!=null">
+                AND userType = #{userType}
             </if>
             <if test="salt!=null">
                 AND salt = #{salt}
@@ -285,6 +303,9 @@ selectList
             <if test="condition.createTime!=null">
                 ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
             </if>
+            <if test="condition.userType!=null">
+                ${condition.groupOp}   userType  ${condition.userType.op}  #{condition.userType.data}
+            </if>
             <if test="condition.salt!=null">
                 ${condition.groupOp}   salt  ${condition.salt.op}  #{condition.salt.data}
             </if>
@@ -326,6 +347,9 @@ selectList
             <if test="condition.createTime!=null">
                 AND createTime = #{condition.createTime}
             </if>
+            <if test="condition.userType!=null">
+                AND userType = #{condition.userType}
+            </if>
             <if test="condition.salt!=null">
                 AND salt = #{condition.salt}
             </if>
@@ -361,6 +385,9 @@ selectList
             <if test="condition.createTime!=null">
                 AND createTime = #{condition.createTime}
             </if>
+            <if test="condition.userType!=null">
+                AND userType = #{condition.userType}
+            </if>
             <if test="condition.salt!=null">
                 AND salt = #{condition.salt}
             </if>
@@ -391,6 +418,9 @@ selectList
            </if>
            <if test="createTime!=null">
                ${groupOp} createTime ${createTime.op}  #{createTime.data}
+           </if>
+           <if test="userType!=null">
+               ${groupOp} userType ${userType.op}  #{userType.data}
            </if>
            <if test="salt!=null">
                ${groupOp} salt ${salt.op}  #{salt.data}

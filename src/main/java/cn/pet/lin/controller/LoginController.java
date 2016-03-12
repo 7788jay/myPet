@@ -38,6 +38,13 @@ public class LoginController {
                 return new ResultDTO(false,"密码错误！");
             }
         }
-        return new ResultDTO(true,"");
+        String msg = "";
+        user = (User) SecurityUtils.getSubject().getPrincipal();
+        if(user.getUserType() == 1){
+            msg = "/html/admin/index.html";
+        }else {
+            msg = "/html/front/index.html";
+        }
+        return new ResultDTO(true,msg);
     }
 }

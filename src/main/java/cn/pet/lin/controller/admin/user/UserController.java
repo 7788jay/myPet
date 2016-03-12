@@ -87,6 +87,7 @@ public class UserController {
         queryUser.setUserName(user.getUserName());
         queryUser.setPassword(user.getPassword());
         queryUser.setPhone(user.getPhone());
+        queryUser.setUserType(user.getUserType());
 
         userService.update(queryUser);
         return new ResultDTO(true,"更新成功！");

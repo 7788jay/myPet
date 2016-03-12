@@ -1,23 +1,26 @@
 package cn.pet.lin.controller.front;
 
+import cn.pet.lin.domain.BizData4Page;
 import cn.pet.lin.domain.common.ResultDTO;
-import cn.pet.lin.domain.order.Cart;
-import cn.pet.lin.domain.order.CartItem;
-import cn.pet.lin.domain.order.Item;
-import cn.pet.lin.domain.order.Orders;
+import cn.pet.lin.domain.order.*;
+import cn.pet.lin.domain.param.order.OrdersParam;
 import cn.pet.lin.domain.user.User;
 import cn.pet.lin.service.order.IItemService;
 import cn.pet.lin.service.order.IOrdersService;
 import cn.pet.lin.service.pet.IPetService;
 import cn.pet.lin.utils.CommonUtils;
+import cn.pet.lin.utils.PageUtils;
 import cn.pet.lin.utils.enums.OrderStatusEnum;
+import cn.pet.lin.utils.enums.SqlOrderEnum;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,5 +65,26 @@ public class PetOrderController {
         }
         ordersService.insert(orders);
         return new ResultDTO(true, "创建成功！");
+    }
+
+    /**
+     * 根据用户来获取订单信息
+     * @param param
+     * @param PageNo
+     * @param PageSize
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryByUser")
+    public BizData4Page<OrdersEx> queryByUser(OrdersParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "5")int PageSize) {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        param.setUserCode(user.getCode());
+        List<OrdersEx> orderExs = ordersService.queryPageEx(param.toMap(),(PageNo-1)*PageSize,PageSize,param.F_CreateTime, SqlOrderEnum.DESC.getAction());
+        for (OrdersEx orderEx : orderExs) {
+            List<ItemEx> itemExList = itemService.queryByOrderCode(orderEx.getCode());
+            orderEx.setItemExs(itemExList);
+        }
+        int record = ordersService.countEx(param.toMap());
+        return PageUtils.toBizData4Page(orderExs,PageNo,PageSize,record);
     }
 }

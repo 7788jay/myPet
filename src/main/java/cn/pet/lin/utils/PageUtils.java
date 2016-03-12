@@ -12,6 +12,7 @@ public class PageUtils {
         BizData4Page bizData4Page = new BizData4Page();
         bizData4Page.setRows(data);
         bizData4Page.setPage(pageNo);
+        bizData4Page.setPagesize(pageSize);
         bizData4Page.setRecords(records);
         int total = records / pageSize;
         int mod = records % pageSize;

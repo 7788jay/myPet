@@ -36,7 +36,7 @@ avalon.ready(function () {
                     avalon.log('登录返回成功=', res);
                     if (res.success) {
                         sessionStorage.setItem("isLoad", true);
-                        window.location = "/html/admin/index.html";
+                        window.location = res.msg;
                     } else {
                         layer.alert(res.msg);
                     }

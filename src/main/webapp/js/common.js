@@ -12,6 +12,9 @@ avalon.filters.OrderStatusFilter = function (value, args, args2) {
 avalon.filters.payTypeFilter = function (value, args, args2) {
     return value == 0 ? "在线支付" : "货到付款";
 }
+avalon.filters.userTypeFilter = function (value, args, args2) {
+    return value == 0 ? "普通用户" : "管理员";
+}
 /******************************************************************
  *                    扩展方法                                  *
  **********************************************************************/

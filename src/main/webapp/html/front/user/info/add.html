@@ -1,6 +1,6 @@
 <div ms-important="user-info" id="user-info" class="user-info">
     <!-- BEGIN FORM-->
-    <form id="user" class="default-form" role="form">
+    <form id="user-update" class="default-form" role="form">
         <div class="form-group">
             <label for="code">账号<span class="require">*</span></label>
             <input type="text" class="form-control" id="code" readonly ms-duplex-string="data.code">
@@ -62,7 +62,7 @@
                 $.ajax({
                     url: "/pet/front/user/update",
                     type: "POST",
-                    data: $('#user').serializeArray(),
+                    data: $('#user-update').serializeArray(),
                     dataType: "json",
                     success: function (result) {
                         layer.alert(result.msg);

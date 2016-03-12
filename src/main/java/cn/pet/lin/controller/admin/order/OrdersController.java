@@ -39,9 +39,9 @@ public class OrdersController {
     @ResponseBody
     @RequestMapping(value = "/queryPage")
     public BizData4Page<OrdersEx> queryPage(OrdersParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10")int PageSize) {
-        List<OrdersEx> animals = ordersService.queryPageEx(param.toMap(),(PageNo-1)*PageSize,PageSize,param.F_CreateTime, SqlOrderEnum.DESC.getAction());
+        List<OrdersEx> orders = ordersService.queryPageEx(param.toMap(),(PageNo-1)*PageSize,PageSize,param.F_CreateTime, SqlOrderEnum.DESC.getAction());
         int record = ordersService.count(param.toSearchFieldMap());
-        return PageUtils.toBizData4Page(animals,PageNo,PageSize,record);
+        return PageUtils.toBizData4Page(orders,PageNo,PageSize,record);
     }
 
     /**

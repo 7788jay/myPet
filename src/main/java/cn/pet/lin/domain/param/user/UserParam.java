@@ -1,27 +1,23 @@
 /*
 {*****************************************************************************
 {  宠物商店 v1.0																		
-{  模块：用户表; InnoDB free: 10240 kB											
+{  模块：用户表											
 {  功能描述:										
 {															
 {  ---------------------------------------------------------------------------	
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-03-06  林伟樘        新建	
+{  2016-03-12  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
 
 package cn.pet.lin.domain.param.user;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import cn.pet.lin.domain.BaseParam;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import cn.pet.lin.domain.BaseParam;
-
-import java.util.*;
 
 /**
  * 《用户表》 查询参数实体
@@ -52,6 +48,10 @@ public class UserParam extends BaseParam<Integer> {
 	*/
 	public static final String F_CreateTime="createTime";
 	/**
+	*字段常量——用户类型
+	*/
+	public static final String F_UserType="userType";
+	/**
 	*字段常量——盐
 	*/
 	public static final String F_Salt="salt";
@@ -65,6 +65,7 @@ public class UserParam extends BaseParam<Integer> {
 	private String password; //密码
 	private String phone; //手机号
 	private Long createTime; //创建时间
+	private Integer userType; //用户类型
 	private String salt; //盐
 	private Integer locked; //是否锁定
     
@@ -136,6 +137,18 @@ public class UserParam extends BaseParam<Integer> {
 		this.createTime = createTime;
 	}
 	/**
+	 * @return userType 用户类型
+	 */
+	public Integer getUserType(){
+		return this.userType;
+	}
+	/**
+	 * @param userType 用户类型
+	 */
+	public void setUserType(Integer userType){
+		this.userType = userType;
+	}
+	/**
 	 * @return salt 盐
 	 */
 	public String getSalt(){
@@ -168,6 +181,7 @@ public class UserParam extends BaseParam<Integer> {
 			.append("password",getPassword())
 			.append("phone",getPhone())
 			.append("createTime",getCreateTime())
+			.append("userType",getUserType())
 			.append("salt",getSalt())
 			.append("locked",getLocked())
 			.toString();
