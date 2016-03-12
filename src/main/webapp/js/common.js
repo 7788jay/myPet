@@ -9,6 +9,9 @@ avalon.filters.OrderStatusFilter = function (value, args, args2) {
     var arr = ["未审核","已确认","已发货","完成","已取消"];
     return arr[value];
 }
+avalon.filters.payTypeFilter = function (value, args, args2) {
+    return value == 0 ? "在线支付" : "货到付款";
+}
 /******************************************************************
  *                    扩展方法                                  *
  **********************************************************************/

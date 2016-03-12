@@ -29,15 +29,20 @@
                 </tr>
                 <tr>
                     <th width="10%">收货人：</th>
-                    <td width="23%">{{data.status | OrderStatusFilter}}</td>
+                    <td width="23%">{{data.delivery.name}}</td>
                     <th width="10%">收货号码：</th>
-                    <td width="23%">￥{{data.totalPrice}}</td>
+                    <td width="23%">{{data.delivery.phone}}</td>
                     <th width="10%">发货时间：</th>
-                    <td width="24%">{{data.sendTime|date}}</td>
+                    <td width="24%">{{data.sendTime | date}}</td>
                 </tr>
                 <tr>
                     <th width="10%">收货地址：</th>
-                    <td colspan="5">{{data.status | OrderStatusFilter}}</td>
+                    <td colspan="5">
+                        {{data.delivery.province.split(":")[1]}}
+                        {{data.delivery.city.split(":")[1]}}
+                        {{data.delivery.area.split(":")[1]}}
+                        {{data.delivery.detail}}
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="6" style="padding: 0px;">
@@ -91,7 +96,15 @@
         var vm = avalon.define({
             $id: "editOrder",
             //先列出绑定属性，保证绑定成功
-            data: {},
+            data: {
+                delivery:{
+                    name:"",
+                    province:"",
+                    city:"",
+                    area:""
+                },
+                itemExs:[]
+            },
             //初始化
             init: function () {
                 vm.data.code = PET_ADMIN.getParam("code");

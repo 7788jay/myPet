@@ -1,0 +1,78 @@
+<div ms-important="user-info" id="user-info" class="user-info">
+    <!-- BEGIN FORM-->
+    <form id="user" class="default-form" role="form">
+        <div class="form-group">
+            <label for="code">账号<span class="require">*</span></label>
+            <input type="text" class="form-control" id="code" readonly ms-duplex-string="data.code">
+        </div>
+        <div class="form-group">
+            <label for="userName">用户名<span class="require">*</span></label>
+            <input name="userName" type="text" class="form-control" id="userName" ms-duplex-string="data.userName"/>
+        </div>
+        <div class="form-group">
+            <label for="phone">手机号码<span class="require">*</span></label>
+            <input class="form-control" id="phone" name="phone" ms-duplex-string="data.phone"/>
+        </div>
+        <div class="form-group">
+            <label for="password">密码<span class="require">*</span></label>
+            <input type="password" class="form-control" id="password" name="password" />
+        </div>
+        <div class="form-group">
+            <label for="password1">确认密码<span class="require">*</span></label>
+            <input type="password" class="form-control" id="password1" name="password1"/>
+        </div>
+        <div class="padding-top-20">
+            <button type="button" ms-click="update" class="btn btn-primary">保存</button>
+        </div>
+    </form>
+    <!-- END FORM-->
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var vm = avalon.define({
+            $id: "user-info",
+            data: {},
+
+            //初始化
+            init: function () {
+                $.ajax({
+                    url: "/common/user/getCurrentUser",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        vm.data = result;
+                    }
+                });
+            },
+            //更新用户信息
+            update: function(){
+                if(vm.data.userName == ""){
+                    layer.alert("请输入用户名！");
+                    return;
+                }
+                if(vm.data.phone == ""){
+                    layer.alert("请输入手机号码！");
+                    return;
+                }
+                if($('#password').val() == "" || ($('#password').val() != $('#password1').val())){
+                    layer.alert("密码不一致！");
+                    return;
+                }
+                $.ajax({
+                    url: "/pet/front/user/update",
+                    type: "POST",
+                    data: $('#user').serializeArray(),
+                    dataType: "json",
+                    success: function (result) {
+                        layer.alert(result.msg);
+                        Layout.closeDialog();
+                    }
+                });
+            }
+
+        });
+        avalon.scan($('#user-info')[0],vm);
+        vm.init();
+    });
+</script>

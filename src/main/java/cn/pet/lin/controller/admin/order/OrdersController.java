@@ -1,7 +1,9 @@
 package cn.pet.lin.controller.admin.order;
 
 import cn.pet.lin.domain.BizData4Page;
+import cn.pet.lin.domain.common.ResultDTO;
 import cn.pet.lin.domain.order.ItemEx;
+import cn.pet.lin.domain.order.Orders;
 import cn.pet.lin.domain.order.OrdersEx;
 import cn.pet.lin.domain.param.order.OrdersParam;
 import cn.pet.lin.service.order.IItemService;
@@ -58,5 +60,41 @@ public class OrdersController {
         ordersEx.setItemExs(itemExs);
 
         return ordersEx;
+    }
+
+    /**
+     * 修改状态
+     * @param type      类型
+     * @param orderCode 订单code
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/update")
+    public ResultDTO update(int type,String orderCode){
+        Orders orders = ordersService.findOne(OrdersParam.F_Code,orderCode);
+        String msg = "修改成功！";
+        orders.setStatus(type);
+        switch (type){
+            //通过审核
+            case 1:{
+                msg = "审核成功！";
+            };break;
+            //确认发货
+            case 2:{
+                orders.setSendTime(System.currentTimeMillis());
+                msg = "已成功发货！";
+            };break;
+            //确认完成
+            case 3:{
+                orders.setCompleteTime(System.currentTimeMillis());
+                msg = "已确认完成整个交易流程！";
+            };break;
+            //取消
+            case 4:{
+                msg = "已取消！";
+            };break;
+        }
+        ordersService.update(orders);
+        return new ResultDTO(true,msg);
     }
 }

@@ -46,7 +46,7 @@
 <!-- Head END -->
 
 <!-- Body BEGIN -->
-<body class="ecommerce" ms-important="pet-item">
+<body class="ecommerce" ms-important="user" id="user">
 <!--头部-->
 <div ms-include-src="'public/head.html'"></div>
 
@@ -63,16 +63,18 @@
             <div class="sidebar col-md-3 col-sm-5">
                 <ul class="list-group margin-bottom-25 sidebar-menu">
                     <li class="list-group-item clearfix">
-                        <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> 个人信息</a>
+                        <a href="javascript:;" ms-click="changPage('user/info/list.html')"><i class="fa fa-angle-right"></i> 个人信息</a>
                     </li>
                     <li class="list-group-item clearfix dropdown active">
-                        <a href="shop-product-list.html" class="collapsed"><i class="fa fa-angle-right"></i>收货地址
+                        <a href="javascript:;" ms-click="changPage('user/address/list.html')" class="collapsed"><i class="fa fa-angle-right"></i>收货地址
                         </a>
                     </li>
                 </ul>
             </div>
             <!-- END SIDEBAR -->
-            <div ms-include-src="'user/address/list.html'" data-include-loaded="layoutInit"></div>
+            {{userPage}}
+            <!--模板引入-->
+            <div style="min-height: 400px;" ms-include-src="userPage" data-include-loaded="layoutInit"></div>
         </div>
         <!-- END SIDEBAR & CONTENT -->
     </div>
@@ -103,30 +105,27 @@
 <script type="text/javascript">
     jQuery(document).ready(function () {
         var vm = avalon.define({
-            $id: "pet-item",
+            $id: "user",
+            userPage: "user/info/list.html",
 
             //初始化
             init: function () {
-                $.ajax({
-                    url: "/pet/front/item/queryOne?code=2d254ad4ff6546c387001e417bdac028",
-                    type: "GET",
-                    dataType: "json",
-                    success: function (result) {
 
-                    }
-                });
             },
+
             //界面初始化
             layoutInit: function () {
-                Layout.init();
-                Layout.initOWL();
-//              Layout.initImageZoom();
-//                Layout.initTouchspin();
-//              Layout.initUniform();
+
+            },
+            //页面切换
+            changPage: function(url){
+                vm.userPage = url;
             }
         });
-        avalon.scan();
+        avalon.scan($('#user')[0],vm);
         vm.init();
+        Layout.init();
+        Layout.initOWL();
     });
 </script>
 <!-- END PAGE LEVEL JAVASCRIPTS -->

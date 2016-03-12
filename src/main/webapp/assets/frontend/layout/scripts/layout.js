@@ -493,7 +493,7 @@ var Layout = function () {
         },
         //打开弹窗
         openDialog: function (url, data, title, width, height, callBack) {
-            $.post(url, {}, function (html) {
+            $.post('/html/front'+url, {}, function (html) {
                 var str = JSON.stringify(data);
                 var hidden = "<input id='param' type='hidden' value='" + str + "' />";
                 layer.open({

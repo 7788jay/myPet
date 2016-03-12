@@ -11,6 +11,7 @@
         <result property="province" column="de_province"></result>
         <result property="city" column="de_city"></result>
         <result property="area" column="de_area"></result>
+        <result property="detail" column="de_detail"></result>
         <result property="phone" column="de_phone"></result>
         <result property="postCode" column="de_postCode"></result>
     </resultMap>

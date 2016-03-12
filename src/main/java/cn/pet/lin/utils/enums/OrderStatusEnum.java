@@ -10,8 +10,8 @@ public enum OrderStatusEnum {
     COMPLETE(3,"完成"),
     CANCEL(4,"已取消");
 
-    private int status;
-    private String msg;
+    private final int status;
+    private final String msg;
 
     OrderStatusEnum(int status, String msg) {
         this.status = status;
@@ -22,15 +22,9 @@ public enum OrderStatusEnum {
         return status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 }

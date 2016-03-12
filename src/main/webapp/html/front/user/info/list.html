@@ -1,0 +1,46 @@
+<!-- begin个人信息 -->
+<div ms-important="listUser" id="listUser" class="col-md-9 col-sm-7">
+    <div class="product-page">
+        <div class="row">
+            <button class="btn btn-primary" type="button" ms-click="editUser">修改用户信息</button>
+            <div class="user-info">
+                <div class="pull-left">
+                    <label class="control-label">账号：</label>{{user.code}}
+                </div>
+                <div class="pull-left">
+                    <label class="control-label">用户名：</label>{{user.userName}}
+                </div>
+                <div class="pull-left">
+                    <label class="control-label">手机号码： </label>{{user.phone}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end 个人信息-->
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var vm = avalon.define({
+            $id: "listUser",
+            user: {},
+
+            //初始化
+            init: function () {
+                $.ajax({
+                    url: "/common/user/getCurrentUser",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        vm.user = result;
+                    }
+                });
+            },
+            editUser: function(){
+                Layout.openDialog("/user/info/add.html", {}, "修改用户信息", '700px', '510Px', function(){})
+            }
+        });
+        avalon.scan($('#listUser')[0],vm);
+        vm.init();
+    });
+</script>
