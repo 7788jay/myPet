@@ -4,27 +4,30 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>用户登录</title>
+<title>用户注册</title>
 
 <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/signin.css" rel="stylesheet">
 </head>
 
-<body ms-controller="login">
-<div class="signin">
+<body ms-controller="register">
+<div class="registerin">
 	<div class="signin-head">
-		<img width="120px" height="120px" src="images/test/head_120.png" alt="" class="img-circle">
+
 	</div>
 	<form class="form-signin" role="form">
+		<input type="text" class="form-control" placeholder="账号" required autofocus ms-duplex="code" ms-keydown="enter($event)"/>
 		<input type="text" class="form-control" placeholder="用户名" required autofocus ms-duplex="username" ms-keydown="enter($event)"/>
+		<input type="text" class="form-control" placeholder="手机号" required autofocus ms-duplex="phone" ms-keydown="enter($event)"/>
 		<input type="password" class="form-control" placeholder="密码" required ms-duplex="password" ms-keydown="enter($event)"/>
-		<button class="btn btn-lg btn-warning btn-block" type="button" ms-click="login">登录</button>
-		<button class="col-md-3 col-sm-offset-9 btn btn-info" type="button" ms-click="register" style="margin-top: 20px;">注册</button>
+		<input type="password" class="form-control" placeholder="确认密码" required ms-duplex="password1" ms-keydown="enter($event)"/>
+		<button class="btn btn-lg btn-warning btn-block" type="button" ms-click="register">注册</button>
+		<button class="col-md-3 col-sm-offset-9 btn btn-info" type="button" ms-click="login" style="margin-top: 20px;">登录</button>
 	</form>
 </div>
 </body>
 </html>
 <script src="/libs/jquery/jquery.min.js"></script>
 <script src="/libs/avalon/avalon.shim.min.js"></script>
-<script src="/js/login.js"></script>
+<script src="/js/register.js"></script>
 <script src="/libs/layer/layer.js"></script>

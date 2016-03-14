@@ -52,6 +52,11 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/add")
     public ResultDTO add(User user) {
+        //创建之前查看是否重名
+        User queryUser = userService.findOne(UserParam.F_Code, user.getCode());
+        if (queryUser != null) {
+            return new ResultDTO(false, "账号重复请重试");
+        }
         user.setCreateTime(System.currentTimeMillis());
         //设置状态
         user.setLocked(0);
@@ -93,11 +98,12 @@ public class UserController {
         queryUser.setUserType(user.getUserType());
         //更新用户信息
         userService.update(queryUser);
-        return new ResultDTO(true,"更新成功！");
+        return new ResultDTO(true, "更新成功！");
     }
 
     /**
      * 单个删除
+     *
      * @param id
      * @return
      */
@@ -105,11 +111,12 @@ public class UserController {
     @RequestMapping(value = "/deleteOne")
     public ResultDTO deleteOne(Integer id) {
         userService.delete(id);
-        return new ResultDTO(true,"删除成功！");
+        return new ResultDTO(true, "删除成功！");
     }
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */
@@ -117,6 +124,19 @@ public class UserController {
     @RequestMapping(value = "/deleteByIds")
     public ResultDTO deleteByIds(Integer[] ids) {
         userService.deleteByIds(Arrays.asList(ids));
-        return new ResultDTO(true,"删除成功！");
+        return new ResultDTO(true, "删除成功！");
+    }
+
+    /**
+     * 注册用户
+     *
+     * @param user
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/register")
+    public ResultDTO register(User user) {
+        user.setUserType(0);
+        return this.add(user);
     }
 }

@@ -1,31 +1,51 @@
 //初始化完成
 avalon.ready(function () {
     var vm = avalon.define({
-        $id: "login",
+        $id: "register",
+        code: "",            //账号
         username: "",        //用户名
+        phone: "",           //手机号
         password: "",        //密码
+        password1: "",       //确认密码
         //回车登录
         enter: function (event) {
             if (event.keyCode == 13) {
-                vm.login();
+                vm.register();
             }
         },
         //登录
-        login: function () {
+        register: function () {
+            if (vm.code == "") {
+                layer.alert('请输入账号！');
+                return;
+            }
             if (vm.username == "") {
-                layer.alert('请输入用户名');
+                layer.alert('请输入用户名！');
+                return;
+            }
+            if (vm.phone == "" || vm.phone.length < 11) {
+                layer.alert('请输入正确手机号！');
                 return;
             }
             if (vm.password == "") {
                 layer.alert('请输入密码');
                 return;
             }
+            if (vm.password != vm.password1) {
+                layer.alert('两次密码不一致！');
+                return;
+            }
             $.ajax({
-                url: "/admin/login",
+                url: "/admin/user/user/register",
                 cache: false,
                 type: "post",
                 dataType: "json",
-                data: {code: vm.username, password: vm.password},
+                data: {
+                    code: vm.code,
+                    userName: vm.username,
+                    phone:vm.phone,
+                    password: vm.password
+                },
                 beforeSend: function () {
                     layer.load(0);
                 },
@@ -33,10 +53,10 @@ avalon.ready(function () {
                     layer.closeAll('loading');
                 },
                 success: function (res) {
-                    avalon.log('登录返回成功=', res);
                     if (res.success) {
                         sessionStorage.setItem("isLoad", true);
-                        window.location = res.msg;
+                        layer.alert("注册成功,请登录！");
+                        window.location = "/login.html";
                     } else {
                         layer.alert(res.msg);
                     }
@@ -47,9 +67,9 @@ avalon.ready(function () {
                 }
             });
         },
-        //注册
-        register: function(){
-            window.location = "/register.html";
+        //登录
+        login: function(){
+            window.location = "/login.html";
         }
     });
 
