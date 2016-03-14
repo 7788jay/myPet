@@ -53,6 +53,7 @@ public class UserController {
     @RequestMapping(value = "/add")
     public ResultDTO add(User user) {
         user.setCreateTime(System.currentTimeMillis());
+        //设置状态
         user.setLocked(0);
         int count = userService.insert(user);
         if (count != 1) {
@@ -82,13 +83,15 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/update")
     public ResultDTO update(User user) {
+        //根据id获取用户信息
         User queryUser = userService.fetch(user.getId());
+        //设置要修改的用户信息
         queryUser.setCode(user.getCode());
         queryUser.setUserName(user.getUserName());
         queryUser.setPassword(user.getPassword());
         queryUser.setPhone(user.getPhone());
         queryUser.setUserType(user.getUserType());
-
+        //更新用户信息
         userService.update(queryUser);
         return new ResultDTO(true,"更新成功！");
     }

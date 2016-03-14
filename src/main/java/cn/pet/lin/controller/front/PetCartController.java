@@ -22,25 +22,38 @@ public class PetCartController {
     @Autowired
     IPetService petService;
 
+    /**
+     * 添加宠物到购物车
+     * @param code
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/add")
     public ResultDTO add(String code, HttpSession session) {
         PetParam petParam = new PetParam();
         petParam.setCode(code);
+        //查询到对应的宠物
         Pet pet = petService.queryOne(petParam.toMap());
+        //从session获取到购物车信息
         Cart cart = (Cart) session.getAttribute("cart");
-//        if(carts == null){
-//            carts = new HashMap<Pet,Integer>();
-//        }
         cart = cart == null ? new Cart() : cart;
+        //添加到购物车
         cart.add(pet);
+        //保存到session中
         session.setAttribute("cart", cart);
         return new ResultDTO(true, "添加成功！");
     }
 
+    /**
+     * 查询购物车
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/queryCart")
     public Cart queryCart(HttpSession session) {
+        //从session中获取到之前保存的购物车信息
         Cart cart = (Cart) session.getAttribute("cart");
         return cart == null ? new Cart() : cart;
     }

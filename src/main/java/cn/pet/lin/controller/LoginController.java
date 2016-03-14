@@ -27,10 +27,11 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getCode(),user.getPassword());
         try {
-            //登录
+            //采用shiro验证框架进行验证登录
             subject.login(token);
         } catch (AuthenticationException e) {
             e.printStackTrace();
+            //验证不通过做相应的提示
             if(e.getClass().getName().equals(UnknownAccountException.class.getName())){
                 return new ResultDTO(false,"账号不存在！");
             }
@@ -39,10 +40,13 @@ public class LoginController {
             }
         }
         String msg = "";
+        //获取登陆后的相应用户信息
         user = (User) SecurityUtils.getSubject().getPrincipal();
         if(user.getUserType() == 1){
+            //跳转到管理平台
             msg = "/html/admin/index.html";
         }else {
+            //普通用户跳转到销售平台
             msg = "/html/front/index.html";
         }
         return new ResultDTO(true,msg);

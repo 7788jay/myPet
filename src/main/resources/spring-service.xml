@@ -36,10 +36,10 @@
     <!-- 扫描basePackage下接口 自动生成代理实现类 -->
     <mybatis:scan base-package="cn.pet.lin.dao" factory-ref="sqlSessionFactory"/>
 
-
+    <!--119.29.155.84-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="jdbc:mysql://119.29.155.84:3306/pet?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/pet?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
 
