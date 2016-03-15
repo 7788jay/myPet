@@ -4,4 +4,32 @@
 <mapper namespace="cn.pet.lin.dao.pet.IAnimalDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：AnimalDAO.xml里各节点的ID不能在这里重复出现）  -->
 	
+	<resultMap id="categoryResult" type="cn.pet.lin.domain.pet.Category">
+		<id column="id" property="ca_id"></id>
+		<result property="code" column="ca_code"></result>
+		<result property="name" column="ca_name"></result>
+		<result property="animalCode" column="ca_animalCode"></result>
+	</resultMap>
+
+	<resultMap id="animalExResult" type="cn.pet.lin.domain.pet.AnimalEx">
+		<id property="id" column="an_id"></id>
+		<result property="code" column="an_code"></result>
+		<result property="name" column="an_name"></result>
+		<collection property="categories" ofType="cn.pet.lin.domain.pet.Category" javaType="java.util.List" resultMap="categoryResult"></collection>
+	</resultMap>
+
+	<select id="getAnimalAndCategory" resultMap="animalExResult">
+		SELECT
+			pc.id AS ca_id,
+			pc.code AS ca_code,
+			pc.name AS ca_name,
+			pc.animalCode AS ca_animalCode,
+			pa.id AS an_id,
+			pa.code AS an_code,
+			pa.name AS an_name
+		FROM
+			pet_animal pa
+		LEFT JOIN pet_category pc
+		ON pa.code = pc.animalCode
+	</select>
 </mapper>

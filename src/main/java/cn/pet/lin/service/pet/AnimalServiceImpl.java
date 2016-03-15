@@ -17,12 +17,12 @@ package cn.pet.lin.service.pet;
 
 import cn.pet.lin.dao.pet.IAnimalDAO;
 import cn.pet.lin.domain.pet.Animal;
+import cn.pet.lin.domain.pet.AnimalEx;
 import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
  /**
  * 《动物种类》 业务逻辑服务类
@@ -38,6 +38,11 @@ public class AnimalServiceImpl extends AbstractBaseService<IAnimalDAO,Animal> im
     public IAnimalDAO getDao() {
         return animalDAO;
     }
+
+     @Override
+     public List<AnimalEx> getAnimalAndCategory() {
+         return animalDAO.getAnimalAndCategory();
+     }
 
 //    @Override
 //    public void insert(BaseDomain entity) {

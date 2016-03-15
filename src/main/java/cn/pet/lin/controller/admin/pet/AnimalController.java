@@ -5,6 +5,7 @@ import cn.pet.lin.domain.common.ResultDTO;
 import cn.pet.lin.domain.param.pet.AnimalParam;
 import cn.pet.lin.domain.pet.Animal;
 import cn.pet.lin.service.pet.IAnimalService;
+import cn.pet.lin.service.pet.ICategoryService;
 import cn.pet.lin.utils.CommonUtils;
 import cn.pet.lin.utils.PageUtils;
 import cn.pet.lin.utils.enums.ERRORMSG;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lwt on 2016/2/10.
@@ -27,6 +30,8 @@ import java.util.List;
 public class AnimalController {
     @Autowired
     IAnimalService animalService;
+    @Autowired
+    ICategoryService categoryService;
 
     /**
      * 查询物种分页
@@ -43,10 +48,27 @@ public class AnimalController {
         return PageUtils.toBizData4Page(animals,PageNo,PageSize,record);
     }
 
+    /**
+     * 查询所有的物种
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/queryAll")
     public List<Animal> queryAll(){
         return animalService.findAll();
+    }
+
+    /**
+     * 查询所有的物种（包含宠物分类）
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getAnimalAndCategory")
+    public Map<String,Object> getAnimalAndCategory(){
+        Map<String,Object> resultMap = new HashMap<String,Object>();
+        resultMap.put("categories",categoryService.findAll());
+        resultMap.put("animals",animalService.findAll());
+        return resultMap;
     }
 
     /**

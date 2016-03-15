@@ -17,13 +17,23 @@ package cn.pet.lin.dao.pet;
 
 import cn.pet.lin.dao.IBaseDAO;
 import cn.pet.lin.domain.pet.Animal;
+import cn.pet.lin.domain.pet.AnimalEx;
 
- /**
+import java.util.List;
+
+/**
  * 《动物种类》 数据访问接口
- * @author 林伟樘
  *
+ * @author 林伟樘
  */
 public interface IAnimalDAO extends IBaseDAO<Animal> {
+
+    /**
+     * 获取物种及其分类
+     *
+     * @return
+     */
+    public List<AnimalEx> getAnimalAndCategory();
 
 
 }

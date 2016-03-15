@@ -85,40 +85,27 @@
             <!-- BEGIN NAVIGATION -->
             <div class="header-navigation">
                 <ul>
-                    <li class="dropdown">
+                    <li class="dropdown" ms-repeat-an="animals">
                         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                            狗
+                            {{an.name}}
                         </a>
-
                         <!-- BEGIN DROPDOWN MENU -->
                         <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a href="shop-product-list.html">蝴蝶狗 <i class="fa fa-angle-right"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="shop-product-list.html">帅狗</a></li>
-                                    <li><a href="shop-product-list.html">Second Level Link</a></li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#"
-                                           href="javascript:;">
-                                            Second Level Link
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="shop-product-list.html">Third Level Link</a></li>
-                                            <li><a href="shop-product-list.html">Third Level Link</a></li>
-                                            <li><a href="shop-product-list.html">Third Level Link</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="shop-product-list.html">傻逼狗</a></li>
-                            <li><a href="shop-product-list.html">Jackets and Coats</a></li>
+                            <li><a href="shop-product-list.html" ms-repeat-ca="categories">{{ca.name}}</a></li>
                         </ul>
                         <!-- END DROPDOWN MENU -->
                     </li>
-                    <li><a href="shop-item.html">猫</a></li>
+                    <li class="dropdown" >
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                            kkkkk
+                        </a>
+                        <!-- BEGIN DROPDOWN MENU -->
+                        <ul class="dropdown-menu">
+                        </ul>
+                        <!-- END DROPDOWN MENU -->
+                    </li>
 
-                    <!-- BEGIN TOP SEARCH -->
+                    <!-- BEGIN TOP 搜索 -->
                     <li class="menu-search">
                         <span class="sep"></span>
                         <i class="fa fa-search search-btn"></i>
@@ -133,7 +120,7 @@
                             </form>
                         </div>
                     </li>
-                    <!-- END TOP SEARCH -->
+                    <!-- END TOP 搜索 -->
                 </ul>
             </div>
             <!-- END NAVIGATION -->
@@ -149,6 +136,8 @@
             $id: "public-head",
             user: {},  //用户
             cart: {cartItems: {}, totalPrice: null},   //购物车
+            animals: [],    //动物种类
+            categories: [],  //宠物分类
 
             //初始化
             init: function () {
@@ -171,10 +160,20 @@
                     }
                 });
                 //获取动物分类
+                $.ajax({
+                    url: "/admin/pet/category/getAnimalAndCategory",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        vm.animals = result.animals;
+                        vm.categories = result.categories;
+                    }
+                });
             },
+            //跳转到商品详情
             showItem: function(code){
                 window.location.href = 'item.html?code='+code;
-            },
+            }
         });
         avalon.scan($('#public-head')[0],vm);
         vm.init();

@@ -28,6 +28,7 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     ICategoryService categoryService;
+
     /**
      * 查询宠物分类分页
      * @param param
@@ -43,6 +44,10 @@ public class CategoryController {
         return PageUtils.toBizData4Page(animals,PageNo,PageSize,record);
     }
 
+    /**
+     * 获取所有宠物分类
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/queryAll")
     public List<Category> queryAll(){

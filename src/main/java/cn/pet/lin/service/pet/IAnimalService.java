@@ -17,13 +17,22 @@ package cn.pet.lin.service.pet;
 
 import cn.pet.lin.domain.pet.Animal;
 import cn.pet.lin.dao.pet.IAnimalDAO;
+import cn.pet.lin.domain.pet.AnimalEx;
 import cn.pet.lin.service.IBaseService;
 
- /**
- * 《动物种类》 业务逻辑服务接口
- * @author 林伟樘
- *
- */
-public interface IAnimalService extends IBaseService<IAnimalDAO, Animal>{
+import java.util.List;
 
+/**
+ * 《动物种类》 业务逻辑服务接口
+ *
+ * @author 林伟樘
+ */
+public interface IAnimalService extends IBaseService<IAnimalDAO, Animal> {
+
+    /**
+     * 获取物种及其分类
+     *
+     * @return
+     */
+    public List<AnimalEx> getAnimalAndCategory();
 }

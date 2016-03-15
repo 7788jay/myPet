@@ -15,12 +15,7 @@
 
 package cn.pet.lin.domain.pet;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
-import java.util.*;
+import java.util.List;
 
 /**
  * 《动物种类》扩展实体
@@ -29,6 +24,16 @@ import java.util.*;
  */
 public class AnimalEx extends Animal {
 	private static final long serialVersionUID = 1L;
+
+	private List<Category> categories;
 	
 	//针对Animal实体在这里增加额外的属性和对应的get和set方法
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
 }
