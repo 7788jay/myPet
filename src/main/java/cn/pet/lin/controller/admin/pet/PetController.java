@@ -29,7 +29,7 @@ public class PetController {
     IPetService petService;
 
     /**
-     * 查询物种分页
+     * 查询宠物分页
      *
      * @param param
      * @param PageNo

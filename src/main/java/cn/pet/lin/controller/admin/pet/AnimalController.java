@@ -4,6 +4,7 @@ import cn.pet.lin.domain.BizData4Page;
 import cn.pet.lin.domain.common.ResultDTO;
 import cn.pet.lin.domain.param.pet.AnimalParam;
 import cn.pet.lin.domain.pet.Animal;
+import cn.pet.lin.domain.pet.AnimalEx;
 import cn.pet.lin.service.pet.IAnimalService;
 import cn.pet.lin.service.pet.ICategoryService;
 import cn.pet.lin.utils.CommonUtils;
@@ -18,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by lwt on 2016/2/10.
@@ -64,11 +63,8 @@ public class AnimalController {
      */
     @ResponseBody
     @RequestMapping(value = "/getAnimalAndCategory")
-    public Map<String,Object> getAnimalAndCategory(){
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("categories",categoryService.findAll());
-        resultMap.put("animals",animalService.findAll());
-        return resultMap;
+    public List<AnimalEx> getAnimalAndCategory(){
+        return animalService.getAnimalAndCategory();
     }
 
     /**

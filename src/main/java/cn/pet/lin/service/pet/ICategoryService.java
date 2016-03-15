@@ -15,15 +15,22 @@
 
 package cn.pet.lin.service.pet;
 
-import cn.pet.lin.domain.pet.Category;
 import cn.pet.lin.dao.pet.ICategoryDAO;
+import cn.pet.lin.domain.pet.Category;
+import cn.pet.lin.domain.pet.CategoryEx;
 import cn.pet.lin.service.IBaseService;
 
- /**
+/**
  * 《宠物分类》 业务逻辑服务接口
- * @author 林伟樘
  *
+ * @author 林伟樘
  */
-public interface ICategoryService extends IBaseService<ICategoryDAO, Category>{
-
+public interface ICategoryService extends IBaseService<ICategoryDAO, Category> {
+    /**
+     * 获取一个有物种名称的分类
+     *
+     * @param code
+     * @return
+     */
+    public CategoryEx queryOneAndName(String code);
 }

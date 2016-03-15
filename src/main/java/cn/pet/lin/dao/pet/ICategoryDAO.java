@@ -17,13 +17,20 @@ package cn.pet.lin.dao.pet;
 
 import cn.pet.lin.dao.IBaseDAO;
 import cn.pet.lin.domain.pet.Category;
+import cn.pet.lin.domain.pet.CategoryEx;
+import org.apache.ibatis.annotations.Param;
 
- /**
+/**
  * 《宠物分类》 数据访问接口
- * @author 林伟樘
  *
+ * @author 林伟樘
  */
 public interface ICategoryDAO extends IBaseDAO<Category> {
-
-
+    /**
+     * 获取一个有物种名称的分类
+     *
+     * @param code
+     * @return
+     */
+    public CategoryEx queryOneAndName(@Param("code") String code);
 }

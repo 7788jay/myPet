@@ -82,27 +82,21 @@
             </div>
             <!--END CART -->
 
-            <!-- BEGIN NAVIGATION -->
+            <!-- BEGIN 导航栏 -->
             <div class="header-navigation">
                 <ul>
-                    <li class="dropdown" ms-repeat-an="animals">
+                    <li class="dropdown" ms-repeat-an="animals" ms-if-loop="an.categories.length>0">
                         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                             {{an.name}}
                         </a>
                         <!-- BEGIN DROPDOWN MENU -->
                         <ul class="dropdown-menu">
-                            <li><a href="shop-product-list.html" ms-repeat-ca="categories">{{ca.name}}</a></li>
+                            <li><a href="shop-product-list.html" ms-repeat-ca="an.categories">{{ca.name}}</a></li>
                         </ul>
                         <!-- END DROPDOWN MENU -->
                     </li>
-                    <li class="dropdown" >
-                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                            kkkkk
-                        </a>
-                        <!-- BEGIN DROPDOWN MENU -->
-                        <ul class="dropdown-menu">
-                        </ul>
-                        <!-- END DROPDOWN MENU -->
+                    <li ms-repeat-an="animals" ms-if-loop="an.categories.length==0">
+                        <a href="shop-product-list.html">{{an.name}}</a>
                     </li>
 
                     <!-- BEGIN TOP 搜索 -->
@@ -113,9 +107,9 @@
                             <form action="#">
                                 <div class="input-group">
                                     <input type="text" placeholder="Search" class="form-control">
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary" type="submit">Search</button>
-                    </span>
+                                    <span class="input-group-btn">
+                                      <button class="btn btn-primary" type="submit">Search</button>
+                                    </span>
                                 </div>
                             </form>
                         </div>
@@ -123,7 +117,7 @@
                     <!-- END TOP 搜索 -->
                 </ul>
             </div>
-            <!-- END NAVIGATION -->
+            <!-- END 导航栏 -->
         </div>
     </div>
     <!-- Header END -->
@@ -161,12 +155,11 @@
                 });
                 //获取动物分类
                 $.ajax({
-                    url: "/admin/pet/category/getAnimalAndCategory",
+                    url: "/admin/pet/animal/getAnimalAndCategory",
                     type: "GET",
                     dataType: "json",
                     success: function (result) {
-                        vm.animals = result.animals;
-                        vm.categories = result.categories;
+                        vm.animals = result;
                     }
                 });
             },

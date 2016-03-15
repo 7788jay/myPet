@@ -17,12 +17,10 @@ package cn.pet.lin.service.pet;
 
 import cn.pet.lin.dao.pet.ICategoryDAO;
 import cn.pet.lin.domain.pet.Category;
+import cn.pet.lin.domain.pet.CategoryEx;
 import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
 
  /**
  * 《宠物分类》 业务逻辑服务类
@@ -38,6 +36,11 @@ public class CategoryServiceImpl extends AbstractBaseService<ICategoryDAO,Catego
     public ICategoryDAO getDao() {
         return categoryDAO;
     }
+
+     @Override
+     public CategoryEx queryOneAndName(String code) {
+         return categoryDAO.queryOneAndName(code);
+     }
 
 //    @Override
 //    public void insert(BaseDomain entity) {
