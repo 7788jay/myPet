@@ -32,5 +32,5 @@ public interface ICategoryDAO extends IBaseDAO<Category> {
      * @param code
      * @return
      */
-    public CategoryEx queryOneAndName(@Param("code") String code);
+    CategoryEx queryOneAndName(@Param("code") String code);
 }

@@ -48,8 +48,8 @@
       <div class="container">
         <ul class="breadcrumb">
             <li><a href="index.html">首页</a></li>
-            <li><a href="">Store</a></li>
-            <li class="active">Men category</li>
+            <li><a href="">{{category.animalName}}</a></li>
+            <li class="active">{{category.name}}</li>
         </ul>
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
@@ -101,7 +101,7 @@
               <div ms-repeat="pets" data-repeat-rendered="layoutInit" class="col-md-4 col-sm-6 col-xs-12">
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img ms-attr-src="el.image" class="img-responsive" class="img-responsive" ms-attr-alt="el.name" style="height: 280px;">
+                    <img ms-attr-src="el.image" class="img-responsive" class="img-responsive" ms-attr-alt="el.name" style="height: 260px;">
                     <div>
                       <a ms-attr-href="el.image" class="btn btn-default fancybox-button">查看</a>
                     </div>
@@ -120,9 +120,9 @@
               <div class="col-md-4 col-sm-4 items-info">总共{{records}}件商品</div>
               <div class="col-md-8 col-sm-8">
                 <ul class="pagination pull-right">
-                  <li ms-if="page > 1"><a href="javascript:;" ms-click="query()">上一页</a></li>
+                  <li ms-if="page > 1"><a href="javascript:;" ms-click="query(page-1)">上一页</a></li>
                   <li><span>{{page}}</span></li>
-                  <li ms-if="page < total"><a href="javascript:;">下一页</a></li>
+                  <li ms-if="page < total"><a href="javascript:;" ms-click="query(page+1)">下一页</a></li>
                 </ul>
               </div>
             </div>
@@ -157,18 +157,36 @@
     <script src='/assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
 
     <script src="/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="/js/common-front.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
           var vm = avalon.define({
             $id: "pet-list",
-            pets: [],
+            categoryCode: "",//分类code
+            pets: [],     //宠物列表
+            category: {},  //分类
             page: "",     //当前页
             total: "",    //总页数
             records: "",   //总记录数
             //初始化
             init: function(){
+              vm.categoryCode = getQueryCode();
+              //宠物查询
+              vm.query(1);
+              //面包屑
               $.ajax({
-                url: "/pet/front/petList/queryPetList",
+                url: "/pet/front/petList/queryOneAndName?code="+vm.categoryCode,
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                  vm.category = result;
+                }
+              });
+            },
+            //分页查询
+            query: function(pageNo){
+              $.ajax({
+                url: "/pet/front/petList/queryPetList?categoryCode="+vm.categoryCode+"&PageNo="+pageNo,
                 type: "GET",
                 dataType: "json",
                 success: function (result) {
@@ -182,18 +200,12 @@
                   vm.records = result.records;
                 }
               });
-              //面包屑
-              $.ajax({
-                url: "/pet/front/petList/queryPetList",
-                type: "GET",
-                dataType: "json",
-                success: function (result) {
-                }
-              });
             },
+            //查看详情
             showItem: function(code){
               window.location.href = 'item.html?code='+code;
             },
+            //遍历之后的回调
             layoutInit: function(){
               Layout.init();
             }

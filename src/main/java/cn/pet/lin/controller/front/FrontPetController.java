@@ -43,6 +43,11 @@ public class FrontPetController {
         return PageUtils.toBizData4Page(pets, PageNo, PageSize, record);
     }
 
+    /**
+     * 获取分类名及物种名（面包屑）
+     * @param code
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/queryOneAndName")
     public CategoryEx queryOneAndName(@RequestParam(defaultValue = "") String code) {
