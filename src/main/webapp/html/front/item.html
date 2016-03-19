@@ -435,7 +435,7 @@ Nostrud duis molestie at dolore.</p>
             },
             //初始化
             init: function(){
-              var code = getQueryCode();
+              var code = getQueryString('code');
 
               $.ajax({
                 url: "/pet/front/item/queryOne?code="+code,
@@ -461,8 +461,10 @@ Nostrud duis molestie at dolore.</p>
             },
             //加入购物车
             addToCart: function(code){
+              //获取数量
+              var num = $('#product-quantity').val();
               $.ajax({
-                url: "/pet/front/cart/add?code="+code,
+                url: "/pet/front/cart/add?code="+code+"&num="+num,
                 type: "GET",
                 dataType: "json",
                 success: function (result) {

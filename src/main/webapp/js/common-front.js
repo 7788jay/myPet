@@ -8,8 +8,13 @@ avalon.filters.OrderStatusFilter = function (value, args, args2) {
 }
 
 /**方法**/
-function getQueryCode(){
-    var reg = new RegExp("(^|&)code=([^&]*)(&|$)","i");
+/**
+ * 获取链接中指定参数值
+ * @param name
+ * @returns {*}
+ */
+function getQueryString(name){
+    var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)","i");
     var r = window.location.search.substr(1).match(reg);
     return r[2];
 }

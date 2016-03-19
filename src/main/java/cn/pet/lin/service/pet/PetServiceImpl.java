@@ -24,19 +24,29 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
- /**
+/**
  * 《宠物表》 业务逻辑服务类
- * @author 林伟樘
  *
+ * @author 林伟樘
  */
 @Service("PetServiceImpl")
-public class PetServiceImpl extends AbstractBaseService<IPetDAO,Pet> implements IPetService{
+public class PetServiceImpl extends AbstractBaseService<IPetDAO, Pet> implements IPetService {
     @Autowired
     private IPetDAO petDAO;
 
     @Override
     public IPetDAO getDao() {
         return petDAO;
+    }
+
+    @Override
+    public List<Pet> queryPageEx(Map<String, Object> condition, int offset, int pageSize, String orderBy, String sortBy) {
+        return petDAO.queryPageEx(condition, offset, pageSize, orderBy, sortBy);
+    }
+
+    @Override
+    public int countEx(Map<String, Object> condition) {
+        return petDAO.countEx(condition);
     }
 
 //    @Override

@@ -3,5 +3,80 @@
 
 <mapper namespace="cn.pet.lin.dao.pet.IPetDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：PetDAO.xml里各节点的ID不能在这里重复出现）  -->
+	<select id="queryPageEx" resultType="Pet">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pet_pet
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="condition.name!=null">
+				AND name like '%${condition.name}%'
+			</if>
+			<if test="condition.weight!=null">
+				AND weight = #{condition.weight}
+			</if>
+			<if test="condition.life!=null">
+				AND life = #{condition.life}
+			</if>
+			<if test="condition.startLife!=null and condition.startLife!=''">
+				AND life &gt; #{condition.startLife}
+			</if>
+			<if test="condition.endLife!=null and condition.endLife!=''">
+				AND life &lt; #{condition.endLife}
+			</if>
+			<if test="condition.price!=null">
+				AND price = #{condition.price}
+			</if>
+			<if test="condition.startPrice!=null and condition.startPrice!=''">
+				AND price &gt; #{condition.startPrice}
+			</if>
+			<if test="condition.endPrice!=null and condition.endPrice!=''">
+				AND price &lt; #{condition.endPrice}
+			</if>
+			<if test="condition.categoryCode!=null">
+				AND categoryCode = #{condition.categoryCode}
+			</if>
+		</trim>
+		<if test="orderBy!=null">
+			ORDER BY ${orderBy} ${sortBy}
+		</if>
+		<if test="offset != null">
+			limit ${offset}, ${rows}
+		</if>
+	</select>
+
+	<select id="countEx" resultType="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM pet_pet
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="condition.name!=null">
+				AND name like '%${condition.name}%'
+			</if>
+			<if test="condition.weight!=null">
+				AND weight = #{condition.weight}
+			</if>
+			<if test="condition.life!=null">
+				AND life = #{condition.life}
+			</if>
+			<if test="condition.startLife!=null and condition.startLife!=''">
+				AND life &gt; #{condition.startLife}
+			</if>
+			<if test="condition.endLife!=null and condition.endLife!=''">
+				AND life &lt; #{condition.endLife}
+			</if>
+			<if test="condition.price!=null">
+				AND price = #{condition.price}
+			</if>
+			<if test="condition.startPrice!=null and condition.startPrice!=''">
+				AND price &gt; #{condition.startPrice}
+			</if>
+			<if test="condition.endPrice!=null and condition.endPrice!=''">
+				AND price &lt; #{condition.endPrice}
+			</if>
+			<if test="condition.categoryCode!=null">
+				AND categoryCode = #{condition.categoryCode}
+			</if>
+		</trim>
+	</select>
 	
 </mapper>

@@ -13,18 +13,19 @@ public class Cart {
     Map<String, CartItem> cartItems = new HashMap<String, CartItem>();
     private int totalPrice;
 
-    public void add(Pet pet){
+    public void add(Pet pet, int num) {
         CartItem item = cartItems.get(pet.getCode());
-        if(item==null){
+        if (item == null) {
             item = new CartItem();
             item.setPet(pet);
-            item.setQuantity(1);
+            item.setQuantity(num);
             cartItems.put(pet.getCode(), item);
-        }else{
-            item.setQuantity(item.getQuantity()+1);
+        } else {
+            item.setQuantity(item.getQuantity() + num);
         }
     }
-    public void changeNum(String code,int quantity){
+
+    public void changeNum(String code, int quantity) {
         CartItem item = cartItems.get(code);
         item.setQuantity(quantity);
 
@@ -37,7 +38,7 @@ public class Cart {
     public int getTotalPrice() {
         this.totalPrice = 0;
         for (Map.Entry<String, CartItem> entry : cartItems.entrySet()) {
-            this.totalPrice += entry.getValue().getPet().getPrice()*entry.getValue().getQuantity();
+            this.totalPrice += entry.getValue().getPet().getPrice() * entry.getValue().getQuantity();
         }
         return totalPrice;
     }

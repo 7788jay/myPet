@@ -31,6 +31,6 @@ public class IndexController {
     @RequestMapping(value = "getNewPets")
     public List<Pet> getNewPets(@RequestParam(defaultValue = "5") Integer num){
         PetParam petParam = new PetParam();
-        return petService.queryPage(petParam.toSearchFieldMap(),0,num, PetParam.F_CreateTime, SqlOrderEnum.ASC);
+        return petService.queryPage(petParam.toSearchFieldMap(),0,num, PetParam.F_CreateTime, SqlOrderEnum.DESC);
     }
 }

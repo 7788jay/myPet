@@ -15,13 +15,6 @@
 
 package cn.pet.lin.domain.pet;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
-import java.util.*;
-
 /**
  * 《宠物表》扩展实体
  * @author 林伟樘
@@ -29,6 +22,16 @@ import java.util.*;
  */
 public class PetEx extends Pet {
 	private static final long serialVersionUID = 1L;
+
+	private int orderSum;   //销量统计
 	
 	//针对Pet实体在这里增加额外的属性和对应的get和set方法
+
+	public int getOrderSum() {
+		return orderSum;
+	}
+
+	public void setOrderSum(int orderSum) {
+		this.orderSum = orderSum;
+	}
 }

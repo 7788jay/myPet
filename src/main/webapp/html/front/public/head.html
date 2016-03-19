@@ -49,9 +49,9 @@
     <!-- BEGIN HEADER -->
     <div class="header">
         <div class="container">
-            <a class="site-logo" href="index.html"><img src="/assets/frontend/layout/img/logos/logo-shop-red.png"
-                                                             alt="Metronic Shop UI"></a>
-
+            <a class="site-logo" href="index.html">
+                <img src="/assets/frontend/layout/img/logos/logo-shop-red.png" alt="Metronic Shop UI"/>
+            </a>
             <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
             <!-- BEGIN CART 购物车 -->
@@ -106,9 +106,9 @@
                         <div class="search-box">
                             <form action="#">
                                 <div class="input-group">
-                                    <input type="text" placeholder="Search" class="form-control">
+                                    <input type="text" id="searchName" placeholder="请输入宠物名" class="form-control">
                                     <span class="input-group-btn">
-                                      <button class="btn btn-primary" type="submit">Search</button>
+                                      <button class="btn btn-primary" type="button" ms-click="search">搜索</button>
                                     </span>
                                 </div>
                             </form>
@@ -166,6 +166,11 @@
             //跳转到商品详情
             showItem: function(code){
                 window.location.href = 'item.html?code='+code;
+            },
+            //跳转到搜索
+            search: function(){
+                var searchName = $('#searchName').val();
+                window.location.href = 'pet-search.html?searchName='+encodeURI(encodeURI(searchName));
             }
         });
         avalon.scan($('#public-head')[0],vm);

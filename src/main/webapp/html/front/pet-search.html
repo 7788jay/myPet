@@ -10,7 +10,7 @@
 <!-- Head BEGIN -->
 <head>
     <meta charset="utf-8">
-    <title>宠物列表</title>
+    <title>宠物搜索列表</title>
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -50,8 +50,7 @@
     <div class="container">
         <ul class="breadcrumb">
             <li><a href="index.html">首页</a></li>
-            <li><a href="">{{category.animalName}}</a></li>
-            <li class="active">{{category.name}}</li>
+            <li class="active"><a href="">搜索</a></li>
         </ul>
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
@@ -62,16 +61,16 @@
                     <h2>筛选条件</h2>
                     <h3>价格</h3>
                     <div class="checkbox-list">
-                        <label><input type="text" size="3" ms-duplex-number="startPrice"> - <input type="text" size="3" ms-duplex-number="endPrice">
+                        <label><input type="text" size="3" ms-duplex-number="startPrice"> - <input type="text" size="3"
+                                                                                                   ms-duplex-number="endPrice">
                             元</label>
                     </div>
                     <h3>年龄</h3>
                     <p>
-                        <label><input type="text" size="3" ms-duplex-number="startLife"> - <input type="text" size="3" ms-duplex-number="endLife"> 年</label>
+                        <label><input type="text" size="3" ms-duplex-number="startLife"> - <input type="text" size="3"
+                                                                                                  ms-duplex-number="endLife">
+                            年</label>
                     </p>
-                    <div>
-                        <input type="button" value="筛选" ms-click="screen">
-                    </div>
                 </div>
 
                 <div class="sidebar-products clearfix">
@@ -100,6 +99,21 @@
 
             <!-- BEGIN CONTENT 右边内容 -->
             <div class="col-md-9 col-sm-7">
+                <!--搜索-->
+                <div class="content-search margin-bottom-20">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form action="#">
+                                <div class="input-group">
+                                    <input type="text" ms-duplex-string="searchName" placeholder="请输入宠物名" class="form-control">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" ms-click="screen">搜索</button>
+                                  </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <!-- BEGIN PRODUCT LIST  商品列表 -->
                 <div class="row product-list">
                     <!-- PRODUCT ITEM START -->
@@ -169,41 +183,32 @@
     jQuery(document).ready(function () {
         var vm = avalon.define({
             $id: "pet-list",
-            categoryCode: "",//分类code
+            searchName: "",  //搜索名称
             pets: [],     //宠物列表
-            category: {},  //分类
             page: "",     //当前页
             total: "",    //总页数
             records: "",   //总记录数
-            startPrice:  "", //开始价格
-            endPrice:  "",
-            startLife:  "",
-            endLife:  "",
+            startPrice: "", //开始价格
+            endPrice: "",
+            startLife: "",
+            endLife: "",
             //初始化
             init: function () {
-                vm.categoryCode = getQueryString('code');
+                vm.searchName = decodeURI(decodeURI(getQueryString("searchName")));
                 //宠物查询
                 vm.query(1);
-                //面包屑
-                $.ajax({
-                    url: "/pet/front/petList/queryOneAndName?code=" + vm.categoryCode,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (result) {
-                        vm.category = result;
-                    }
-                });
             },
             //分页查询
             query: function (pageNo) {
                 $.ajax({
-                    url: "/pet/front/petList/queryPetList?categoryCode=" + vm.categoryCode + "&PageNo=" + pageNo,
+                    url: "/pet/front/petList/queryPetList?PageNo=" + pageNo,
                     type: "POST",
-                    data:{
-                        startPrice:  vm.startPrice, //开始价格
-                        endPrice:  vm.endPrice,
-                        startLife:  vm.startLife,
-                        endLife:  vm.endLife
+                    data: {
+                        name: vm.searchName,//名称
+                        startPrice: vm.startPrice, //开始价格
+                        endPrice: vm.endPrice,
+                        startLife: vm.startLife,
+                        endLife: vm.endLife
                     },
                     dataType: "json",
                     success: function (result) {
@@ -220,11 +225,11 @@
             },
             //筛选
             screen: function () {
-                if (vm.endPrice!=''&&vm.endPrice < vm.startPrice) {
+                if (vm.endPrice != '' && vm.endPrice < vm.startPrice) {
                     layer.alert("开始价格不能小于结束价格");
                     return;
                 }
-                if (vm.endLife!=''&&vm.endLife < vm.startLife) {
+                if (vm.endLife != '' && vm.endLife < vm.startLife) {
                     layer.alert("开始年龄不能小于结束年龄");
                     return;
                 }
