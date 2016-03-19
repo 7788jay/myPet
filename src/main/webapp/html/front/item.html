@@ -1,493 +1,285 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
 
 <!-- Head BEGIN -->
 <head>
-  <meta charset="utf-8">
-  <title>商品详情</title>
+    <meta charset="utf-8">
+    <title>商品详情</title>
 
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta content="Metronic Shop UI description" name="description">
-  <meta content="Metronic Shop UI keywords" name="keywords">
-  <meta content="keenthemes" name="author">
+    <meta content="Metronic Shop UI description" name="description">
+    <meta content="Metronic Shop UI keywords" name="keywords">
+    <meta content="keenthemes" name="author">
 
-  <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
 
-  <!-- Global styles START -->
-  <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
-  <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Global styles END -->
+    <!-- Global styles START -->
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Global styles END -->
 
-  <!-- Page level plugin styles START -->
-  <link href="/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
-  <link href="/assets/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet">
-  <link href="/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
-  <link href="/assets/css/uncompressed/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
-  <link href="/assets/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin styles END -->
+    <!-- Page level plugin styles START -->
+    <link href="/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+    <link href="/assets/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/uncompressed/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
+    <link href="/assets/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin styles END -->
 
-  <!-- Theme styles START -->
-  <link href="/assets/css/components.css" rel="stylesheet">
-  <link href="/assets/frontend/layout/css/style.css" rel="stylesheet">
-  <link href="/assets/frontend/pages/css/style-shop.css" rel="stylesheet" type="text/css">
-  <link href="/assets/frontend/layout/css/style-responsive.css" rel="stylesheet">
-  <link href="/assets/frontend/layout/css/themes/red.css" rel="stylesheet" id="style-color">
-  <link href="/assets/frontend/layout/css/custom.css" rel="stylesheet">
-  <!-- Theme styles END -->
-  <!--样式区-->
-  <style>
-    .ms-controller, .ms-important, [ms-controller], [ms-important] {
-      visibility: hidden;
-    }
-  </style>
+    <!-- Theme styles START -->
+    <link href="/assets/css/components.css" rel="stylesheet">
+    <link href="/assets/frontend/layout/css/style.css" rel="stylesheet">
+    <link href="/assets/frontend/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+    <link href="/assets/frontend/layout/css/style-responsive.css" rel="stylesheet">
+    <link href="/assets/frontend/layout/css/themes/green.css" rel="stylesheet" id="style-color">
+    <link href="/assets/frontend/layout/css/custom.css" rel="stylesheet">
+    <!-- Theme styles END -->
+    <!--样式区-->
+    <style>
+        .ms-controller, .ms-important, [ms-controller], [ms-important] {
+            visibility: hidden;
+        }
+    </style>
 </head>
 <!-- Head END -->
 
 <!-- Body BEGIN -->
-<body class="ecommerce" ms-important="pet-item">
-    <!--头部-->
-    <div ms-include-src="'public/head.html'"></div>
+<body class="ecommerce" ms-controller="pet-item" id="pet-item">
+<!--头部-->
+<div ms-include-src="'public/head.html'"></div>
 
-    <div class="main">
-      <div class="container">
-        <ul class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="">Store</a></li>
-            <li class="active">Cool green dress with red bell</li>
-        </ul>
+<div class="main">
+    <div class="container">
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
-          <!-- BEGIN SIDEBAR -->
-          <div class="sidebar col-md-3 col-sm-5">
+            <!-- 销售排行榜 -->
+            <div class="sidebar col-md-3 col-sm-5" ms-include-src="'./public/hotPets-left.html'"></div>
 
-            <div class="sidebar-products clearfix">
-              <h2>Bestsellers</h2>
-              <div class="item">
-                <a href="shop-item.html"><img src="/assets/frontend/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$31.00</div>
-              </div>
-              <div class="item">
-                <a href="shop-item.html"><img src="/assets/frontend/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$23.00</div>
-              </div>
-              <div class="item">
-                <a href="shop-item.html"><img src="/assets/frontend/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$86.00</div>
-              </div>
+            <!-- begin商品详情 -->
+            <div class="col-md-9 col-sm-7">
+                <div class="product-page">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="product-main-image" style="height: 350px;">
+                                <img ms-attr-src="currentImage" alt="Cool green dress with red bell"
+                                     class="img-responsive" ms-attr-data-BigImgsrc="currentImage">
+                            </div>
+                            <div class="product-other-images">
+                                <a ms-repeat="data.image" ms-click="switchPic(el)" href="javascript:;">
+                                    <img alt="Berry Lace Dress" ms-attr-src="el">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <h1>{{data.name}}</h1>
+                            <div class="price-availability-block clearfix">
+                                <div class="price">
+                                    <strong><span>￥</span>{{data.price}}</strong>
+                                </div>
+                                <!--<div class="availability">
+                                    Availability: <strong>In Stock</strong>
+                                </div>-->
+                            </div>
+                            <div class="product-page-options">
+                                <div class="pull-left">
+                                    <label class="control-label">重量：{{data.weight}}KG</label>
+
+                                </div>
+                                <div class="pull-left">
+                                    <label class="control-label">寿命： {{data.life}}年</label>
+
+                                </div>
+                            </div>
+                            <div class="product-page-cart">
+                                <div class="product-quantity">
+                                    <input id="product-quantity" type="text" value="1" readonly
+                                           class="form-control input-sm">
+                                </div>
+                                <button class="btn btn-primary" type="button" ms-click="addToCart(data.code)">加入购物车
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-page-content">
+                            <ul id="myTab" class="nav nav-tabs">
+                                <li class="active"><a href="#Description" data-toggle="tab">宠物描述</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade in active" id="Description">
+                                    {{data.description | html}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sticker sticker-sale"></div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <!-- END SIDEBAR -->
-
-          <!-- begin商品详情 -->
-          <div class="col-md-9 col-sm-7">
-            <div class="product-page">
-              <div class="row">
-                <div class="col-md-6 col-sm-6">
-                  <div class="product-main-image" style="height: 350px;">
-                    <img ms-attr-src="currentImage" alt="Cool green dress with red bell" class="img-responsive" ms-attr-data-BigImgsrc="currentImage">
-                  </div>
-                  <div class="product-other-images">
-                    <a ms-repeat="data.image" ms-click="switchPic(el)" data-repeat-rendered="layoutInit" href="javascript:;" >
-                      <img alt="Berry Lace Dress" ms-attr-src="el">
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-6">
-                  <h1>{{data.name}}</h1>
-                  <div class="price-availability-block clearfix">
-                    <div class="price">
-                      <strong><span>￥</span>{{data.price}}</strong>
-                    </div>
-                    <div class="availability">
-                      Availability: <strong>In Stock</strong>
-                    </div>
-                  </div>
-                  <div class="product-page-options">
-                    <div class="pull-left">
-                      <label class="control-label">重量：{{data.weight}}KG</label>
-
-                    </div>
-                    <div class="pull-left">
-                      <label class="control-label">寿命： {{data.life}}年</label>
-
-                    </div>
-                  </div>
-                  <div class="product-page-cart">
-                    <div class="product-quantity">
-                        <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-                    </div>
-                    <button class="btn btn-primary" type="button" ms-click="addToCart(data.code)">加入购物车</button>
-                  </div>
-                  <div class="review">
-                    <input type="range" value="4" step="0.25" id="backing4">
-                    <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-                    </div>
-                    <a href="javascript:;">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:;">Write a review</a>
-                  </div>
-                </div>
-
-                <div class="product-page-content">
-                  <ul id="myTab" class="nav nav-tabs">
-                    <li class="active"><a href="#Description" data-toggle="tab">宠物描述</a></li>
-                    <li><a href="#Information" data-toggle="tab">Information</a></li>
-                    <li><a href="#Reviews" data-toggle="tab">Reviews (2)</a></li>
-                  </ul>
-                  <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane fade in active" id="Description">
-                     {{data.description | html}}
-                    </div>
-                    <div class="tab-pane fade" id="Information">
-                      <table class="datasheet">
-                        <tr>
-                          <th colspan="2">Additional features</th>
-                        </tr>
-                        <tr>
-                          <td class="datasheet-features-type">Value 1</td>
-                          <td>21 cm</td>
-                        </tr>
-                        <tr>
-                          <td class="datasheet-features-type">Value 2</td>
-                          <td>700 gr.</td>
-                        </tr>
-                        <tr>
-                          <td class="datasheet-features-type">Value 3</td>
-                          <td>10 person</td>
-                        </tr>
-                        <tr>
-                          <td class="datasheet-features-type">Value 4</td>
-                          <td>14 cm</td>
-                        </tr>
-                        <tr>
-                          <td class="datasheet-features-type">Value 5</td>
-                          <td>plastic</td>
-                        </tr>
-                      </table>
-                    </div>
-                    <div class="tab-pane fade" id="Reviews">
-                      <!--<p>There are no reviews for this product.</p>-->
-                      <div class="review-item clearfix">
-                        <div class="review-item-submitted">
-                          <strong>Bob</strong>
-                          <em>30/12/2013 - 07:37</em>
-                          <div class="rateit" data-rateit-value="5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                        </div>
-                        <div class="review-item-content">
-                            <p>Sed velit quam, auctor id semper a, hendrerit eget justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies tristique, enim mauris bibendum orci, a sodales lectus purus ut lorem.</p>
-                        </div>
-                      </div>
-                      <div class="review-item clearfix">
-                        <div class="review-item-submitted">
-                          <strong>Mary</strong>
-                          <em>13/12/2013 - 17:49</em>
-                          <div class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                        </div>
-                        <div class="review-item-content">
-                            <p>Sed velit quam, auctor id semper a, hendrerit eget justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies tristique, enim mauris bibendum orci, a sodales lectus purus ut lorem.</p>
-                        </div>
-                      </div>
-
-                      <!-- BEGIN FORM-->
-                      <form action="#" class="reviews-form" role="form">
-                        <h2>Write a review</h2>
-                        <div class="form-group">
-                          <label for="name">Name <span class="require">*</span></label>
-                          <input type="text" class="form-control" id="name">
-                        </div>
-                        <div class="form-group">
-                          <label for="email">Email</label>
-                          <input type="text" class="form-control" id="email">
-                        </div>
-                        <div class="form-group">
-                          <label for="review">Review <span class="require">*</span></label>
-                          <textarea class="form-control" rows="8" id="review"></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label for="email">Rating</label>
-                          <input type="range" value="4" step="0.25" id="backing5">
-                          <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-                          </div>
-                        </div>
-                        <div class="padding-top-20">
-                          <button type="submit" class="btn btn-primary">Send</button>
-                        </div>
-                      </form>
-                      <!-- END FORM-->
-                    </div>
-                  </div>
-                </div>
-
-                <div class="sticker sticker-sale"></div>
-              </div>
-            </div>
-          </div>
-          <!-- END 商品详情 -->
+            <!-- END 商品详情 -->
         </div>
         <!-- END SIDEBAR & CONTENT -->
 
         <!-- BEGIN 相似宠物 -->
         <div class="row margin-bottom-40">
-          <div class="col-md-12 col-sm-12">
-            <h2>Most popular products</h2>
-            <div class="owl-carousel owl-carousel4">
-              <div>
-                <div class="product-item">
-                  <div class="pi-img-wrapper">
-                    <img src="/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
-                    <div>
-                      <a href="/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+            <div class="col-md-12 col-sm-12">
+                <h2>类似宠物</h2>
+                <div class="owl-carousel owl-carousel4">
+                    <div ms-repeat="similarPets" data-repeat-rendered="layoutInit">
+                        <div class="product-item">
+                            <div class="pi-img-wrapper">
+                                <img ms-attr-src="el.image" class="img-responsive" ms-attr-alt="el.name" style="height: 280px;"/>
+                                <div>
+                                    <a ms-attr-href="el.image" class="btn btn-default fancybox-button">查看</a>
+                                </div>
+                            </div>
+                            <h3><a ms-attr-href="item.html?code={{el.code}}">{{el.name}}</a></h3>
+                            <div class="pi-price">￥{{el.price}}</div>
+                            <a href="javascript:;" ms-click="addToCart1(el.code)" class="btn btn-default add2cart">加入购物车</a>
+                        </div>
                     </div>
-                  </div>
-                  <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                  <div class="pi-price">$29.00</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                  <div class="sticker sticker-new"></div>
                 </div>
-              </div>
-              <div>
-                <div class="product-item">
-                  <div class="pi-img-wrapper">
-                    <img src="/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
-                    <div>
-                      <a href="/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                    </div>
-                  </div>
-                  <h3><a href="shop-item.html">Berry Lace Dress2</a></h3>
-                  <div class="pi-price">$29.00</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                </div>
-              </div>
-              <div>
-                <div class="product-item">
-                  <div class="pi-img-wrapper">
-                    <img src="/assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
-                    <div>
-                      <a href="/assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                    </div>
-                  </div>
-                  <h3><a href="shop-item.html">Berry Lace Dress3</a></h3>
-                  <div class="pi-price">$29.00</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
-                </div>
-              </div>
-              <div>
-                <div class="product-item">
-                  <div class="pi-img-wrapper">
-                    <img src="/assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
-                    <div>
-                      <a href="/assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                    </div>
-                  </div>
-                  <h3><a href="shop-item.html">Berry Lace Dress4</a></h3>
-                  <div class="pi-price">$29.00</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                  <div class="sticker sticker-sale"></div>
-                </div>
-              </div>
-              <div>
-                <div class="product-item">
-                  <div class="pi-img-wrapper">
-                    <img src="/assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
-                    <div>
-                      <a href="/assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                    </div>
-                  </div>
-                  <h3><a href="shop-item.html">Berry Lace Dress5</a></h3>
-                  <div class="pi-price">$29.00</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                </div>
-              </div>
-              <div>
-                <div class="product-item">
-                  <div class="pi-img-wrapper">
-                    <img src="/assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
-                    <div>
-                      <a href="/assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
-                    </div>
-                  </div>
-                  <h3><a href="shop-item.html">Berry Lace Dress6</a></h3>
-                  <div class="pi-price">$29.00</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
         <!-- END 相似宠物 -->
-      </div>
     </div>
+</div>
 
-    <!--footer-->
-    <div ms-include-src="'public/foot.html'"></div>
+<!--footer-->
+<div ms-include-src="'public/foot.html'"></div>
 
-    <!-- BEGIN fast view of a product -->
-    <div id="product-pop-up" style="display: none; width: 700px;">
-            <div class="product-page product-pop-up">
-              <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-3">
-                  <div class="product-main-image">
-                    <img src="/assets/frontend/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
-                  </div>
-                  <div class="product-other-images">
-                    <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="/assets/frontend/pages/img/products/model3.jpg"></a>
-                    <a href="javascript:;"><img alt="Berry Lace Dress" src="/assets/frontend/pages/img/products/model4.jpg"></a>
-                    <a href="javascript:;"><img alt="Berry Lace Dress" src="/assets/frontend/pages/img/products/model5.jpg"></a>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-9">
-                  <h2>Cool green dress with red bell</h2>
-                  <div class="price-availability-block clearfix">
-                    <div class="price">
-                      <strong><span>$</span>47.00</strong>
-                      <em>$<span>62.00</span></em>
-                    </div>
-                    <div class="availability">
-                      Availability: <strong>In Stock</strong>
-                    </div>
-                  </div>
-                  <div class="description">
-                    <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat
-Nostrud duis molestie at dolore.</p>
-                  </div>
-                  <div class="product-page-options">
-                    <div class="pull-left">
-                      <label class="control-label">Size:</label>
-                      <select class="form-control input-sm">
-                        <option>L</option>
-                        <option>M</option>
-                        <option>XL</option>
-                      </select>
-                    </div>
-                    <div class="pull-left">
-                      <label class="control-label">Color:</label>
-                      <select class="form-control input-sm">
-                        <option>Red</option>
-                        <option>Blue</option>
-                        <option>Black</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="product-page-cart">
-                    <div class="product-quantity">
-                        <input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Add to cart</button>
-                    <a href="shop-item.html" class="btn btn-default">More details</a>
-                  </div>
-                </div>
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+<script src="/assets/plugins/respond.min.js"></script>
+<![endif]-->
+<script src="/assets/js/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="/assets/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/frontend/layout/scripts/back-to-top.js" type="text/javascript"></script>
+<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/libs/avalon/avalon.shim.min.js"></script>
+<!-- END CORE PLUGINS -->
 
-                <div class="sticker sticker-sale"></div>
-              </div>
-            </div>
-    </div>
-    <!-- END fast view of a product -->
+<!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+<script src="/assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+<script src="/assets/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+<!-- slider for products -->
+<script src='/assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+<script src="/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
+<!-- Quantity -->
+<script src="/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="/assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
 
-    <!-- Load javascripts at bottom, this will reduce page load time -->
-    <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
-    <!--[if lt IE 9]>
-    <script src="/assets/plugins/respond.min.js"></script>
-    <![endif]-->
-    <script src="/assets/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-    <script src="/assets/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/assets/frontend/layout/scripts/back-to-top.js" type="text/javascript"></script>
-    <script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <script src="/libs/avalon/avalon.shim.min.js"></script>
-    <!-- END CORE PLUGINS -->
-
-    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-    <script src="/assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
-    <script src="/assets/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
-    <script src='/assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
-    <script src="/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
-    <script src="/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-    <script src="/assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
-
-    <script src="/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
-    <script src="/js/common-front.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-          var vm = avalon.define({
+<script src="/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="/js/common-front.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var petItem = avalon.define({
             $id: "pet-item",
             currentImage: "",   //当前显示图片
             data: {
-              code: "",   //代码
-              name: "",
-              price: "",
-              weight: "",  //重量
-              life: "",    //寿命
-              image: [],
-              description: "" //描述
+                categoryCode: "",
+                code: "",   //代码
+                name: "",
+                price: "",
+                weight: "",  //重量
+                life: "",    //寿命
+                image: [],
+                description: "" //描述
             },
+            similarPets: [],  //类似宠物
             //初始化
-            init: function(){
-              var code = getQueryString('code');
+            init: function () {
+                var code = getQueryString('code');
 
-              $.ajax({
-                url: "/pet/front/item/queryOne?code="+code,
-                type: "GET",
-                dataType: "json",
-                success: function (result) {
-                  vm.data.code = result.code;
-                  vm.data.name = result.name;
-                  vm.data.price = result.price;
-                  vm.data.weight = result.weight;
-                  vm.data.life = result.life;
-                  vm.data.description = result.description;
-                  vm.data.image = result.image.split(",");
-                  vm.currentImage = vm.data.image[0];
-                  $('.product-main-image').zoom({url: vm.currentImage});
-                }
-              });
+                $.ajax({
+                    url: "/pet/front/item/queryOne?code=" + code,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        petItem.data.code = result.code;
+                        petItem.data.categoryCode = result.categoryCode;
+                        //查询类似宠物
+                        petItem.querySimilar();
+                        petItem.data.name = result.name;
+                        petItem.data.price = result.price;
+                        petItem.data.weight = result.weight;
+                        petItem.data.life = result.life;
+                        petItem.data.description = result.description;
+                        petItem.data.image = result.image.split(",");
+                        petItem.currentImage = petItem.data.image[0];
+                        $('.product-main-image').zoom({url: petItem.currentImage});
+                    }
+                });
+            },
+            //查询类似宠物
+            querySimilar: function () {
+                $.ajax({
+                    url: "/pet/front/petList/queryByCategory?categoryCode="+petItem.data.categoryCode,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        result.forEach(function (el) {
+                            el.image = el.image.split(",")[0];
+                        });
+                        petItem.similarPets = result;
+                    }
+                });
             },
             //切换图片
-            switchPic: function(url){
-              vm.currentImage = url;
-              $('.product-main-image').zoom({url: url});
+            switchPic: function (url) {
+                petItem.currentImage = url;
+                $('.product-main-image').zoom({url: url});
             },
             //加入购物车
-            addToCart: function(code){
-              //获取数量
-              var num = $('#product-quantity').val();
-              $.ajax({
-                url: "/pet/front/cart/add?code="+code+"&num="+num,
-                type: "GET",
-                dataType: "json",
-                success: function (result) {
-                  if(result.success){
-                    window.location.href = "cart-success.html";
-                  }
-                }
-              });
+            addToCart: function (code) {
+                //获取数量
+                var num = $('#product-quantity').val();
+                $.ajax({
+                    url: "/pet/front/cart/add?code=" + code + "&num=" + num,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.success) {
+                            window.location.href = "cart-success.html";
+                        }
+                    }
+                });
+            },
+            //加入购物车
+            addToCart1: function (code) {
+                $.ajax({
+                    url: "/pet/front/cart/add?code=" + code,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.success) {
+                            window.location.href = "cart-success.html";
+                        }
+                    }
+                });
             },
             //界面初始化
-            layoutInit: function(){
-              Layout.init();
-              Layout.initOWL();
-//              Layout.initImageZoom();
-              Layout.initTouchspin();
-//              Layout.initUniform();
+            layoutInit: function () {
+                Layout.init();
+                Layout.initOWL();
+                Layout.initImageZoom();
+                Layout.initTouchspin();
             }
-          });
-          avalon.scan();
-          vm.init();
         });
-    </script>
-    <!-- END PAGE LEVEL JAVASCRIPTS -->
+        avalon.scan($('#pet-item')[0], petItem);
+        petItem.init();
+    });
+</script>
+<!-- END PAGE LEVEL JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
 </html>

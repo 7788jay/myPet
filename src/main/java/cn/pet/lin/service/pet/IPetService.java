@@ -15,8 +15,9 @@
 
 package cn.pet.lin.service.pet;
 
-import cn.pet.lin.domain.pet.Pet;
 import cn.pet.lin.dao.pet.IPetDAO;
+import cn.pet.lin.domain.pet.Pet;
+import cn.pet.lin.domain.pet.PetEx;
 import cn.pet.lin.service.IBaseService;
 
 import java.util.List;
@@ -46,4 +47,13 @@ public interface IPetService extends IBaseService<IPetDAO, Pet> {
      * @return
      */
     int countEx(Map<String, Object> condition);
+
+    /**
+     * 查询销量高的宠物
+     *
+     * @param offset
+     * @param rows
+     * @return
+     */
+    List<PetEx> queryPetOrderSum(int offset, int rows);
 }

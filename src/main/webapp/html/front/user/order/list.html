@@ -15,30 +15,32 @@
                             <table summary="Shopping cart">
                                 <tr>
                                     <th class="goods-page-image">图片</th>
-                                    <th class="goods-page-description">描述</th>
+                                    <th class="goods-page-description">宠物名</th>
+                                    <th class="goods-page-quantity">重量</th>
                                     <th class="goods-page-price">单价</th>
-                                    <th class="goods-page-total" colspan="2">总价</th>
+                                    <th class="goods-page-quantity">数量</th>
+                                    <th class="goods-page-total">总价</th>
                                 </tr>
                                 <tr ms-repeat="el.itemExs" data-repeat-rendered="layoutInit">
                                     <td class="goods-page-image">
-                                        <a href="javascript:;">
-                                            <img ms-attr-src="el.pet.image.split(',')[0]" alt="Berry Lace Dress">
+                                        <a ms-attr-href="item.html?code={{el.pet.code}}">
+                                            <img ms-attr-src="el.pet.image.split(',')[0]">
                                         </a>
                                     </td>
                                     <td class="goods-page-description">
-                                        <h3>
-                                            <a href="javascript:;">{{el.pet.name}}</a>
-                                            &nbsp;X {{el.quantity}}
-                                        </h3>
+                                        <h3><a ms-attr-href="item.html?code={{el.pet.code}}">{{el.pet.name}}</a></h3>
+                                    </td>
+                                    <td class="goods-page-price">
+                                        <strong>{{el.pet.weight}} <span>KG</span></strong>
                                     </td>
                                     <td class="goods-page-price">
                                         <strong><span>￥</span>{{el.pet.price}}</strong>
                                     </td>
+                                    <td class="goods-page-price">
+                                        <strong>{{el.quantity}}</strong>
+                                    </td>
                                     <td class="goods-page-total">
                                         <strong><span>￥</span>{{el.pet.price * el.quantity}}</strong>
-                                    </td>
-                                    <td class="del-goods-col">
-                                        <a class="del-goods" href="javascript:;">&nbsp;</a>
                                     </td>
                                 </tr>
                             </table>

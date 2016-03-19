@@ -35,7 +35,7 @@
     <link href="/assets/frontend/pages/css/style-shop.css" rel="stylesheet" type="text/css">
     <link href="/assets/frontend/pages/css/style-layer-slider.css" rel="stylesheet">
     <link href="/assets/frontend/layout/css/style-responsive.css" rel="stylesheet">
-    <link href="/assets/frontend/layout/css/themes/red.css" rel="stylesheet" id="style-color">
+    <link href="/assets/frontend/layout/css/themes/green.css" rel="stylesheet" id="style-color">
     <link href="/assets/frontend/layout/css/custom.css" rel="stylesheet">
     <!-- Theme styles END -->
 </head>
@@ -61,39 +61,21 @@
                     <h2>筛选条件</h2>
                     <h3>价格</h3>
                     <div class="checkbox-list">
-                        <label><input type="text" size="3" ms-duplex-number="startPrice"> - <input type="text" size="3"
-                                                                                                   ms-duplex-number="endPrice">
+                        <label><input type="text" size="3" ms-duplex-number="startPrice"> -
+                            <input type="text" size="3"  ms-duplex-number="endPrice">
                             元</label>
                     </div>
                     <h3>年龄</h3>
                     <p>
-                        <label><input type="text" size="3" ms-duplex-number="startLife"> - <input type="text" size="3"
-                                                                                                  ms-duplex-number="endLife">
+                        <label>
+                            <input type="text" size="3" ms-duplex-number="startLife"> -
+                            <input type="text" size="3" ms-duplex-number="endLife">
                             年</label>
                     </p>
                 </div>
 
-                <div class="sidebar-products clearfix">
-                    <h2>Bestsellers</h2>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="../../assets/frontend/pages/img/products/k1.jpg"
-                                                      alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$31.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="../../assets/frontend/pages/img/products/k4.jpg"
-                                                      alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$23.00</div>
-                    </div>
-                    <div class="item">
-                        <a href="shop-item.html"><img src="../../assets/frontend/pages/img/products/k3.jpg"
-                                                      alt="Some Shoes in Animal with Cut Out"></a>
-                        <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                        <div class="price">$86.00</div>
-                    </div>
-                </div>
+                <!-- 销售排行榜 -->
+                <div ms-include-src="'./public/hotPets-left.html'"></div>
             </div>
             <!-- END SIDEBAR -->
 
@@ -128,7 +110,7 @@
                             </div>
                             <h3><a href="javascript:;" ms-click="showItem(el.code)">{{el.name}}</a></h3>
                             <div class="pi-price">￥{{el.price}}</div>
-                            <a href="javascript:;" class="btn btn-default add2cart">加入购物车</a>
+                            <a href="javascript:;" ms-click="addToCart(el.code)" class="btn btn-default add2cart">加入购物车</a>
                         </div>
                     </div>
                     <!-- PRODUCT ITEM END -->
@@ -239,6 +221,19 @@
             //查看详情
             showItem: function (code) {
                 window.location.href = 'item.html?code=' + code;
+            },
+            //加入购物车
+            addToCart: function (code) {
+                $.ajax({
+                    url: "/pet/front/cart/add?code=" + code,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.success) {
+                            window.location.href = "cart-success.html";
+                        }
+                    }
+                });
             },
             //遍历之后的回调
             layoutInit: function () {

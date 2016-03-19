@@ -64,18 +64,18 @@
 
                 <div class="top-cart-content-wrapper">
                     <div class="top-cart-content">
-                        <ul class="scroller" style="height: 250px;">
+                        <ul class="scroller" style="height: auto;">
                             <li ms-repeat="cart.cartItems">
-                                <a href="shop-item.html"><img ms-attr-src="$val.pet.image.split(',')[0]" width="37" height="34"></a>
+                                <a ms-attr-href="item.html?code={{$val.pet.code}}"><img ms-attr-src="$val.pet.image.split(',')[0]" width="37" height="34"></a>
                                 <span class="cart-content-count">x {{$val.quantity}}</span>
-                                <strong><a href="javascript:;" ms-click="showItem($val.pet.code)">{{$val.pet.name}}</a></strong>
+                                <strong><a ms-attr-href="item.html?code={{$val.pet.code}}">{{$val.pet.name}}</a></strong>
                                 <em>￥{{$val.pet.price * $val.quantity}}</em>
                                 <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
                             </li>
                         </ul>
                         <div class="text-right">
                             <a href="cart.html" class="btn btn-default">查看购物车</a>
-                            <a href="shop-checkout.html" class="btn btn-primary">Checkout</a>
+                            <a ms-if="user == null" href="login.html" class="btn btn-primary">登录</a>
                         </div>
                     </div>
                 </div>
@@ -162,10 +162,6 @@
                         vm.animals = result;
                     }
                 });
-            },
-            //跳转到商品详情
-            showItem: function(code){
-                window.location.href = 'item.html?code='+code;
             },
             //跳转到搜索
             search: function(){

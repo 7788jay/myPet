@@ -308,7 +308,7 @@ var Layout = function () {
             handleSidebarMenu();
             handleAccordions();
             handleMenu();
-            handleScrollers();
+            //handleScrollers();
             handleSubMenuExt();
             handleMobiToggler();
         },

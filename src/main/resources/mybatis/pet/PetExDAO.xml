@@ -78,5 +78,21 @@
 			</if>
 		</trim>
 	</select>
+
+	<!--查询销量高的宠物-->
+	<select id="queryPetOrderSum" resultType="cn.pet.lin.domain.pet.PetEx">
+		SELECT
+			pp.*, sum(oi.quantity) AS orderSum
+		FROM
+			order_item oi
+		LEFT JOIN pet_pet pp ON oi.petCode = pp.code
+		GROUP BY
+			oi.petCode
+		ORDER BY
+			sum(oi.quantity) DESC
+		<if test="offset != null">
+			limit ${offset}, ${rows}
+		</if>
+	</select>
 	
 </mapper>

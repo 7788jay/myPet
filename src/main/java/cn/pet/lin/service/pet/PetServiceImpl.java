@@ -17,6 +17,7 @@ package cn.pet.lin.service.pet;
 
 import cn.pet.lin.dao.pet.IPetDAO;
 import cn.pet.lin.domain.pet.Pet;
+import cn.pet.lin.domain.pet.PetEx;
 import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,11 @@ public class PetServiceImpl extends AbstractBaseService<IPetDAO, Pet> implements
     @Override
     public int countEx(Map<String, Object> condition) {
         return petDAO.countEx(condition);
+    }
+
+    @Override
+    public List<PetEx> queryPetOrderSum(int offset, int rows) {
+        return petDAO.queryPetOrderSum(offset,rows);
     }
 
 //    @Override

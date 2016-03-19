@@ -17,6 +17,7 @@ package cn.pet.lin.dao.pet;
 
 import cn.pet.lin.dao.IBaseDAO;
 import cn.pet.lin.domain.pet.Pet;
+import cn.pet.lin.domain.pet.PetEx;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -47,4 +48,14 @@ public interface IPetDAO extends IBaseDAO<Pet> {
      * @return
      */
     int countEx(@Param("condition") Map<String, Object> condition);
+
+    /**
+     * 查询销量高的宠物
+     *
+     * @param offset
+     * @param rows
+     * @return
+     */
+    List<PetEx> queryPetOrderSum(@Param("offset") int offset, @Param("rows") int rows);
+
 }

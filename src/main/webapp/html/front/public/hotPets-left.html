@@ -1,0 +1,39 @@
+<div class="sidebar-products clearfix" ms-important="hotPets" id="hotPets">
+    <h2>销售排行榜</h2>
+    <div class="item" ms-repeat="hotPets">
+        <a ms-attr-href="item.html?code={{el.code}}">
+            <img ms-attr-src="el.image" class="img-responsive" ms-attr-alt="el.name" />
+        </a>
+        <h3><a ms-attr-href="item.html?code={{el.code}}">{{el.name}}</a></h3>
+        <div class="price">￥{{el.price}}</div>
+        <div style="margin-left: 80px;font-size: 10px;">共售出 {{el.orderSum}} 只</div>
+    </div>
+</div>
+<!--脚本区-->
+<script>
+    var hotPets = avalon.define({
+        $id: "hotPets",
+        hotPets: [],   //销量高
+        //初始化
+        init: function(){
+            //获取最热宠物
+            $.ajax({
+                url: "/pet/front/petList/getHotPets",
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    result.forEach(function(el){
+                        el.image = el.image.split(",")[0];
+                    });
+                    hotPets.hotPets = result;
+                }
+            });
+        },
+        //显示单个
+        showItem: function(code){
+            window.location.href = 'item.html?code='+code;
+        }
+    });
+    avalon.scan($('#hotPets')[0],hotPets);
+    hotPets.init();
+</script>
