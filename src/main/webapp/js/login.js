@@ -49,7 +49,8 @@ avalon.ready(function () {
         },
         //注册
         register: function(){
-            window.location = "/register.html";
+            console.log(1)
+            window.location.href = "/register.html";
         }
     });
 

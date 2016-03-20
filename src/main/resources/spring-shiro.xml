@@ -37,12 +37,14 @@
         <property name="filterChainDefinitions">
             <value>
                 /login.html=anon
+                /register.html=anon
                 /assets/**=anon
                 /css/**=anon
                 /js/**=anon
                 /libs/**=anon
                 /images/**=anon
                 /admin/login=anon
+                /admin/user/user/register=anon
                 /logout=logout
                 /**=authc
             </value>

@@ -55,8 +55,9 @@ avalon.ready(function () {
                 success: function (res) {
                     if (res.success) {
                         sessionStorage.setItem("isLoad", true);
-                        layer.alert("注册成功,请登录！");
-                        window.location = "/login.html";
+                        layer.alert("注册成功,请登录！",function(){
+                            window.location = "/login.html";
+                        });
                     } else {
                         layer.alert(res.msg);
                     }
@@ -69,7 +70,7 @@ avalon.ready(function () {
         },
         //登录
         login: function(){
-            window.location = "/login.html";
+            window.location.href = "/login.html";
         }
     });
 
