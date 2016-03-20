@@ -56,7 +56,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        var vm = avalon.define({
+        var listOrders = avalon.define({
             $id: "listOrders",
             data: [],
 
@@ -67,12 +67,12 @@
                     type: "GET",
                     dataType: "json",
                     success: function (result) {
-                        vm.data = result.rows;
+                        listOrders.data = result.rows;
                     }
                 });
             }
         });
-        avalon.scan($('#listOrders')[0],vm);
-        vm.init();
+        avalon.scan($('#listOrders')[0],listOrders);
+        listOrders.init();
     });
 </script>

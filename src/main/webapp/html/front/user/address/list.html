@@ -28,7 +28,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        var vm = avalon.define({
+        var listAddress = avalon.define({
             $id: "listAddress",
             data: [],
 
@@ -39,7 +39,7 @@
                     type: "GET",
                     dataType: "json",
                     success: function (result) {
-                        vm.data = result;
+                        listAddress.data = result;
                     }
                 });
             },
@@ -47,7 +47,7 @@
                 Layout.openDialog("/user/address/add.html", {}, "添加收货地址", '700px', '510Px', function(){})
             }
         });
-        avalon.scan($('#listAddress')[0],vm);
-        vm.init();
+        avalon.scan($('#listAddress')[0],listAddress);
+        listAddress.init();
     });
 </script>

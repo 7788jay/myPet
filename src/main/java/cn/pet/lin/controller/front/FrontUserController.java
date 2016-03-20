@@ -37,6 +37,10 @@ public class FrontUserController {
         return new ResultDTO(true, "添加成功！");
     }
 
+    /**
+     * 查询地址
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "queryAllAddress")
     public List<Delivery> queryAllAddress() {
@@ -50,12 +54,16 @@ public class FrontUserController {
      * 更新用户信息
      *
      * @param user
+     * @param originPassword 原密码
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/update")
-    public ResultDTO update(User user) {
+    public ResultDTO update(User user,String originPassword) {
         User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
+        if(!originPassword.equals(currentUser.getPassword())){
+            return new ResultDTO(false,"原密码错误，请重试！");
+        }
         User queryUser = userService.fetch(currentUser.getId());
         queryUser.setUserName(user.getUserName());
         queryUser.setPassword(user.getPassword());

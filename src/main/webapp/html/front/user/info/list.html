@@ -21,7 +21,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        var vm = avalon.define({
+        var listUser = avalon.define({
             $id: "listUser",
             user: {},
 
@@ -32,15 +32,15 @@
                     type: "GET",
                     dataType: "json",
                     success: function (result) {
-                        vm.user = result;
+                        listUser.user = result;
                     }
                 });
             },
             editUser: function(){
-                Layout.openDialog("/user/info/add.html", {}, "修改用户信息", '700px', '510Px', function(){})
+                Layout.openDialog("/user/info/edit.html", {}, "修改用户信息", '700px', '550Px', function(){})
             }
         });
-        avalon.scan($('#listUser')[0],vm);
-        vm.init();
+        avalon.scan($('#listUser')[0],listUser);
+        listUser.init();
     });
 </script>

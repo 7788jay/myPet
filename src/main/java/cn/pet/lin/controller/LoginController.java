@@ -42,6 +42,9 @@ public class LoginController {
         String msg = "";
         //获取登陆后的相应用户信息
         user = (User) SecurityUtils.getSubject().getPrincipal();
+        if(user.getLocked() == 1){
+            return new ResultDTO(false,"账号已锁定，请联系管理员！");
+        }
         if(user.getUserType() == 1){
             //跳转到管理平台
             msg = "/html/admin/index.html";

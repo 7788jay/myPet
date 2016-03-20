@@ -55,6 +55,8 @@
             <td>
                 <input type="button" value="修改" ms-click="edit(pageNo,el.id)"/>
                 <input type="button" value="删除" ms-click="deleteOne(pageNo,el.id)"/>
+                <input ms-if="!el.locked" type="button" value="锁定" ms-click="lock(pageNo,el.id,el.locked)"/>
+                <input ms-if="el.locked" type="button" value="解锁" ms-click="lock(pageNo,el.id,el.locked)"/>
         </tr>
     </table>
     <div class="page_num"><a ms-class="disabled:pageNo===1" ms-click="selectPage(-9999)">首页</a> <a
@@ -236,6 +238,27 @@
                                     layer.alert("删除成功！");
                                 }else {
                                     layer.alert("删除失败！");
+                                }
+                            }
+                        });
+                    });
+                },
+                //锁定及解锁
+                lock: function (pageNum, id,locked) {
+                    var msg = locked == 0?"锁定":"解锁";
+                    layer.confirm('确定要'+msg+'该用户？', function (index) {
+                        $.ajax({
+                            url: "/admin/user/user/lock?id="+id,
+                            type: "GET",
+                            dataType: "json",
+                            complete: function () {
+                                vm.query(pageNum);
+                            },
+                            success: function (result) {
+                                if (result.success) {
+                                    layer.alert(msg+"成功！");
+                                }else {
+                                    layer.alert(msg+"失败！");
                                 }
                             }
                         });

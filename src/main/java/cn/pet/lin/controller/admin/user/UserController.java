@@ -126,6 +126,22 @@ public class UserController {
         userService.deleteByIds(Arrays.asList(ids));
         return new ResultDTO(true, "删除成功！");
     }
+    /**
+     * 锁定或解锁
+     *
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/lock")
+    public ResultDTO lock(Integer id) {
+        //根据id获取用户信息
+        User queryUser = userService.fetch(id);
+        int lock = queryUser.getLocked() == 0 ? 1 : 0;
+        queryUser.setLocked(lock);
+        userService.update(queryUser);
+        return new ResultDTO(true, "修改成功！");
+    }
 
     /**
      * 注册用户

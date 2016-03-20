@@ -64,6 +64,8 @@ public class PetOrderController {
             itemService.insert(item);
         }
         ordersService.insert(orders);
+        //清空购物车
+        session.setAttribute("cart",new Cart());
         return new ResultDTO(true, "创建成功！");
     }
 
