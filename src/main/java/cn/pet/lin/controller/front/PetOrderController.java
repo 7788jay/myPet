@@ -36,6 +36,12 @@ public class PetOrderController {
     @Autowired
     IItemService itemService;
 
+    /**
+     * 创建订单
+     * @param orders
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/createOrder")
     public ResultDTO createOrder(Orders orders, HttpSession session) {
@@ -66,7 +72,7 @@ public class PetOrderController {
         ordersService.insert(orders);
         //清空购物车
         session.setAttribute("cart",new Cart());
-        return new ResultDTO(true, "创建成功！");
+        return new ResultDTO(true, "订单创建成功！",orders.getCode());
     }
 
     /**
@@ -88,5 +94,19 @@ public class PetOrderController {
         }
         int record = ordersService.countEx(param.toMap());
         return PageUtils.toBizData4Page(orderExs,PageNo,PageSize,record);
+    }
+
+    /**
+     * 支付
+     * @param orderCode
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updatePayTime")
+    public ResultDTO updatePayTime(String orderCode){
+        Orders orders = ordersService.findOne(OrdersParam.F_Code,orderCode);
+        orders.setPayTime(System.currentTimeMillis());
+        ordersService.update(orders);
+        return new ResultDTO(true,"支付成功！");
     }
 }

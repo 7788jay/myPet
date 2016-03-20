@@ -70,7 +70,7 @@
                                 <span class="cart-content-count">x {{$val.quantity}}</span>
                                 <strong><a ms-attr-href="item.html?code={{$val.pet.code}}">{{$val.pet.name}}</a></strong>
                                 <em>￥{{$val.pet.price * $val.quantity}}</em>
-                                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
+                                <a href="javascript:void(0);" class="del-goods" ms-click="remove($val.pet.code)">&nbsp;</a>
                             </li>
                         </ul>
                         <div class="text-right">
@@ -160,6 +160,17 @@
                     dataType: "json",
                     success: function (result) {
                         vm.animals = result;
+                    }
+                });
+            },
+            //移出购物车
+            remove: function(code){
+                $.ajax({
+                    url: "/pet/front/cart/remove?code="+code,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        vm.cart = result;
                     }
                 });
             },

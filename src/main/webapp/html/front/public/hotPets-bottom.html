@@ -1,7 +1,7 @@
 <div class="col-md-12 col-sm-12" ms-controller="hotPets" id="hotPets">
     <h2>热销商品</h2>
     <div class="owl-carousel owl-carousel4">
-        <div ms-repeat="hotPets" data-repeat-rendered="layoutInit">
+        <div ms-repeat="hotPets">
             <div class="product-item">
                 <div class="pi-img-wrapper">
                     <img ms-attr-src="el.image" class="img-responsive" ms-attr-alt="el.name" style="height: 280px;"/>
@@ -19,46 +19,41 @@
 </div>
 
 <!--脚本区-->
-<script>
-    var hotPets = avalon.define({
-        $id: "hotPets",
-        hotPets: [],   //销量高
-        //初始化
-        init: function () {
-            //获取最热宠物
-            $.ajax({
-                url: "/pet/front/petList/getHotPets",
-                type: "GET",
-                dataType: "json",
-                success: function (result) {
-                    result.forEach(function (el) {
-                        el.image = el.image.split(",")[0];
-                    });
-                    hotPets.hotPets = result;
-                }
-            });
-        },
-        //回调渲染界面
-        layoutInit: function () {
-            Layout.init();
-            Layout.initOWL();
-            Layout.initImageZoom();
-            Layout.initTouchspin();
-        },
-        //加入购物车
-        addToCart: function (code) {
-            $.ajax({
-                url: "/pet/front/cart/add?code=" + code,
-                type: "GET",
-                dataType: "json",
-                success: function (result) {
-                    if (result.success) {
-                        window.location.href = "cart-success.html";
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var hotPets = avalon.define({
+            $id: "hotPets",
+            hotPets: [],   //销量高
+            //初始化
+            init: function () {
+                //获取最热宠物
+                $.ajax({
+                    url: "/pet/front/petList/getHotPets",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        result.forEach(function (el) {
+                            el.image = el.image.split(",")[0];
+                        });
+                        hotPets.hotPets = result;
                     }
-                }
-            });
-        }
+                });
+            },
+            //加入购物车
+            addToCart: function (code) {
+                $.ajax({
+                    url: "/pet/front/cart/add?code=" + code,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.success) {
+                            window.location.href = "cart-success.html";
+                        }
+                    }
+                });
+            }
+        });
+        avalon.scan($('#hotPets')[0], hotPets);
+        hotPets.init();
     });
-    avalon.scan($('#hotPets')[0], hotPets);
-    hotPets.init();
 </script>

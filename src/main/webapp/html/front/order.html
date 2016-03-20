@@ -204,13 +204,30 @@
             },
             //提交订单
             createOrder: function () {
+                if(vm.address.length < 1){
+                    layer.alert("请添加收货地址！");
+                    return;
+                }
                 $.ajax({
                     url: "/pet/front/order/createOrder",
                     type: "POST",
                     data: $('#order-form').serializeArray(),
                     dataType: "json",
                     success: function (result) {
-                        layer.alert(result.msg);
+                        if(result.success){
+                            var payType = $("input[name='payType']:checked").val();
+                            var orderCode = result.value;
+                            avalon.log(payType,orderCode);
+                            layer.alert(result.msg,function(index){
+                                layer.close(index);
+                                window.location.href = "order-success.html?payType="+payType+"&orderCode="+orderCode;
+                            });
+                        }else{
+                            layer.alert(result.msg,function(index) {
+                                window.location.href = 'cart.html';
+                            });
+                        }
+
                     }
                 });
             },
