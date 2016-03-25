@@ -31,16 +31,16 @@ public class UserController {
      * 查询用户分页
      *
      * @param param
-     * @param PageNo
+     * @param pageNo
      * @param PageSize
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/queryPage")
-    public BizData4Page<User> queryPage(UserParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10") int PageSize) {
-        List<User> users = userService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY), (PageNo - 1) * PageSize, PageSize);
-        int record = userService.count(param.toSearchFieldMap());
-        return PageUtils.toBizData4Page(users, PageNo, PageSize, record);
+    public BizData4Page<User> queryPage(UserParam param, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10") int PageSize) {
+        List<User> users = userService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY), (pageNo - 1) * PageSize, PageSize);
+        int record = userService.count(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY));
+        return PageUtils.toBizData4Page(users, pageNo, PageSize, record);
     }
 
     /**

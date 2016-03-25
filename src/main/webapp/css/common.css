@@ -23,14 +23,6 @@ div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, b
 #welcome .hello h3{ font-size:32px; height:60px; line-height:32px;font-weight:normal;}
 #welcome .hello li{ width:370px; height:175px; float:left; margin:0 70px 50px 0;}
 #welcome .hello li a{ width:370px; height:175px; display:block;}
-#welcome .hello li .a1{ background:url(../images/wel_1.png) no-repeat;}
-#welcome .hello li .a1:hover{ background:url(../images/wel_1.png) no-repeat -370px 0;}
-#welcome .hello li .a2{ background:url(../images/wel_2.png) no-repeat;}
-#welcome .hello li .a2:hover{ background:url(../images/wel_2.png) no-repeat -370px 0;}
-#welcome .hello li .a3{ background:url(../images/wel_3.png) no-repeat;}
-#welcome .hello li .a3:hover{ background:url(../images/wel_3.png) no-repeat -370px 0;}
-#welcome .hello li .a4{ background:url(../images/wel_4.png) no-repeat;}
-#welcome .hello li .a4:hover{ background:url(../images/wel_4.png) no-repeat -370px 0;}
 #welcome .copy{ width:100%; height:20px; line-height:20px; padding:30px 0; font-size:14px; color:#999; clear:both;}
 
 /**表格**/
@@ -47,8 +39,6 @@ div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, b
 .search input:hover[type="submit"]{background:#4F99C6;}
 .search .s_box{ width:180px; height:26px; border:1px solid #ccc; background:#eee; overflow:hidden; float:left; top:0; left:0; text-align:left; margin:0 15px 8px;}
 .search .s_box .txt{ width:144px; height:26px; line-height:26px; border:0; background:#eee; padding:0 5px; margin:0;}
-.search .s_box .choose{ width:26px; height:26px; border:0; background:url(../images/choose.png); float:left;}
-.search .s_box .choose:hover{ background:url(../images/choose.png) #e2e2e2;}
 .search .search-label{ width:auto; height:28px; }
 .search .search-label b{  color:#444; float:left}
 .search .search-label h3{ float:left; text-align:right; color:#444; padding:0 10px;}
@@ -153,8 +143,6 @@ div.form .remark{ text-align:left; padding:20px;}
 
 .table_1 td .mul{ width:100px; height:26px; display:inline-block; position:relative;}
 .table_1 td .mul input{ width:92px; height:24px; background:#f5f5f5; border:1px solid #ccc; border-radius:3px; padding:0 3px;}
-.table_1 td .mul em{ width:22px; height:22px; display:block; background:url(../images/mul.png) no-repeat; position:absolute; top:4px; right:2px;}
-.table_1 td .mul em:hover{ background:url(../images/mul.png) no-repeat #ddd;}
 .table_1 td .now{ width:auto; height:26px; display:inline-block; margin:0 0 0 15px;}
 .table_1 td .head_photo{ width:120px; height:120px; padding:2px; border:1px solid #8095AA;}
 
@@ -170,8 +158,6 @@ div.form .remark{ text-align:left; padding:20px;}
 .table_3 td.work{ height:60px; padding:30px 0 10px; position:relative; color:#069;}
 .table_3 td .day{ width:100%; height:30px; line-height:36px; position:absolute; top:0; left:0; font-size:14px; text-align:left; text-indent:15px; color:#999;}
 .table_3 td .day span{ font-weight:bold; color:#2e6589; margin:0 5px;}
-.table_3 td .day a{ width:20px; height:20px; display:block; background:url(../images/edit_1.png) no-repeat 0 0; cursor:default; position:absolute; top:10px; right:10px;}
-.table_3 td .day a:hover{ background:url(../images/edit_1.png) no-repeat -20px 0;}
 
 .table_0{ border:0;}
 .table_0 th{ border:0; border-bottom:1px dotted #ccc; background:none; padding:3px 10px; font-weight:normal;}
@@ -209,8 +195,6 @@ div.form .remark{ text-align:left; padding:20px;}
 .l_search ul li{ padding:0}
 .l_search ul li p a:hover{ background:#fcf2c1;display:block;}
 a.class_tb{ height:25px; display:block; color:#222;}
-.op-class{ background:url(../images/ico_add_jt_down.png) 0 center no-repeat; padding-left:15px; }
-.op-classed{ background:url(../images/ico_add_jt_r.png) 0 center no-repeat; padding-left:15px; }
 .l_search ul li p a span{ color:#999; display:block; padding-left:10px;}
 a.p_l{ padding-left:40px;}
 a.p_2{ padding-left:20px;}

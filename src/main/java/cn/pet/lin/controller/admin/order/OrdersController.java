@@ -32,16 +32,16 @@ public class OrdersController {
     /**
      * 分页查询订单
      * @param param
-     * @param PageNo
+     * @param pageNo
      * @param PageSize
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/queryPage")
-    public BizData4Page<OrdersEx> queryPage(OrdersParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10")int PageSize) {
-        List<OrdersEx> orders = ordersService.queryPageEx(param.toMap(),(PageNo-1)*PageSize,PageSize,param.F_CreateTime, SqlOrderEnum.DESC.getAction());
+    public BizData4Page<OrdersEx> queryPage(OrdersParam param, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10")int PageSize) {
+        List<OrdersEx> orders = ordersService.queryPageEx(param.toMap(),(pageNo-1)*PageSize,PageSize,param.F_CreateTime, SqlOrderEnum.DESC.getAction());
         int record = ordersService.count(param.toSearchFieldMap());
-        return PageUtils.toBizData4Page(orders,PageNo,PageSize,record);
+        return PageUtils.toBizData4Page(orders,pageNo,PageSize,record);
     }
 
     /**

@@ -33,3 +33,6 @@
     margin: 5px 1px 1px;
     cursor: pointer;
 }
+.upload_pic td{
+    border: none;
+}

@@ -35,16 +35,16 @@ public class AnimalController {
     /**
      * 查询物种分页
      * @param param
-     * @param PageNo
+     * @param pageNo
      * @param PageSize
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/queryPage")
-    public BizData4Page<Animal> queryPage(AnimalParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10")int PageSize) {
-        List<Animal> animals = animalService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY),(PageNo-1)*PageSize,PageSize);
-        int record = animalService.count(param.toSearchFieldMap());
-        return PageUtils.toBizData4Page(animals,PageNo,PageSize,record);
+    public BizData4Page<Animal> queryPage(AnimalParam param, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10")int PageSize) {
+        List<Animal> animals = animalService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY),(pageNo-1)*PageSize,PageSize);
+        int record = animalService.count(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY));
+        return PageUtils.toBizData4Page(animals,pageNo,PageSize,record);
     }
 
     /**

@@ -32,16 +32,16 @@ public class CategoryController {
     /**
      * 查询宠物分类分页
      * @param param
-     * @param PageNo
+     * @param pageNo
      * @param PageSize
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/queryPage")
-    public BizData4Page<Category> queryPage(CategoryParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "10")int PageSize) {
-        List<Category> animals = categoryService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY),(PageNo-1)*PageSize,PageSize);
-        int record = categoryService.count(param.toSearchFieldMap());
-        return PageUtils.toBizData4Page(animals,PageNo,PageSize,record);
+    public BizData4Page<Category> queryPage(CategoryParam param, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10")int PageSize) {
+        List<Category> animals = categoryService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY),(pageNo-1)*PageSize,PageSize);
+        int record = categoryService.count(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY));
+        return PageUtils.toBizData4Page(animals,pageNo,PageSize,record);
     }
 
     /**
