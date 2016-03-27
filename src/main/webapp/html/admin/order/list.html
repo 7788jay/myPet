@@ -33,7 +33,7 @@
             <th width="10%">会员名</th>
             <th width="10%">支付类型</th>
             <th width="10%">支付时间</th>
-            <th width="10%">配送类型</th>
+            <!--<th width="10%">配送类型</th>-->
             <th width="10%">总价</th>
             <th width="10%">订单状态</th>
             <th width="10%">创建时间</th>
@@ -44,8 +44,8 @@
                 <input type="checkbox" ms-duplex-checked="el.checked" data-duplex-changed="checkOne" ms-attr-disabled="el.status===0"/>
             </td>
             <td>{{el.userName}}</td>
-            <td>{{el.payType | payTypeFilter}}</td>
-            <td>{{el.payTime}}</td>
+            <!--<td>{{el.payType | payTypeFilter}}</td>-->
+            <td>{{el.payTime | date}}</td>
             <td>{{el.deliveryType}}</td>
             <td>￥{{el.totalPrice}}</td>
             <td>{{el.status | OrderStatusFilter}}</td>

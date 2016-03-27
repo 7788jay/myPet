@@ -23,27 +23,41 @@ import java.io.PrintWriter;
 @RequestMapping("/common/upload")
 public class UploadController {
 
+    /**
+     * webUpload图片上传
+     * @param request
+     * @param file
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/img")
     public ResultDTO img(HttpServletRequest request, @RequestParam(value = "file", required = true) MultipartFile file) {
         int width = 100;
         try {
+            //读取图片信息
             BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
             width = bufferedImage.getWidth();
             System.out.println(file.getOriginalFilename());
-            String sep = System.getProperty("file.separator");
+            //设置上传的文件夹
             String uploadDir = request.getServletContext().getRealPath("/") + "upload";
             File dirPath = new File(uploadDir);
             if (!dirPath.exists()) {
                 dirPath.mkdirs();
             }
-            File uploadedFile = new File(uploadDir + sep + file.getOriginalFilename());
+            File uploadedFile = new File(uploadDir + File.separator + file.getOriginalFilename());
             FileCopyUtils.copy(file.getBytes(), uploadedFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return new ResultDTO(true, "/upload/" + file.getOriginalFilename(),width);
     }
+
+    /**
+     * 编辑器图片上传
+     * @param request
+     * @param response
+     * @param file
+     */
     @ResponseBody
     @RequestMapping(value = "/editorImg")
     public void editorImg(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "wangEditorH5File", required = true) MultipartFile file) {

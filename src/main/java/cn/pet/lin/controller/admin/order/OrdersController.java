@@ -57,8 +57,8 @@ public class OrdersController {
 
         //查询订单项信息
         List<ItemEx> itemExs = itemService.queryByOrderCode(orderCode);
+        //封装订单项信息到订单中
         ordersEx.setItemExs(itemExs);
-
         return ordersEx;
     }
 

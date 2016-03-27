@@ -49,6 +49,13 @@ body {
   padding-left:60px;
   color:#FFFFFF;
 }
+.form-signin input[type="phone"] {
+    margin-bottom: 14px;
+    border-radius: 0;
+    background: url(../images/login_phone.png) 0 0 #bdbdbd no-repeat;
+    padding-left:60px;
+    color:#FFFFFF;
+}
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-radius: 0;

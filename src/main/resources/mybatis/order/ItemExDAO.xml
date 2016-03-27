@@ -10,7 +10,9 @@
         <result property="name" column="pet_name"/>
         <result property="image" column="image"/>
         <result property="weight" column="weight"/>
-        <result property="life" column="life"/>
+        <result property="age" column="age"/>
+        <result property="sex" column="sex"/>
+        <result property="quantity" column="quantity"/>
         <result property="price" column="price"/>
         <result property="description" column="description"/>
         <result property="createTime" column="createTime"/>
@@ -41,7 +43,9 @@
 			pp.name AS pet_name,
 			pp.image,
 			pp.weight,
-			pp.life,
+			pp.age,
+			pp.sex,
+			pp.quantity,
 			pp.price,
 			pp.description,
 			pp.createTime,

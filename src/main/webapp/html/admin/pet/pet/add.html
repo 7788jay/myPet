@@ -121,12 +121,7 @@
             '|',
             'fullscreen'
         ];
-        editor.create();
-    });
-</script>
-<script type="text/javascript">
-    var uploadLimit = 4;
-    $(function () {
+        //图片上传
         var uploader = WebUploader.create({
             // swf文件路径
             swf: '/libs/webuploader/Uploader.swf',
@@ -169,9 +164,9 @@
             },
             messages: {
                 name: {required: "必填"},
-                weight: {required: "必填",number:"请填入数据"},
-                life: {required: "必填",number:"请填入数据"},
-                price: {required: "必填",number:"请填入数据"}
+                weight: {required: "必填",number:"请填入数字"},
+                life: {required: "必填",number:"请填入数字"},
+                price: {required: "必填",number:"请填入数字"}
             },
             errorPlacement: errorPlacement,
             success: "valid"
@@ -196,7 +191,9 @@
                         vm.animalCode = result[0].code;
                         vm.queryCategory();
                     }
-                })
+                });
+                //创建富文本编辑器
+                editor.create();
             },
             queryCategory:function(){
                 $.ajax({

@@ -14,14 +14,17 @@
 			<if test="condition.weight!=null">
 				AND weight = #{condition.weight}
 			</if>
-			<if test="condition.life!=null">
-				AND life = #{condition.life}
+			<if test="condition.sex!=null">
+				AND sex = #{condition.sex}
+			</if>
+			<if test="condition.age!=null">
+				AND age = #{condition.age}
 			</if>
 			<if test="condition.startLife!=null and condition.startLife!=''">
-				AND life &gt; #{condition.startLife}
+				AND age &gt; #{condition.startLife}
 			</if>
 			<if test="condition.endLife!=null and condition.endLife!=''">
-				AND life &lt; #{condition.endLife}
+				AND age &lt; #{condition.endLife}
 			</if>
 			<if test="condition.price!=null">
 				AND price = #{condition.price}
@@ -31,6 +34,9 @@
 			</if>
 			<if test="condition.endPrice!=null and condition.endPrice!=''">
 				AND price &lt; #{condition.endPrice}
+			</if>
+			<if test="condition.quantity!=null">
+				AND quantity = #{condition.quantity}
 			</if>
 			<if test="condition.categoryCode!=null">
 				AND categoryCode = #{condition.categoryCode}
@@ -55,14 +61,17 @@
 			<if test="condition.weight!=null">
 				AND weight = #{condition.weight}
 			</if>
-			<if test="condition.life!=null">
-				AND life = #{condition.life}
+			<if test="condition.sex!=null">
+				AND sex = #{condition.sex}
+			</if>
+			<if test="condition.age!=null">
+				AND age = #{condition.age}
 			</if>
 			<if test="condition.startLife!=null and condition.startLife!=''">
-				AND life &gt; #{condition.startLife}
+				AND age &gt; #{condition.startLife}
 			</if>
 			<if test="condition.endLife!=null and condition.endLife!=''">
-				AND life &lt; #{condition.endLife}
+				AND age &lt; #{condition.endLife}
 			</if>
 			<if test="condition.price!=null">
 				AND price = #{condition.price}
@@ -72,6 +81,9 @@
 			</if>
 			<if test="condition.endPrice!=null and condition.endPrice!=''">
 				AND price &lt; #{condition.endPrice}
+			</if>
+			<if test="condition.quantity!=null">
+				AND quantity = #{condition.quantity}
 			</if>
 			<if test="condition.categoryCode!=null">
 				AND categoryCode = #{condition.categoryCode}

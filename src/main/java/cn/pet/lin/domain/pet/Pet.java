@@ -1,27 +1,25 @@
 /*
 {*****************************************************************************
 {  宠物商店 v1.0																		
-{  模块：宠物表; InnoDB free: 10240 kB											
+{  模块：宠物表											
 {  功能描述:										
 {															
 {  ---------------------------------------------------------------------------	
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-02-14  林伟樘        新建	
+{  2016-03-27  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
 
 package cn.pet.lin.domain.pet;
 
+import cn.pet.lin.domain.BaseDomain;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import cn.pet.lin.domain.BaseDomain;
-
-import java.util.*;
 
 /**
  * 《宠物表》 实体
@@ -35,11 +33,14 @@ public class Pet extends BaseDomain<Long> {
 	private String name; //宠物名
 	private String image; //宠物图片
 	private Integer weight; //重量
-	private Integer life; //寿命
-	private Integer price; //售价
+	private Boolean sex; //性别
+	private Integer age; //年龄
 	private String description; //描述
-	private Long createTime; //创建时间
+	private Integer price; //售价
+	private Long quantity; //库存
 	private String categoryCode; //宠物分类code
+	private Long createTime; //创建时间
+	private Integer status; //状态
     
 	/**
 	 *默认空构造函数
@@ -97,28 +98,28 @@ public class Pet extends BaseDomain<Long> {
 		this.weight = weight;
 	}
 	/**
-	 * @return life 寿命
+	 * @return sex 性别
 	 */
-	public Integer getLife(){
-		return this.life;
+	public Boolean getSex(){
+		return this.sex;
 	}
 	/**
-	 * @param life 寿命
+	 * @param sex 性别
 	 */
-	public void setLife(Integer life){
-		this.life = life;
+	public void setSex(Boolean sex){
+		this.sex = sex;
 	}
 	/**
-	 * @return price 售价
+	 * @return age 年龄
 	 */
-	public Integer getPrice(){
-		return this.price;
+	public Integer getAge(){
+		return this.age;
 	}
 	/**
-	 * @param price 售价
+	 * @param age 年龄
 	 */
-	public void setPrice(Integer price){
-		this.price = price;
+	public void setAge(Integer age){
+		this.age = age;
 	}
 	/**
 	 * @return description 描述
@@ -133,16 +134,28 @@ public class Pet extends BaseDomain<Long> {
 		this.description = description;
 	}
 	/**
-	 * @return createTime 创建时间
+	 * @return price 售价
 	 */
-	public Long getCreateTime(){
-		return this.createTime;
+	public Integer getPrice(){
+		return this.price;
 	}
 	/**
-	 * @param createTime 创建时间
+	 * @param price 售价
 	 */
-	public void setCreateTime(Long createTime){
-		this.createTime = createTime;
+	public void setPrice(Integer price){
+		this.price = price;
+	}
+	/**
+	 * @return quantity 库存
+	 */
+	public Long getQuantity(){
+		return this.quantity;
+	}
+	/**
+	 * @param quantity 库存
+	 */
+	public void setQuantity(Long quantity){
+		this.quantity = quantity;
 	}
 	/**
 	 * @return categoryCode 宠物分类code
@@ -156,6 +169,30 @@ public class Pet extends BaseDomain<Long> {
 	public void setCategoryCode(String categoryCode){
 		this.categoryCode = categoryCode;
 	}
+	/**
+	 * @return createTime 创建时间
+	 */
+	public Long getCreateTime(){
+		return this.createTime;
+	}
+	/**
+	 * @param createTime 创建时间
+	 */
+	public void setCreateTime(Long createTime){
+		this.createTime = createTime;
+	}
+	/**
+	 * @return status 状态
+	 */
+	public Integer getStatus(){
+		return this.status;
+	}
+	/**
+	 * @param status 状态
+	 */
+	public void setStatus(Integer status){
+		this.status = status;
+	}
 	
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -164,11 +201,14 @@ public class Pet extends BaseDomain<Long> {
 			.append("name",getName())
 			.append("image",getImage())
 			.append("weight",getWeight())
-			.append("life",getLife())
-			.append("price",getPrice())
+			.append("sex",getSex())
+			.append("age",getAge())
 			.append("description",getDescription())
-			.append("createTime",getCreateTime())
+			.append("price",getPrice())
+			.append("quantity",getQuantity())
 			.append("categoryCode",getCategoryCode())
+			.append("createTime",getCreateTime())
+			.append("status",getStatus())
 			.toString();
 	}
 	
@@ -179,11 +219,14 @@ public class Pet extends BaseDomain<Long> {
 			.append(getName())
 			.append(getImage())
 			.append(getWeight())
-			.append(getLife())
-			.append(getPrice())
+			.append(getSex())
+			.append(getAge())
 			.append(getDescription())
-			.append(getCreateTime())
+			.append(getPrice())
+			.append(getQuantity())
 			.append(getCategoryCode())
+			.append(getCreateTime())
+			.append(getStatus())
 			.toHashCode();
 	}
 	
