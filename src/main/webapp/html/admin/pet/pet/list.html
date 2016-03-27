@@ -46,8 +46,8 @@
                 <input type="checkbox" ms-duplex-checked="el.checked" data-duplex-changed="checkOne" ms-attr-disabled="el.status===0"/>
             </td>
             <td>{{el.name}}</td>
-            <td>{{el.weight}}KG</td>
-            <td>{{el.life}}年</td>
+            <td>{{el.weight}} KG</td>
+            <td>{{el.age}} 年</td>
             <td>￥{{el.price}}</td>
             <td>{{el.createTime | date}}</td>
             <td>
@@ -179,7 +179,7 @@
                 },
                 //添加
                 add: function () {
-                    PET_ADMIN.openDialog("/pet/pet/add.html", {}, "添加", "80%", "650px", function () {
+                    PET_ADMIN.openDialog("/pet/pet/add.html", {}, "添加", "80%", "600px", function () {
                         vm.clear();    //重置
                     });
                 },

@@ -16,39 +16,47 @@
                 <table class="table_1" cellpadding="0" cellspacing="0">
                     <tr>
                         <th width="10%"><span>*</span>宠物名称：</th>
-                        <td width="23%"><input type="text" name="name"/></td>
+                        <td width="15%"><input type="text" name="name"/></td>
                         <th width="10%"><span>*</span>物种：</th>
-                        <td width="23%">
+                        <td width="15%">
                             <select name="animalCode" ms-change="queryCategory" ms-duplex-string="animalCode">
                                 <option ms-repeat="animals" ms-attr-value="el.code">{{el.name}}</option>
                             </select>
                         </td>
                         <th width="10%"><span>*</span> 宠物种类：</th>
-                        <td width="23%">
+                        <td width="15%">
                             <select name="categoryCode">
                                 <option ms-repeat="categories" ms-attr-value="el.code">{{el.name}}</option>
                             </select>
                         </td>
+                        <th width="10%"><span>*</span> 性别：</th>
+                        <td width="15%">
+                            <select name="sex">
+                                <option value="1">公</option>
+                                <option value="0">母</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
-                        <th width="10%"><span>*</span>重量：</th>
-                        <td width="23%"><input type="text" name="weight"/></td>
-                        <th width="10%"><span>*</span>年龄：</th>
-                        <td width="23%"><input type="text" name="life"/></td>
-                        <th width="10%"><span>*</span>价格：</th>
-                        <td width="23%"><input type="text" name="price"/></td>
+                        <th><span>*</span>重量：</th>
+                        <td><input type="text" name="weight"/>KG</td>
+                        <th><span>*</span>年龄：</th>
+                        <td><input type="text" name="age"/>年</td>
+                        <th><span>*</span>价格：</th>
+                        <td><input type="text" name="price"/>元</td>
+                        <th><span>*</span>库存：</th>
+                        <td><input type="text" name="quantity"/></td>
                     </tr>
                     <tr>
-                        <th width="10%"><span>*</span>图片：</th>
-                        <td colspan="5" height="160px">
+                        <th><span>*</span>图片：</th>
+                        <td colspan="7">
                             <input type="hidden" name="image" id="image" ms-attr-value="images"/>
                             <table class="upload_pic">
                                 <tr>
-                                    <td rowspan="2">
+                                    <td rowspan="2" style="height: 135px;">
                                         <div id="uploaderImg" ms-repeat="images">
                                             <div class="file-panel"><a href="javascript:void(0)" ms-click="removeImg($index)"></a></div>
-                                            <img style="margin-right: 5px;" width='130px' height='130px'
-                                                 ms-attr-src="el"/>
+                                            <img width='130px' height='130px' ms-attr-src="el"/>
                                         </div>
                                     </td>
                                     <td>
@@ -67,10 +75,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <th width="10%"><span>*</span>描述：</th>
-                        <td colspan="5">
-                            <div style="height: 280px" id="editor-container">
-                                <textarea id="description" name="description" style="width: 95%;height: 270px;"/>
+                        <th><span>*</span>描述：</th>
+                        <td colspan="7">
+                            <div style="height: 245px" id="editor-container">
+                                <textarea id="description" name="description" style="width: 95%;height: 235px;"/>
                             </div>
                         </td>
                     </tr>
@@ -135,7 +143,22 @@
             //验证文件总数量, 超出则不允许加入队列。
             fileNumLimit: 4,
             // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-            resize: false
+            resize: {
+                width: 500,
+                height: 800,
+                // 图片质量，只有type为`image/jpeg`的时候才有效。
+                quality: 70,
+
+                // 如果发现压缩后文件大小比原来还大，则使用原来图片
+                // 此属性可能会影响图片自动纠正功能
+                noCompressIfLarger: true
+            },
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
         });
         // 当有文件添加进来的时候
         uploader.on('fileQueued', function (file) {
@@ -159,13 +182,15 @@
             rules: {
                 name: {required: true},
                 weight: {required: true,number:true},
-                life: {required: true,number:true},
+                age: {required: true,number:true},
+                quantity: {required: true,number:true},
                 price: {required: true,number:true}
             },
             messages: {
                 name: {required: "必填"},
                 weight: {required: "必填",number:"请填入数字"},
-                life: {required: "必填",number:"请填入数字"},
+                age: {required: "必填",number:"请填入数字"},
+                quantity: {required: "必填",number:"请填入数字"},
                 price: {required: "必填",number:"请填入数字"}
             },
             errorPlacement: errorPlacement,

@@ -4,7 +4,7 @@
     height: 130px;
     background: url(/images/bg.png) no-repeat;
     text-align: center;
-    margin: 0 8px 20px 0;
+    margin: 0px 10px 0px 0;
     position: relative;
     display: inline;
     float: left;
@@ -35,4 +35,5 @@
 }
 .upload_pic td{
     border: none;
+    padding: 0px;
 }
