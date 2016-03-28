@@ -34,25 +34,29 @@
         <tr>
             <th width="5%"><input type="checkbox" ms-duplex-checked="allChecked"
                                   data-duplex-changed="checkAll"/></th>
-            <th width="20%">宠物名称</th>
-            <th width="15%">重量</th>
-            <th width="15%">年龄</th>
+            <th width="15%">宠物名称</th>
+            <th width="10%">性别</th>
+            <th width="10%">重量</th>
+            <th width="10%">年龄</th>
             <th width="10%">价格</th>
+            <th width="10%">库存</th>
             <th width="10%">创建时间</th>
-            <th width="25%">操作</th>
+            <th width="20%">操作</th>
         </tr>
         <tr ms-repeat="data">
             <td width="5%">
                 <input type="checkbox" ms-duplex-checked="el.checked" data-duplex-changed="checkOne" ms-attr-disabled="el.status===0"/>
             </td>
             <td>{{el.name}}</td>
+            <td>{{el.sex | sexFilter}}</td>
             <td>{{el.weight}} KG</td>
             <td>{{el.age}} 年</td>
             <td>￥{{el.price}}</td>
+            <td>{{el.quantity}} 只</td>
             <td>{{el.createTime | date}}</td>
             <td>
-                <input type="button" value="修改" ms-click="edit(pageNo,el.id)"/>
-                <input type="button" value="删除" ms-click="deleteOne(pageNo,el.id)"/>
+                <input type="button" value="修改" ms-click="edit(pageNo,el.code)"/>
+                <input type="button" value="下架" ms-click="deleteOne(pageNo,el.id)"/>
             </td>
         </tr>
     </table>
@@ -180,12 +184,12 @@
                 //添加
                 add: function () {
                     PET_ADMIN.openDialog("/pet/pet/add.html", {}, "添加", "80%", "600px", function () {
-                        vm.clear();    //重置
+                        vm.query(1);   //重置
                     });
                 },
                 //修改
-                edit: function (pageNum, id) {
-                    PET_ADMIN.openDialog("/app/appMenu/edit.html", {id: id}, "修改", "800px", "440px", function () {
+                edit: function (pageNum, code) {
+                    PET_ADMIN.openDialog("/pet/pet/edit.html", {code: code}, "修改", "80%", "600px", function () {
                         vm.query(pageNum);    //重置
                     });
                 },

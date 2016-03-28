@@ -8,7 +8,7 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2016-03-27  林伟樘        新建	
+{  2016-03-28  林伟樘        新建	
 { 	                                                                     
 {*****************************************************************************	
 */
@@ -33,7 +33,7 @@ public class Pet extends BaseDomain<Long> {
 	private String name; //宠物名
 	private String image; //宠物图片
 	private Integer weight; //重量
-	private Boolean sex; //性别
+	private Integer sex; //性别
 	private Integer age; //年龄
 	private String description; //描述
 	private Integer price; //售价
@@ -100,13 +100,13 @@ public class Pet extends BaseDomain<Long> {
 	/**
 	 * @return sex 性别
 	 */
-	public Boolean getSex(){
+	public Integer getSex(){
 		return this.sex;
 	}
 	/**
 	 * @param sex 性别
 	 */
-	public void setSex(Boolean sex){
+	public void setSex(Integer sex){
 		this.sex = sex;
 	}
 	/**

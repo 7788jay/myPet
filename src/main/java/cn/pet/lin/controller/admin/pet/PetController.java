@@ -4,6 +4,7 @@ import cn.pet.lin.domain.BizData4Page;
 import cn.pet.lin.domain.common.ResultDTO;
 import cn.pet.lin.domain.param.pet.PetParam;
 import cn.pet.lin.domain.pet.Pet;
+import cn.pet.lin.domain.pet.PetEx;
 import cn.pet.lin.service.pet.IPetService;
 import cn.pet.lin.utils.CommonUtils;
 import cn.pet.lin.utils.PageUtils;
@@ -78,8 +79,9 @@ public class PetController {
      */
     @ResponseBody
     @RequestMapping(value = "/queryOne")
-    public Pet queryOne(String code) {
-        return petService.findOne(PetParam.F_Code, code);
+    public PetEx queryOne(String code) {
+        PetEx petEx = (PetEx) petService.findOne(PetParam.F_Code, code);
+        return petEx;
     }
 
     /**

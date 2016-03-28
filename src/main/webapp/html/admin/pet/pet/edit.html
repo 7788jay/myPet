@@ -1,0 +1,272 @@
+<!--样式区-->
+<style>
+    .ms-controller, .ms-important, [ms-controller], [ms-important] {
+        visibility: hidden;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="/libs/wangEditor/dist/css/wangEditor.css"/>
+<link rel="stylesheet" type="text/css" href="/css/upload.css"/>
+<link rel="stylesheet" type="text/css" href="/libs/webuploader/webuploader.css"/>
+
+<!--标签区-->
+<div id="editPet" ms-important="editPet">
+    <div class="form">
+        <form id="editForm">
+            <div class=" user-edit ">
+                <table class="table_1" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th width="10%"><span>*</span>宠物名称：</th>
+                        <td width="15%"><input type="text" name="name" ms-duplex-string="data.name"/></td>
+                        <th width="10%"><span>*</span>物种：</th>
+                        <td width="15%">
+                            <select name="animalCode" ms-change="queryCategory" ms-duplex-string="animalCode">
+                                <option ms-repeat="animals" ms-attr-value="el.code">{{el.name}}</option>
+                            </select>
+                        </td>
+                        <th width="10%"><span>*</span> 宠物种类：</th>
+                        <td width="15%">
+                            <select name="categoryCode">
+                                <option ms-repeat="categories" ms-attr-value="el.code">{{el.name}}</option>
+                            </select>
+                        </td>
+                        <th width="10%"><span>*</span> 性别：</th>
+                        <td width="15%">
+                            <select name="sex" ms-duplex="data.sex">
+                                <option value="1">公</option>
+                                <option value="0">母</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>*</span>重量：</th>
+                        <td><input type="text" name="weight"/>KG</td>
+                        <th><span>*</span>年龄：</th>
+                        <td><input type="text" name="age"/>年</td>
+                        <th><span>*</span>价格：</th>
+                        <td><input type="text" name="price"/>元</td>
+                        <th><span>*</span>库存：</th>
+                        <td><input type="text" name="quantity"/></td>
+                    </tr>
+                    <tr>
+                        <th><span>*</span>图片：</th>
+                        <td colspan="7">
+                            <input type="hidden" name="image" id="image" ms-attr-value="images"/>
+                            <table class="upload_pic">
+                                <tr>
+                                    <td rowspan="2" style="height: 135px;">
+                                        <div id="uploaderImg" ms-repeat="images">
+                                            <div class="file-panel"><a href="javascript:void(0)" ms-click="removeImg($index)"></a></div>
+                                            <img width='130px' height='130px' ms-attr-src="el"/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div type="file" id="picker" name="picker">选择图片</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="uploadProgress" class="progress pos-rel progress-striped active"
+                                             data-percent="0%">
+                                            <div class="progress-bar" style="width:0%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>*</span>描述：</th>
+                        <td colspan="7">
+                            <div style="height: 245px" id="editor-container">
+                                <textarea id="description" name="description" style="width: 95%;height: 235px;"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="user-btn">
+                    <input type="button" value="保存" class="oper" ms-click="save"/>
+                    <input type="button" value="返回" class="oper" ms-click="back"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--脚本区-->
+<script type="text/javascript" src="/libs/webuploader/webuploader.js"/>
+<script type="text/javascript">
+    $(function () {
+        var editor = new wangEditor('description');
+        // 上传图片
+        editor.config.uploadImgUrl = '/common/upload/editorImg';
+        // 自定义菜单
+        editor.config.menus = [
+            'source',
+            '|',
+            'bold',
+            'underline',
+            'italic',
+            'strikethrough',
+            'eraser',
+            'forecolor',
+            'bgcolor',
+            '|',
+            'fontfamily',
+            'fontsize',
+            'head',
+            'unorderlist',
+            'orderlist',
+            'alignleft',
+            'aligncenter',
+            'alignright',
+            '|',
+            'link',
+            'unlink',
+            'table',
+            '|',
+            'img',
+            'vedio',
+            '|',
+            'fullscreen'
+        ];
+        //图片上传
+        var uploader = WebUploader.create({
+            // swf文件路径
+            swf: '/libs/webuploader/Uploader.swf',
+            // 文件接收服务端。
+            server: '/common/upload/img',
+            //设置为 true 后，不需要手动调用上传，有文件选择即开始上传。
+            auto: true,
+            method: "POST",
+            // 选择文件的按钮。可选。
+            pick: '#picker',
+            //验证文件总数量, 超出则不允许加入队列。
+            fileNumLimit: 4,
+            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: {
+                width: 500,
+                height: 800,
+                // 图片质量，只有type为`image/jpeg`的时候才有效。
+                quality: 70,
+
+                // 如果发现压缩后文件大小比原来还大，则使用原来图片
+                // 此属性可能会影响图片自动纠正功能
+                noCompressIfLarger: true
+            },
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+        // 当有文件添加进来的时候
+        uploader.on('fileQueued', function (file) {
+            $("#uploadProgress").attr("data-percent", "0%");
+            $("#uploadProgress").find(".progress-bar").css("width", "0%");
+        });
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on('uploadSuccess', function (file, res) {
+            console.log(file);
+            vm.images.push(res.msg);
+        });
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on('uploadProgress', function (file, percentage) {
+            console.log(percentage)
+            $("#uploadProgress").attr("data-percent", percentage*100+"%");
+            $("#uploadProgress").find(".progress-bar").css("width", percentage*100+"%");
+        });
+
+        //表单校验
+        var validator = $("#editForm").validate({
+            rules: {
+                name: {required: true},
+                weight: {required: true,number:true},
+                age: {required: true,number:true},
+                quantity: {required: true,number:true},
+                price: {required: true,number:true}
+            },
+            messages: {
+                name: {required: "必填"},
+                weight: {required: "必填",number:"请填入数字"},
+                age: {required: "必填",number:"请填入数字"},
+                quantity: {required: "必填",number:"请填入数字"},
+                price: {required: "必填",number:"请填入数字"}
+            },
+            errorPlacement: errorPlacement,
+            success: "valid"
+        });
+
+        var vm = avalon.define({
+            $id: "editPet",
+            animals: [],           //物种
+            animalCode: "",   //物种code
+            categories: [],            //种类
+            images: [],                //图片
+            data: {},
+            //初始化
+            init: function () {
+                vm.data.code = PET_ADMIN.getParam("code");
+                //获取宠物信息
+                $.ajax({
+                    url: "/admin/pet/pet/queryOne?code="+vm.data.code,
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (result) {
+                        vm.data = result;
+                    }
+                });
+                //获取动物种类
+                $.ajax({
+                    url: "/admin/pet/animal/queryAll",
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (result) {
+                        vm.animals = result;
+                        vm.animalCode = result[0].code;
+                        vm.queryCategory();
+                    }
+                });
+                //创建富文本编辑器
+                editor.create();
+            },
+            //查询分类
+            queryCategory:function(){
+                $.ajax({
+                    url: "/admin/pet/category/queryByAnimalCode?animalCode="+vm.animalCode,
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (result) {
+                        vm.categories = result;
+                    }
+                })
+            },
+            //保存
+            save: function () {
+                if (validator.form()) {
+                    $.ajax({
+                        url: "/admin/pet/pet/add",
+                        type: "POST",
+                        dataType: 'json',
+                        data: $("#editForm").serializeArray(),
+                        success: function (result) {
+                            if (result.success) {
+                                PET_ADMIN.closeDialog();
+                            }
+                            layer.alert(result.msg);
+                        }
+                    });
+                }
+            },
+            removeImg: function (index) {
+                vm.images.removeAt(index);
+                uploader.removeFile("WU_FILE_"+index);
+            },
+            back: function () {
+                PET_ADMIN.cancelDialog();
+            }
+        });
+        avalon.scan($("#editPet")[0], vm);
+        vm.init();
+    })
+</script>

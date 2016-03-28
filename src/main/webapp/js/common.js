@@ -15,6 +15,9 @@ avalon.filters.payTypeFilter = function (value, args, args2) {
 avalon.filters.userTypeFilter = function (value, args, args2) {
     return value == 0 ? "普通用户" : "管理员";
 }
+avalon.filters.sexFilter = function (value, args, args2) {
+    return value == 0 ? "母" : "公";
+}
 /******************************************************************
  *                    扩展方法                                  *
  **********************************************************************/

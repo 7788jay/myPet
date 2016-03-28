@@ -24,6 +24,7 @@ public class PetEx extends Pet {
 	private static final long serialVersionUID = 1L;
 
 	private int orderSum;   //销量统计
+	private String animalCode;  //物种编码
 	
 	//针对Pet实体在这里增加额外的属性和对应的get和set方法
 
@@ -33,5 +34,13 @@ public class PetEx extends Pet {
 
 	public void setOrderSum(int orderSum) {
 		this.orderSum = orderSum;
+	}
+
+	public String getAnimalCode() {
+		return animalCode;
+	}
+
+	public void setAnimalCode(String animalCode) {
+		this.animalCode = animalCode;
 	}
 }
