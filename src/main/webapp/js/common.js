@@ -18,6 +18,9 @@ avalon.filters.userTypeFilter = function (value, args, args2) {
 avalon.filters.sexFilter = function (value, args, args2) {
     return value == 0 ? "母" : "公";
 }
+avalon.filters.petStatusFilter = function (value, args, args2) {
+    return value == 1 ? "<font color='green'>上架中</font>" : "<font color='red'>已下架</font>";
+}
 /******************************************************************
  *                    扩展方法                                  *
  **********************************************************************/

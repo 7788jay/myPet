@@ -79,17 +79,20 @@
                                     <strong><span>￥</span>{{data.price}}</strong>
                                 </div>
                                 <!--<div class="availability">
-                                    Availability: <strong>In Stock</strong>
+                                    性别: <strong>{{data.sex}}</strong>
                                 </div>-->
                             </div>
                             <div class="product-page-options">
                                 <div class="pull-left">
-                                    <label class="control-label">重量：{{data.weight}}KG</label>
-
+                                    <label class="control-label">性别：{{data.sex | sexFilter}}</label>
                                 </div>
                                 <div class="pull-left">
-                                    <label class="control-label">年龄： {{data.life}}年</label>
-
+                                    <label class="control-label">年龄： {{data.age}} 年</label>
+                                </div>
+                            </div>
+                            <div class="product-page-options">
+                                <div class="pull-left">
+                                    <label class="control-label">重量：{{data.weight}} KG</label>
                                 </div>
                             </div>
                             <div class="product-page-cart">
@@ -97,8 +100,13 @@
                                     <input id="product-quantity" type="text" value="1" readonly
                                            class="form-control input-sm">
                                 </div>
-                                <button class="btn btn-primary" type="button" ms-click="addToCart(data.code)">加入购物车
+                                <button ms-if="data.status" class="btn btn-primary" type="button" ms-click="addToCart(data.code)">
+                                    加入购物车
                                 </button>
+                                <button disabled ms-if="!data.status" class="btn btn-primary" type="button">
+                                    该商品已下架
+                                </button>
+                                &nbsp;<font color="red">剩余库存:{{data.quantity}}</font>
                             </div>
                         </div>
 
@@ -184,10 +192,13 @@
                 code: "",   //代码
                 name: "",
                 price: "",
+                sex: "",     //性别
                 weight: "",  //重量
-                life: "",    //寿命
+                age: "",    //年龄
+                quantity: "", //库存
                 image: [],
-                description: "" //描述
+                description: "", //描述
+                status: 1    //状态
             },
             similarPets: [],  //类似宠物
             //初始化
@@ -206,8 +217,11 @@
                         petItem.data.name = result.name;
                         petItem.data.price = result.price;
                         petItem.data.weight = result.weight;
-                        petItem.data.life = result.life;
+                        petItem.data.age = result.age;
+                        petItem.data.sex = result.sex;
+                        petItem.data.quantity = result.quantity;
                         petItem.data.description = result.description;
+                        petItem.data.status = result.status;
                         petItem.data.image = result.image.split(",");
                         petItem.currentImage = petItem.data.image[0];
                         $('.product-main-image').zoom({url: petItem.currentImage});

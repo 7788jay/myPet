@@ -6,6 +6,9 @@ avalon.filters.OrderStatusFilter = function (value, args, args2) {
     var arr = ["未审核","已确认","已发货","完成","已取消"];
     return arr[value];
 }
+avalon.filters.sexFilter = function (value, args, args2) {
+    return value == 0 ? "母" : "公";
+}
 
 /**方法**/
 /**

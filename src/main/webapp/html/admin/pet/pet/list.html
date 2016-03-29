@@ -35,12 +35,13 @@
             <th width="5%"><input type="checkbox" ms-duplex-checked="allChecked"
                                   data-duplex-changed="checkAll"/></th>
             <th width="15%">宠物名称</th>
-            <th width="10%">性别</th>
+            <th width="5%">性别</th>
             <th width="10%">重量</th>
-            <th width="10%">年龄</th>
+            <th width="5%">年龄</th>
             <th width="10%">价格</th>
             <th width="10%">库存</th>
             <th width="10%">创建时间</th>
+            <th width="10%">状态</th>
             <th width="20%">操作</th>
         </tr>
         <tr ms-repeat="data">
@@ -54,9 +55,12 @@
             <td>￥{{el.price}}</td>
             <td>{{el.quantity}} 只</td>
             <td>{{el.createTime | date}}</td>
+            <td>{{el.status | petStatusFilter | html}}</td>
             <td>
                 <input type="button" value="修改" ms-click="edit(pageNo,el.code)"/>
-                <input type="button" value="下架" ms-click="deleteOne(pageNo,el.id)"/>
+                <input type="button" value="删除" ms-click="deleteOne(pageNo,el.id)"/>
+                <input ms-if="el.status==0" type="button" value="上架" ms-click="updateStatus(1,pageNo,el.id)"/>
+                <input ms-if="el.status==1" type="button" value="下架" ms-click="updateStatus(0,pageNo,el.id)"/>
             </td>
         </tr>
     </table>
@@ -193,6 +197,7 @@
                         vm.query(pageNum);    //重置
                     });
                 },
+                //批量删除
                 deleteBatch: function () {
                     layer.confirm('确定要删除所选？', function (index) {
                         var ids = [];
@@ -206,7 +211,7 @@
                             return;
                         }
                         $.ajax({
-                            url: "/admin/qky/app/appMenu/deleteByIds",
+                            url: "/admin/pet/category/deleteByIds",
                             type: "POST",
                             dataType: 'json',
                             data: {ids: ids.join(",")},
@@ -224,10 +229,11 @@
                         });
                     });
                 },
+                //单个删除
                 deleteOne: function (pageNum, id) {
                     layer.confirm('确定要删除该记录？', function (index) {
                         $.ajax({
-                            url: "/admin/qky/app/appMenu/deleteOne?id=" + id,
+                            url: "/admin/pet/category/deleteOne?id=" + id,
                             type: "GET",
                             dataType: "json",
                             complete: function () {
@@ -239,6 +245,28 @@
                                     layer.alert("删除成功！");
                                 }else {
                                     layer.alert("删除失败！");
+                                }
+                            }
+                        });
+                    });
+                },
+                //状态更新
+                updateStatus: function (status,pageNum, id) {
+                    var msg = status == 1?"上架":"下架";
+                    layer.confirm('确定要'+msg+'该宠物？', function (index) {
+                        $.ajax({
+                            url: "/admin/pet/pet/updateStatus?id=" + id,
+                            type: "GET",
+                            dataType: "json",
+                            complete: function () {
+                                layer.close(index);
+                                vm.query(pageNum);
+                            },
+                            success: function (result) {
+                                if (result.success) {
+                                    layer.alert(msg+"成功！");
+                                }else {
+                                    layer.alert(msg+"失败！");
                                 }
                             }
                         });
