@@ -228,7 +228,8 @@
                             </div>
                             <h3><a href="javascript:;" ms-click="showItem(el.code)">{{el.name}}</a></h3>
                             <div class="pi-price">￥{{el.price}}</div>
-                            <a href="javascript:;" ms-click="addToCart(el.code)" class="btn btn-default add2cart">加入购物车</a>
+                            <a ms-if="el.status" href="javascript:;" ms-click="addToCart(el.code)" class="btn btn-default add2cart">加入购物车</a>
+                            <a ms-if="!el.status" href="javascript:;" class="btn btn-default add2cart">该商品已下架</a>
                             <div class="sticker sticker-new"></div>
                         </div>
                     </div>

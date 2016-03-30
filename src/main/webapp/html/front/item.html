@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="product-page-cart">
-                                <div class="product-quantity">
+                                <div ms-if="data.status" class="product-quantity">
                                     <input id="product-quantity" type="text" value="1" readonly
                                            class="form-control input-sm">
                                 </div>
@@ -106,7 +106,7 @@
                                 <button disabled ms-if="!data.status" class="btn btn-primary" type="button">
                                     该商品已下架
                                 </button>
-                                &nbsp;<font color="red">剩余库存:{{data.quantity}}</font>
+                                &nbsp;<font ms-if="data.status" color="red">剩余库存:{{data.quantity}}</font>
                             </div>
                         </div>
 
