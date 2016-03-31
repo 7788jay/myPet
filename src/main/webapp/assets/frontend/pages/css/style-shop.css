@@ -1165,11 +1165,14 @@ table .product-quantity .input-group {
 }
 /**显示用户订单**/
 .user-order{
-	width: 31%;
+	margin-right: 25px;
 	height: 30px;
 	line-height: 30px;
 	font-size: 14px;
 	float: left;
+}
+.user-order span{
+	color: #67bd3c;
 }
 /***
 Shop Stype Buttons

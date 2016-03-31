@@ -4,6 +4,8 @@ import cn.pet.lin.domain.BizData4Page;
 import cn.pet.lin.domain.common.ResultDTO;
 import cn.pet.lin.domain.order.*;
 import cn.pet.lin.domain.param.order.OrdersParam;
+import cn.pet.lin.domain.param.pet.PetParam;
+import cn.pet.lin.domain.pet.Pet;
 import cn.pet.lin.domain.user.User;
 import cn.pet.lin.service.order.IItemService;
 import cn.pet.lin.service.order.IOrdersService;
@@ -68,6 +70,16 @@ public class PetOrderController {
             item.setTotalPrice((long) (cartItem.getQuantity() * cartItem.getPet().getPrice()));
 
             itemService.insert(item);
+            //更新库存
+            Pet pet =petService.findOne(PetParam.F_Code,item.getPetCode());
+            Long quantity = pet.getQuantity()-item.getQuantity();
+            if(quantity<0){
+                return new ResultDTO(false, "库存不足，请返回购物车修改！");
+            }else if(quantity == 0){
+                pet.setStatus(0);
+            }
+            pet.setQuantity(quantity);
+            petService.update(pet);
         }
         ordersService.insert(orders);
         //清空购物车
