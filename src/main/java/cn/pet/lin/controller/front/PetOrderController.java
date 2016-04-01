@@ -121,4 +121,15 @@ public class PetOrderController {
         ordersService.update(orders);
         return new ResultDTO(true,"支付成功！");
     }
+
+    /**
+     *获取订单信息
+     * @param orderCode
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryOne")
+    public Orders queryOne(String orderCode){
+        return ordersService.findOne(OrdersParam.F_Code,orderCode);
+    }
 }

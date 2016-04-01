@@ -1,7 +1,7 @@
-<div class="col-md-12 col-sm-12" ms-controller="hotPets" id="hotPets">
+<div class="col-md-12 col-sm-12" ms-important="hotPets" id="hotPets">
     <h2>热销商品</h2>
     <div class="owl-carousel owl-carousel4">
-        <div ms-repeat="hotPets">
+        <div ms-repeat="hotPets" data-repeat-rendered="layoutInit">
             <div class="product-item">
                 <div class="pi-img-wrapper">
                     <img ms-attr-src="el.image" class="img-responsive" ms-attr-alt="el.name" style="height: 280px;"/>
@@ -51,6 +51,11 @@
                         }
                     }
                 });
+            },
+            //界面初始化
+            layoutInit: function(){
+                Layout.init();
+                Layout.initOWL();
             }
         });
         avalon.scan($('#hotPets')[0], hotPets);

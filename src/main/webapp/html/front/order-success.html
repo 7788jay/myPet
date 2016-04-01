@@ -59,12 +59,15 @@
                 <div class="goods-page">
                     <div class="goods-data clearfix">
                         <div class="table-wrapper-responsive">
-                            <span></span>
                             <h1 style="margin-left:40%;font-size: 30px;color: #7ABD54;font-weight: bold;">已成功创建订单!</h1>
+                            <div style="margin-left:35%;font-size: 17px;margin-top: 30px;">
+                                <div style="margin: 10px 0;">订单编号：{{order.code}}</div>
+                                <div>订单金额：￥{{order.totalPrice}}</div>
+                            </div>
                         </div>
                     </div>
                     <div style="text-align: center;">
-                        <button ms-if="payType==0" class="btn btn-warning" type="button" ms-click="pay">
+                        <button ms-if="order.payType==0" class="btn btn-warning" type="button" ms-click="pay">
                             立即支付 <i class="fa fa-credit-card"></i>
                         </button>
                         <a class="btn btn-info" href="user.html" type="button">
@@ -79,7 +82,7 @@
         <!-- END SIDEBAR & CONTENT -->
 
         <!-- BEGIN 销售排行 -->
-        <div class="row margin-bottom-40" ms-include-src="'./public/hotPets-bottom.html'" data-include-rendered="layoutInit"></div>
+        <div class="row margin-bottom-40" ms-include-src="'./public/hotPets-bottom.html'"></div>
         <!-- END 销售排行 -->
     </div>
 </div>
@@ -117,24 +120,32 @@
     jQuery(document).ready(function () {
         var vm = avalon.define({
             $id: "order-success",
-            payType: "",    //支付类型
+            order: "",    //订单
             //初始化
             init: function(){
-                vm.payType = getQueryString('payType');
-                vm.orderCode = getQueryString('orderCode');
-                avalon.log(vm.payType,vm.orderCode);
+//                vm.payType = getQueryString('payType');
+                var orderCode = getQueryString('orderCode');
+//                avalon.log(vm.payType,vm.orderCode);
+                $.ajax({
+                    url: "/pet/front/order/queryOne?orderCode="+orderCode,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        vm.order = result;
+                    }
+                });
             },
             pay: function(){
                 layer.confirm("确认支付？",function(index){
                     layer.close(index);
                     $.ajax({
-                        url: "/pet/front/order/updatePayTime?orderCode="+vm.orderCode,
+                        url: "/pet/front/order/updatePayTime?orderCode="+vm.order.code,
                         type: "GET",
                         dataType: "json",
                         success: function (result) {
                             if(result.success){
                                 layer.alert(result.msg,function(){
-                                    window,location.href = "user.html";
+                                    window.location.href = "user.html";
                                 });
                             }
                         }

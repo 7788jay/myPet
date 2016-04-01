@@ -215,12 +215,10 @@
                     dataType: "json",
                     success: function (result) {
                         if(result.success){
-                            var payType = $("input[name='payType']:checked").val();
                             var orderCode = result.value;
-                            avalon.log(payType,orderCode);
                             layer.alert(result.msg,function(index){
                                 layer.close(index);
-                                window.location.href = "order-success.html?payType="+payType+"&orderCode="+orderCode;
+                                window.location.href = "order-success.html?orderCode="+orderCode;
                             });
                         }else{
                             layer.alert(result.msg,function(index) {

@@ -1,22 +1,30 @@
 <!-- begin收货地址 -->
 <div ms-important="listOrders" id="listOrders" class="col-md-9 col-sm-7">
-    <div class="product-page" ms-repeat="data" style="margin-bottom: 10px;">
+    <div class="product-page" ms-repeat="data" style="margin-bottom: 15px;padding: 5px;border:1px solid #67bd3c;">
         <div class="row">
             <!-- BEGIN CONTENT -->
             <div class="col-md-12 col-sm-12">
-                <div class="col-md-12 col-sm-12" style="border-bottom: 1px dotted rgba(0, 0, 0, 0.33);">
+                <div class="col-md-12 col-sm-12" style="padding-bottom:10px;border-bottom: 1px dotted rgba(0, 0, 0, 0.33);">
                     <div class="user-order">创建时间：<span>{{el.createTime | date}}</span></div>
                     <div class="user-order">订单编号：<span>{{el.code}}</span></div>
-                    <div class="user-order">订单状态：<span>{{el.status | OrderStatusFilter}}</span></div>
+                    <div class="user-order">订单状态：
+                        <span ms-if="el.payTime">已支付，{{el.status | OrderStatusFilter}}</span>
+                        <span ms-if="!el.payTime">
+                            未支付
+                            <a class="btn btn-warning" ms-attr-href="order-success.html?orderCode={{el.code}}" type="button">
+                                <i class="fa fa-hand-o-right"> 去支付</i>
+                            </a>
+                        </span>
+                    </div>
                 </div>
                 <div class="goods-page">
-                    <div class="goods-data clearfix">
+                    <div class="goods-data clearfix" style="margin: 0px;padding: 5px;">
                         <div class="table-wrapper-responsive">
                             <table summary="Shopping cart">
                                 <tr>
                                     <th class="goods-page-image">图片</th>
                                     <th class="goods-page-description">宠物名</th>
-                                    <!--<th class="goods-page-quantity">重量</th>-->
+                                    <th class="goods-page-quantity">重量</th>
                                     <th class="goods-page-price">单价</th>
                                     <th class="goods-page-quantity">数量</th>
                                     <th class="goods-page-total">总价</th>
@@ -30,9 +38,9 @@
                                     <td class="goods-page-description">
                                         <h3><a ms-attr-href="item.html?code={{el.pet.code}}">{{el.pet.name}}</a></h3>
                                     </td>
-                                    <!--<td class="goods-page-price">
+                                    <td class="goods-page-price">
                                         <strong>{{el.pet.weight}} <span>KG</span></strong>
-                                    </td>-->
+                                    </td>
                                     <td class="goods-page-price">
                                         <strong><span>￥</span>{{el.pet.price}}</strong>
                                     </td>
@@ -44,6 +52,16 @@
                                     </td>
                                 </tr>
                             </table>
+                        </div>
+                        <div class="shopping-total">
+                            <ul>
+                                <li>
+                                    <em>总计:</em>
+                                    <strong class="price">
+                                        <span>￥</span>{{el.totalPrice}}
+                                    </strong>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
