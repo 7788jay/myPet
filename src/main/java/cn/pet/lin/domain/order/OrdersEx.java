@@ -28,9 +28,9 @@ public class OrdersEx extends Orders {
 	private static final long serialVersionUID = 1L;
 
 	private Delivery delivery;//收货人信息
-	private String userName;
-	private String phone;
-	private List<ItemEx> itemExs;
+	private String userName;  //下单用户名
+	private String phone;     //下单用户手机号
+	private List<ItemEx> itemExs;  //订单项集合
 	
 	//针对Orders实体在这里增加额外的属性和对应的get和set方法
 

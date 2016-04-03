@@ -50,19 +50,19 @@
                             <table width="100%">
                                 <tr>
                                     <th width="10%">宠物名</th>
+                                    <th width="10%">性别</th>
                                     <th width="10%">重量</th>
                                     <th width="10%">售价</th>
                                     <th width="10%">数量</th>
                                     <th width="10%">小计</th>
-                                    <th width="10%">操作</th>
                                 </tr>
                                 <tr ms-repeat="data.itemExs">
                                     <td style="text-align: center">{{el.pet.name}}</td>
+                                    <td style="text-align: center">{{el.pet.sex | sexFilter}}</td>
                                     <td style="text-align: center">{{el.pet.weight}}KG</td>
                                     <td style="text-align: center">￥{{el.pet.price}}</td>
                                     <td style="text-align: center">{{el.quantity}}</td>
                                     <td style="text-align: center">￥{{el.pet.price * el.quantity}}</td>
-                                    <td style="text-align: center"></td>
                                 </tr>
                             </table>
                         </div>

@@ -112,23 +112,6 @@
           scaleout: .8;
           showuntil: 4000;"><b>最低</b> <strong><span>￥</span>250</strong>
             </div>
-
-            <a href="javascript:;" class="ls-l ls-more"
-               style="top: 75%; left: 21%; display: inline-block; white-space: nowrap;" data-ls="
-          fade: true;
-          fadeout: true;
-          durationin: 750;
-          durationout: 750;
-          easingin: easeOutQuint;
-          easingout: easeInOutQuint;
-          delayin: 0;
-          delayout: 0;
-          rotatein: 90;
-          rotateout: -90;
-          scalein: .5;
-          scaleout: .5;
-          showuntil: 4000;">查看更多
-            </a>
         </div>
         <!-- slide two end2 -->
 
@@ -160,9 +143,6 @@
           scaleout: .8;
           showuntil: 4000;
           ">
-                <a href="javascript:;" class="ls-buy">
-                    立即购买
-                </a>
                 <div class="ls-price">
                     <span>惊喜价:</span>
                     <strong>250<sup>元</sup></strong>
@@ -191,18 +171,6 @@
                 完美的购物体验
             </div>
 
-            <div class="ls-l ls-mini-text" style="top: 70%; left: 60%; white-space: nowrap;" data-ls="
-          fade: true;
-          fadeout: true;
-          durationout: 750;
-          easingin: easeOutQuint;
-          delayin: 300;
-          scalein: .8;
-          scaleout: .8;
-          showuntil: 4000;">
-                <a href="javascript:;">购买</a>
-            </div>
-
         </div>
         <!-- slide four end -->
     </div>
@@ -218,7 +186,7 @@
             <div class="col-md-12 sale-product">
                 <h2>新品展示</h2>
                 <div class="owl-carousel owl-carousel5" >
-                    <div ms-repeat="newPets" data-repeat-rendered="layoutInit">
+                    <div ms-repeat="newPets">
                         <div class="product-item">
                             <div class="pi-img-wrapper">
                                 <img ms-attr-src="el.image" class="img-responsive" ms-attr-alt="el.name" style="height: 280px;"/>
@@ -228,8 +196,8 @@
                             </div>
                             <h3><a href="javascript:;" ms-click="showItem(el.code)">{{el.name}}</a></h3>
                             <div class="pi-price">￥{{el.price}}</div>
-                            <a ms-if="el.status" href="javascript:;" ms-click="addToCart(el.code)" class="btn btn-default add2cart">加入购物车</a>
-                            <a ms-if="!el.status" href="javascript:;" class="btn btn-default add2cart">该商品已下架</a>
+                            <a ms-if="el.status && el.quantity" href="javascript:;" ms-click="addToCart(el.code)" class="btn btn-default add2cart">加入购物车</a>
+                            <a ms-if="!el.quantity" href="javascript:;" class="btn btn-default add2cart">暂时缺货</a>
                             <div class="sticker sticker-new"></div>
                         </div>
                     </div>
@@ -245,7 +213,7 @@
             <div class="col-md-6 two-items-bottom-items">
                 <h2>销售排行榜</h2>
                 <div class="owl-carousel owl-carousel2">
-                    <div ms-repeat="hotPets">
+                    <div ms-repeat="hotPets" data-repeat-rendered="layoutInit">
                         <div class="product-item">
                             <div class="pi-img-wrapper">
                                 <img ms-attr-src="el.image" class="img-responsive" ms-attr-alt="el.name" style="height: 280px;"/>
@@ -348,20 +316,22 @@
                             el.image = el.image.split(",")[0];
                         });
                         vm.newPets = result;
-                    }
-                });
-                //获取最热宠物
-                $.ajax({
-                    url: "/pet/front/petList/getHotPets",
-                    type: "GET",
-                    dataType: "json",
-                    success: function (result) {
-                        result.forEach(function(el){
-                            el.image = el.image.split(",")[0];
+
+                        //获取最热宠物
+                        $.ajax({
+                            url: "/pet/front/petList/getHotPets",
+                            type: "GET",
+                            dataType: "json",
+                            success: function (result) {
+                                result.forEach(function(el){
+                                    el.image = el.image.split(",")[0];
+                                });
+                                vm.hotPets = result;
+                            }
                         });
-                        vm.hotPets = result;
                     }
                 });
+
             },
             //显示单个
             showItem: function(code){
@@ -384,9 +354,8 @@
             layoutInit: function(){
                 Layout.init();
                 Layout.initOWL();
-                LayersliderInit.initLayerSlider();
                 Layout.initImageZoom();
-                Layout.initTouchspin();
+                LayersliderInit.initLayerSlider();
             }
         });
         avalon.scan($('#index')[0],vm);

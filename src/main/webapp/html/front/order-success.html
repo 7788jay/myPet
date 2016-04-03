@@ -10,7 +10,7 @@
 <!-- Head BEGIN -->
 <head>
     <meta charset="utf-8">
-    <title>成功创建订单</title>
+    <title>订单支付</title>
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -59,7 +59,7 @@
                 <div class="goods-page">
                     <div class="goods-data clearfix">
                         <div class="table-wrapper-responsive">
-                            <h1 style="margin-left:40%;font-size: 30px;color: #7ABD54;font-weight: bold;">已成功创建订单!</h1>
+                            <h1 style="margin-left:40%;font-size: 30px;color: #7ABD54;font-weight: bold;">订单已成功生成!</h1>
                             <div style="margin-left:35%;font-size: 17px;margin-top: 30px;">
                                 <div style="margin: 10px 0;">订单编号：{{order.code}}</div>
                                 <div>订单金额：￥{{order.totalPrice}}</div>
@@ -70,7 +70,7 @@
                         <button ms-if="order.payType==0" class="btn btn-warning" type="button" ms-click="pay">
                             立即支付 <i class="fa fa-credit-card"></i>
                         </button>
-                        <a class="btn btn-info" href="user.html" type="button">
+                        <a class="btn btn-info" href="user.html?index=2" type="button">
                             去个人中心查看 <i class="fa fa-hand-o-right"></i>
                         </a>
                     </div>

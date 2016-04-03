@@ -75,8 +75,6 @@ public class PetOrderController {
             Long quantity = pet.getQuantity()-item.getQuantity();
             if(quantity<0){
                 return new ResultDTO(false, "库存不足，请返回购物车修改！");
-            }else if(quantity == 0){
-                pet.setStatus(0);
             }
             pet.setQuantity(quantity);
             petService.update(pet);
@@ -90,22 +88,22 @@ public class PetOrderController {
     /**
      * 根据用户来获取订单信息
      * @param param
-     * @param PageNo
+     * @param pageNo
      * @param PageSize
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/queryByUser")
-    public BizData4Page<OrdersEx> queryByUser(OrdersParam param, @RequestParam(defaultValue = "1") int PageNo, @RequestParam(defaultValue = "5")int PageSize) {
+    public BizData4Page<OrdersEx> queryByUser(OrdersParam param, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "5")int PageSize) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         param.setUserCode(user.getCode());
-        List<OrdersEx> orderExs = ordersService.queryPageEx(param.toMap(),(PageNo-1)*PageSize,PageSize,param.F_CreateTime, SqlOrderEnum.DESC.getAction());
+        List<OrdersEx> orderExs = ordersService.queryPageEx(param.toMap(),(pageNo-1)*PageSize,PageSize,param.F_CreateTime, SqlOrderEnum.DESC.getAction());
         for (OrdersEx orderEx : orderExs) {
             List<ItemEx> itemExList = itemService.queryByOrderCode(orderEx.getCode());
             orderEx.setItemExs(itemExList);
         }
         int record = ordersService.countEx(param.toMap());
-        return PageUtils.toBizData4Page(orderExs,PageNo,PageSize,record);
+        return PageUtils.toBizData4Page(orderExs,pageNo,PageSize,record);
     }
 
     /**

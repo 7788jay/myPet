@@ -4,6 +4,9 @@
         <div class="row">
             <button class="btn btn-primary" type="button" ms-click="addAddress">新增收货地址</button>
             <div ms-repeat="data" class="user-info">
+                <div >
+                    <button class="btn btn-info" type="button" ms-click="addAddress">编辑</button>
+                </div>
                 <div class="pull-left">
                     <label class="control-label">收货人：</label>{{el.name}}
                 </div>

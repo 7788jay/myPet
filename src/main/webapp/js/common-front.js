@@ -19,5 +19,9 @@ avalon.filters.sexFilter = function (value, args, args2) {
 function getQueryString(name){
     var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)","i");
     var r = window.location.search.substr(1).match(reg);
-    return r[2];
+    if(r != null && r.length>=3){
+        return r[2];
+    }else{
+        return "";
+    }
 }

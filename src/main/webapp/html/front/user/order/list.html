@@ -69,6 +69,18 @@
             <!-- END CONTENT -->
         </div>
     </div>
+    <!-- BEGIN PAGINATOR -->
+    <div class="row">
+        <div class="col-md-4 col-sm-4 items-info">总共{{records}}个订单</div>
+        <div class="col-md-8 col-sm-8">
+            <ul class="pagination pull-right">
+                <li ms-if="page > 1"><a href="javascript:;" ms-click="query(page-1)">上一页</a></li>
+                <li><span>{{page}}</span></li>
+                <li ms-if="page < total"><a href="javascript:;" ms-click="query(page+1)">下一页</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- END PAGINATOR -->
 </div>
 <!--end 收货地址-->
 
@@ -77,15 +89,25 @@
         var listOrders = avalon.define({
             $id: "listOrders",
             data: [],
+            page: "",     //当前页
+            total: "",    //总页数
+            records: "",   //总记录数
 
             //初始化
             init: function () {
+                listOrders.query(1);
+            },
+            //分页查询
+            query(pageNo){
                 $.ajax({
-                    url: "/pet/front/order/queryByUser",
+                    url: "/pet/front/order/queryByUser?pageNo="+pageNo,
                     type: "GET",
                     dataType: "json",
                     success: function (result) {
                         listOrders.data = result.rows;
+                        listOrders.page = result.page;
+                        listOrders.total = result.total;
+                        listOrders.records = result.records;
                     }
                 });
             }

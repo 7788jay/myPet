@@ -80,7 +80,7 @@
                         <th><span>*</span>描述：</th>
                         <td colspan="7">
                             <div style="height: 245px" id="editor-container">
-                                <textarea id="description" name="description" style="width: 95%;height: 235px;">{{data.description | html}}</textarea>
+                                <textarea id="description" name="description" style="width: 95%;height: 235px;"></textarea>
                             </div>
                         </td>
                     </tr>
@@ -176,6 +176,8 @@
                         vm.images = vm.data.image.split(",");
                         avalon.log(vm.images.size());
                         vm.initUploader();
+                        // 初始化编辑器的内容
+                        editor.$txt.html(vm.data.description);
                         vm.queryCategory();
                     }
                 });

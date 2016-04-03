@@ -15,8 +15,6 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <link rel="shortcut icon" href="favicon.ico">
-
     <!-- Global styles START -->
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -57,18 +55,18 @@
             <!-- BEGIN SIDEBAR -->
             <div class="sidebar col-md-3 col-sm-5">
                 <ul class="list-group margin-bottom-25 sidebar-menu">
-                    <li class="list-group-item clearfix" ms-class="active:userPage=='user/info/list.html'">
-                        <a href="javascript:;" ms-click="changPage('user/info/list.html')">
+                    <li class="list-group-item clearfix" ms-class="active:pageIndex==0">
+                        <a href="javascript:;" ms-click="changPage(0)">
                             <i class="fa fa-angle-right"></i> 个人信息
                         </a>
                     </li>
-                    <li class="list-group-item clearfix dropdown" ms-class="active:userPage=='user/address/list.html'">
-                        <a href="javascript:;" ms-click="changPage('user/address/list.html')">
+                    <li class="list-group-item clearfix dropdown" ms-class="active:pageIndex==1">
+                        <a href="javascript:;" ms-click="changPage(1)">
                             <i class="fa fa-angle-right"></i>收货地址
                         </a>
                     </li>
-                    <li class="list-group-item clearfix dropdown" ms-class="active:userPage=='user/order/list.html'">
-                        <a href="javascript:;" ms-click="changPage('user/order/list.html')">
+                    <li class="list-group-item clearfix dropdown" ms-class="active:pageIndex==2">
+                        <a href="javascript:;" ms-click="changPage(2)">
                             <i class="fa fa-angle-right"></i>我的订单
                         </a>
                     </li>
@@ -112,20 +110,23 @@
     jQuery(document).ready(function () {
         var vm = avalon.define({
             $id: "user",
-            userPage: "user/order/list.html",
+            includePage:['user/info/list.html','user/address/list.html','user/order/list.html'],     //页面列表
+            pageIndex: 0,
+            userPage: 'user/info/list.html',   //当前页
 
             //初始化
             init: function () {
-
+                vm.pageIndex = getQueryString("index") || 0;
+                vm.userPage = vm.includePage[vm.pageIndex];
             },
-
             //界面初始化
             layoutInit: function () {
                 Layout.init();
             },
             //页面切换
-            changPage: function(url){
-                vm.userPage = url;
+            changPage: function(index){
+                vm.pageIndex = index;
+                vm.userPage = vm.includePage[index];
             }
         });
         avalon.scan($('#user')[0],vm);
