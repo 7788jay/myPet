@@ -1,4 +1,4 @@
-<div ms-important="addAddress" id="addAddress" class="user-info-address">
+<div ms-important="editAddress" id="editAddress" class="user-info-address">
     <!-- BEGIN FORM-->
     <form id="address" class="default-form" role="form">
         <div class="form-group">
@@ -35,7 +35,7 @@
             <input class="form-control" id="phone" name="phone"/>
         </div>
         <div class="padding-top-20">
-            <button type="button" ms-click="addAddress" class="btn btn-primary">保存收货地址</button>
+            <button type="button" ms-click="save" class="btn btn-primary">保存收货地址</button>
         </div>
     </form>
     <!-- END FORM-->
@@ -55,7 +55,7 @@
         };
         var data;
         var vm = avalon.define({
-            $id: "addAddress",
+            $id: "editAddress",
             provinces: [],  //省
             cities: [],     //市
             areas: [],      //区
@@ -65,6 +65,8 @@
 
             //初始化
             init: function () {
+                var id = Layout.getParam("id");
+
                 $.ajax({
                     url: "/assets/area.json",
                     type: "GET",
@@ -110,8 +112,8 @@
                     vm.area = this.options[this.selectedIndex].text;
                 }
             },
-            //添加地址
-            addAddress: function(){
+            //保存地址
+            save: function(){
                 $.ajax({
                     url: "/pet/front/user/addAddress",
                     type: "POST",
@@ -125,7 +127,7 @@
             }
 
         });
-        avalon.scan($('#addAddress')[0],vm);
+        avalon.scan($('#editAddress')[0],vm);
         vm.init();
     });
 </script>

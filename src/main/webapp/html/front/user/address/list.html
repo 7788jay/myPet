@@ -5,7 +5,7 @@
             <button class="btn btn-primary" type="button" ms-click="addAddress">新增收货地址</button>
             <div ms-repeat="data" class="user-info">
                 <div >
-                    <button class="btn btn-info" type="button" ms-click="addAddress">编辑</button>
+                    <button class="btn btn-info" type="button" ms-click="editAddress(el.id)">编辑</button>
                 </div>
                 <div class="pull-left">
                     <label class="control-label">收货人：</label>{{el.name}}
@@ -48,6 +48,10 @@
             },
             addAddress: function(){
                 Layout.openDialog("/user/address/add.html", {}, "添加收货地址", '700px', '510Px', function(){})
+            },
+            //修改
+            editAddress: function(id){
+                Layout.openDialog("/user/address/edit.html", {id:id}, "修改收货地址", '700px', '510Px', function(){})
             }
         });
         avalon.scan($('#listAddress')[0],listAddress);

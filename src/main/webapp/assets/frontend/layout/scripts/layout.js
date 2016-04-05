@@ -489,6 +489,10 @@ var Layout = function () {
                 $('.grid-v1').mixitup();
             });
         },
+        //读取参数
+        getParam: function (name) {
+            return JSON.parse($(".layui-layer-content #param").val())[name];
+        },
         //打开弹窗
         openDialog: function (url, data, title, width, height, callBack) {
             $.post('/html/front'+url, {}, function (html) {
