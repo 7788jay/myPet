@@ -1,6 +1,6 @@
 <div ms-important="addAddress" id="addAddress" class="user-info-address">
     <!-- BEGIN FORM-->
-    <form id="address" class="default-form" role="form">
+    <form id="addForm" class="default-form" role="form">
         <div class="form-group">
             <label for="name">收货人<span class="require">*</span></label>
             <input type="text" class="form-control" id="name" name="name">
@@ -43,6 +43,27 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
+        //表单校验
+        var validator = $("#addForm").validate({
+            rules: {
+                name: {required: true},
+                province: {required: true},
+                city: {required: true},
+                area: {required: true},
+                detail: {required: true},
+                phone: {required: true,number:true,rangelength:[11,11]}
+            },
+            messages: {
+                name: {required: "必填"},
+                province: {required: "必选"},
+                city: {required: "必选"},
+                area: {required: "必选"},
+                detail: {required: "必填"},
+                phone: {required: "必填",number:"请输入11位手机号",rangelength:"请输入11位手机号"}
+            },
+            errorPlacement: errorPlacement,
+            success: "valid"
+        });
         //筛选数据
         function getSame(code, arr, num) {
             var myarr = [];
@@ -112,16 +133,18 @@
             },
             //添加地址
             addAddress: function(){
-                $.ajax({
-                    url: "/pet/front/user/addAddress",
-                    type: "POST",
-                    data: $('#address').serializeArray(),
-                    dataType: "json",
-                    success: function (result) {
-                        layer.alert(result.msg);
-                        Layout.closeDialog();
-                    }
-                });
+                if(validator.form()){
+                    $.ajax({
+                        url: "/pet/front/user/addAddress",
+                        type: "POST",
+                        data: $('#addForm').serializeArray(),
+                        dataType: "json",
+                        success: function (result) {
+                            layer.alert(result.msg);
+                            Layout.closeDialog();
+                        }
+                    });
+                }
             }
 
         });

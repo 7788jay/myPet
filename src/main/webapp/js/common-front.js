@@ -1,3 +1,4 @@
+
 /**自定义过滤**/
 avalon.filters.imgFilter = function (value, args, args2) {
     return value;
@@ -24,4 +25,39 @@ function getQueryString(name){
     }else{
         return "";
     }
+}
+
+/**错误显示**/
+function errorPlacement(error, element) {
+    if (element.is(':radio') || element.is(':checkbox')) { //如果是radio或checkbox
+        var eid = element.attr('name'); //获取元素的name属性
+        element = $("input[name='" + eid + "']").last().parent(); //将错误信息添加当前元素的父结点后面
+    }
+    if (!error.is(':empty')) {
+        $(element).not('.valid').qtip({
+            overwrite: false,
+            content: error,
+            hide: false,
+            show: {
+                event: false,
+                ready: true
+            },
+            style: {
+                classes: 'qtip-cream qtip-shadow qtip-rounded'
+            },
+            position: {
+                my: 'top left',
+                at: 'bottom right'
+            }
+        }).qtip('option', 'content.text', error);
+    }
+    else {
+        element.qtip('destroy');
+    }
+}
+//关闭所有提示
+function closeAllTip() {
+    $('.qtip').each(function () {
+        $(this).data('qtip').destroy();
+    })
 }

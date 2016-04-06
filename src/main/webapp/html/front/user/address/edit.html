@@ -1,22 +1,23 @@
 <div ms-important="editAddress" id="editAddress" class="user-info-address">
     <!-- BEGIN FORM-->
-    <form id="address" class="default-form" role="form">
+    <form id="editForm" class="default-form" role="form">
+        <input type="hidden" name="id" ms-attr-value="data.id"/>
         <div class="form-group">
             <label for="name">收货人<span class="require">*</span></label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name" ms-duplex-string="data.name">
         </div>
         <div class="form-group">
             <label>所在地区 <span class="require">*</span></label>
             <div style="height: 35px;">
-                <select name="province" ms-change="change1" class="form-control address-select">
+                <select name="province" data-duplex-changed="change1" class="form-control address-select" ms-duplex-string="data.province">
                     <option value="">请选择</option>
                     <option ms-repeat="provinces" ms-attr-value=el.code+":"+el.name> {{ el.name }}</option>
                 </select>
-                <select name="city" ms-change="change2" class="form-control address-select">
+                <select name="city" data-duplex-changed="change2" class="form-control address-select" ms-duplex-string="data.city">
                     <option value="">请选择</option>
                     <option ms-repeat="cities" ms-attr-value=el.code+":"+el.name> {{ el.name }}</option>
                 </select>
-                <select name="area" ms-change="change3" class="form-control address-select">
+                <select name="area" data-duplex-changed="change3" class="form-control address-select" ms-duplex-string="data.area">
                     <option value="">请选择</option>
                     <option ms-repeat="areas" ms-attr-value=el.code+":"+el.name> {{ el.name }}</option>
                 </select>
@@ -24,15 +25,15 @@
         </div>
         <div class="form-group">
             <label for="detail">收货具体地址<span class="require">*</span></label>
-            <input name="detail" type="text" class="form-control" id="detail">
+            <input name="detail" type="text" class="form-control" id="detail" ms-duplex-string="data.detail">
         </div>
         <div class="form-group">
             <label for="postCode">邮编</label>
-            <input class="form-control" id="postCode" name="postCode"/>
+            <input class="form-control" id="postCode" name="postCode" ms-duplex-string="data.postCode"/>
         </div>
         <div class="form-group">
             <label for="phone">手机号<span class="require">*</span></label>
-            <input class="form-control" id="phone" name="phone"/>
+            <input class="form-control" id="phone" name="phone" ms-duplex-string="data.phone"/>
         </div>
         <div class="padding-top-20">
             <button type="button" ms-click="save" class="btn btn-primary">保存收货地址</button>
@@ -43,6 +44,27 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
+        //表单校验
+        var validator = $("#editForm").validate({
+            rules: {
+                name: {required: true},
+                province: {required: true},
+                city: {required: true},
+                area: {required: true},
+                detail: {required: true},
+                phone: {required: true,number:true,rangelength:[11,11]}
+            },
+            messages: {
+                name: {required: "必填"},
+                province: {required: "必选"},
+                city: {required: "必选"},
+                area: {required: "必选"},
+                detail: {required: "必填"},
+                phone: {required: "必填",number:"请输入11位手机号",rangelength:"请输入11位手机号"}
+            },
+            errorPlacement: errorPlacement,
+            success: "valid"
+        });
         //筛选数据
         function getSame(code, arr, num) {
             var myarr = [];
@@ -52,7 +74,7 @@
                 }
             }
             return myarr;
-        };
+        }
         var data;
         var vm = avalon.define({
             $id: "editAddress",
@@ -62,11 +84,21 @@
             province: "",  //省
             city: "",     //市
             area: "",      //区
+            data:{},    //回显数据
 
             //初始化
             init: function () {
                 var id = Layout.getParam("id");
-
+                //获取收货地址
+                $.ajax({
+                    url: "/pet/front/user/queryOneAddress?id="+id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        vm.data = result;
+                    }
+                });
+                //获取地区数据
                 $.ajax({
                     url: "/assets/area.json",
                     type: "GET",
@@ -114,16 +146,18 @@
             },
             //保存地址
             save: function(){
-                $.ajax({
-                    url: "/pet/front/user/addAddress",
-                    type: "POST",
-                    data: $('#address').serializeArray(),
-                    dataType: "json",
-                    success: function (result) {
-                        layer.alert(result.msg);
-                        Layout.closeDialog();
-                    }
-                });
+                if(validator.form()){
+                    $.ajax({
+                        url: "/pet/front/user/updateAddress",
+                        type: "POST",
+                        data: $('#editForm').serializeArray(),
+                        dataType: "json",
+                        success: function (result) {
+                            layer.alert(result.msg);
+                            Layout.closeDialog();
+                        }
+                    });
+                }
             }
 
         });

@@ -27,6 +27,11 @@ public class FrontUserController {
     @Autowired
     IUserService userService;
 
+    /**
+     * 添加收货地址
+     * @param delivery
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "addAddress")
     public ResultDTO addAddress(Delivery delivery) {
@@ -38,7 +43,26 @@ public class FrontUserController {
     }
 
     /**
-     * 查询地址
+     * 添加收货地址
+     * @param delivery
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "updateAddress")
+    public ResultDTO updateAddress(Delivery delivery) {
+        Delivery queryDelivery = deliveryService.fetch(delivery.getId());
+        queryDelivery.setName(delivery.getName());
+        queryDelivery.setProvince(delivery.getProvince());
+        queryDelivery.setCity(delivery.getCity());
+        queryDelivery.setArea(delivery.getArea());
+        queryDelivery.setDetail(delivery.getDetail());
+        queryDelivery.setPostCode(delivery.getPostCode());
+        queryDelivery.setPhone(delivery.getPhone());
+        return new ResultDTO(true, "修改成功！");
+    }
+
+    /**
+     * 查询全部地址
      * @return
      */
     @ResponseBody
@@ -50,6 +74,26 @@ public class FrontUserController {
         return deliveryService.queryList(deliveryParam.toMap(),null,null);
     }
 
+    /**
+     * 查询地址
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "queryOneAddress")
+    public Delivery queryOneAddress(int id) {
+        return deliveryService.fetch(id);
+    }
+
+    /**
+     * 删除地址
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "deleteAddress")
+    public ResultDTO deleteAddress(int id) {
+        deliveryService.delete(id);
+        return new ResultDTO(true, "删除成功！");
+    }
     /**
      * 更新用户信息
      *
