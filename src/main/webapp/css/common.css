@@ -89,7 +89,7 @@ ul.import-d li{ height:28px; line-height:28px;}
 /*add*/
 
 
-.title{ width:100%; height:auto; overflow:hidden; background:#48bcbb; padding:8px 0; text-align:center; font-size:14px; font-weight:bold; color:#069;}
+.title{ width:100%; height:auto; overflow:hidden; background:#438eb9; padding:8px 0; text-align:center; font-size:14px; font-weight:bold; color:#069;}
 .title b{ line-height:24px; color:#fff; font-weight:normal; float:left; margin:0 0 0 15px;}
 .title em{ color:#ff6;}
 .title .btns{ float:right; margin:0 5px 0 0;}
@@ -123,7 +123,7 @@ div.form .remark{ text-align:left; padding:20px;}
 
 .table_1{ width:100%; border-left:1px solid #ddd;}
 .table_1 tr:hover{ background:#fbfbfb;}
-.table_1 th{ height:25px;border-right:1px solid #ddd; border-bottom:1px solid #ddd; padding:8px; background:#48bcbb; color:#fff;}
+.table_1 th{ height:25px;border-right:1px solid #ddd; border-bottom:1px solid #ddd; padding:8px; background:#438eb9; color:#fff;}
 .table_1 td{ border-right:1px solid #ddd; border-bottom:1px solid #ddd; padding:6px 8px; color:#666;}
 .table_1 img{ vertical-align:middle}
 .table_1 em{ color:#f00;}
