@@ -1,0 +1,93 @@
+<!--样式区-->
+<style>
+    .ms-controller, .ms-important {
+        visibility: hidden
+    }
+
+    input[type='checkbox'] {
+        margin: 8px 5px 5px 5px;
+    }
+</style>
+
+<!--标签区-->
+<div id="listPetOrder" ms-important="listPetOrder" class="page-content">
+    <div id="main" style="width: 600px;height:400px;"></div>
+</div>
+
+<!--脚本区-->
+<script type="text/javascript">
+    //本页面脚本列表
+    var scripts = [null];
+    //加载完毕后执行
+    ace.load_ajax_scripts(scripts, function () {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '宠物销量排行'
+            },
+            tooltip: {},
+            legend: {
+                data:['售出宠物数']
+            },
+            xAxis: {
+                name: '时间',
+                type: 'category',
+                data: [],
+                axisLabel: {
+                    interval : 0
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} 只'
+                }
+            },
+            series: [{
+                name: '售出宠物数',
+                type: 'line',
+                data: []
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        //DOM加载完
+        avalon.ready(function () {
+            var vm = avalon.define({
+                $id: "listPetOrder",
+
+                init: function () {
+                    myChart.showLoading();
+                    $.ajax({
+                        url: "/admin/pet/count/CountOrderByDays",
+                        type: "GET",
+                        cache: false,
+                        dataType: 'json',
+                        success: function (result) {
+                            // 填入数据
+                            myChart.setOption({
+                                xAxis: {
+                                    data: result.dates
+                                },
+                                series: [{
+                                    // 根据名字对应到相应的系列
+                                    name: '售出宠物数',
+                                    data: result.sums
+                                }]
+                            });
+                            myChart.hideLoading();
+                        }
+                    })
+                }
+
+            });
+            avalon.scan($("#listPetOrder")[0], vm);
+            vm.init();
+        });
+    });
+
+</script>
