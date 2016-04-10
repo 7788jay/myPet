@@ -11,7 +11,7 @@
 
 <!--标签区-->
 <div id="listPetOrder" ms-important="listPetOrder" class="page-content">
-    <div id="main" style="width: 600px;height:400px;"></div>
+    <div id="main" style="width: 100%;height:500px;"></div>
 </div>
 
 <!--脚本区-->
@@ -26,11 +26,11 @@
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: '宠物销量排行'
+                text: '订单及宠物日销量统计'
             },
             tooltip: {},
             legend: {
-                data:['售出宠物数']
+                data:['日售出宠物数','日订单数']
             },
             xAxis: {
                 name: '时间',
@@ -41,13 +41,14 @@
                 }
             },
             yAxis: {
-                type: 'value',
-                axisLabel: {
-                    formatter: '{value} 只'
-                }
+                type: 'value'
             },
             series: [{
-                name: '售出宠物数',
+                name: '日售出宠物数',
+                type: 'line',
+                data: []
+            },{
+                name: '日订单数',
                 type: 'line',
                 data: []
             }]
@@ -63,7 +64,7 @@
                 init: function () {
                     myChart.showLoading();
                     $.ajax({
-                        url: "/admin/pet/count/CountOrderByDays",
+                        url: "/admin/pet/count/CountOrderByDays?num=20",
                         type: "GET",
                         cache: false,
                         dataType: 'json',
@@ -75,8 +76,12 @@
                                 },
                                 series: [{
                                     // 根据名字对应到相应的系列
-                                    name: '售出宠物数',
-                                    data: result.sums
+                                    name: '日售出宠物数',
+                                    data: result.petSum
+                                },{
+                                    // 根据名字对应到相应的系列
+                                    name: '日订单数',
+                                    data: result.orderSum
                                 }]
                             });
                             myChart.hideLoading();

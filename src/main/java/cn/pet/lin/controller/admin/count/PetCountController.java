@@ -59,13 +59,16 @@ public class PetCountController {
         List<Count> counts = countService.CountOrderByDays(num);
         Map<String,Object> map = new HashMap<String,Object>();
         List<String> dates = new ArrayList<String>();
-        List<Integer> sums = new ArrayList<Integer>();
+        List<Integer> orderSum = new ArrayList<Integer>();
+        List<Integer> petSum = new ArrayList<Integer>();
         for (Count count : counts) {
             dates.add(count.getDate());
-            sums.add(count.getOrderSum());
+            orderSum.add(count.getOrderSum());
+            petSum.add(count.getPetSum());
         }
         map.put("dates",dates);
-        map.put("sums",sums);
+        map.put("orderSum",orderSum);
+        map.put("petSum",petSum);
         return map;
     }
 }

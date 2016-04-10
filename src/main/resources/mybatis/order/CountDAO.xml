@@ -6,7 +6,8 @@
     <select id="CountOrderByDays" resultType="cn.pet.lin.domain.order.Count">
         SELECT
         FROM_UNIXTIME(createTime/1000,'%Y-%m-%d') as date,
-        SUM(quantity) as orderSum
+        count(DISTINCT oo.code) as orderSum,
+        SUM(quantity) as petSum
         FROM
         order_item oi LEFT JOIN order_orders oo
         ON oi.orderCode = oo.code

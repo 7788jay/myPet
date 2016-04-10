@@ -10,6 +10,8 @@ public class Count {
     private String date;
     //订单数
     private int orderSum;
+    //宠物数
+    private int petSum;
 
     public int getOrderSum() {
         return orderSum;
@@ -25,5 +27,13 @@ public class Count {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getPetSum() {
+        return petSum;
+    }
+
+    public void setPetSum(int petSum) {
+        this.petSum = petSum;
     }
 }
