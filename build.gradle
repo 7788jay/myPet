@@ -15,6 +15,13 @@ repositories {
     maven { url 'http://maven.oschina.net/content/groups/public/' }
 }
 
+//1. exclude commons-logging
+configurations.all {
+    all*.exclude group: "commons-logging", module: "commons-logging"
+    //排除log4j桥接，只允许使用logback
+    all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     //导入本地的依赖包
@@ -33,7 +40,10 @@ dependencies {
             'org.apache.shiro:shiro-spring:1.2.4',
             'org.apache.shiro:shiro-web:1.2.4',
             'org.apache.shiro:shiro-core:1.2.4',
-            'org.slf4j:slf4j-nop:1.7.9',
+            //2. bridge logging from JCL to SLF4j
+            'org.slf4j:jcl-over-slf4j:1.7.12',
+            //3. Logback
+            'ch.qos.logback:logback-classic:1.1.3',
             'javax.servlet:javax.servlet:3.0.0.v201103241009',
             'apache-lang:commons-lang:2.1',
             'commons-fileupload:commons-fileupload:1.3.1-jenkins-1',

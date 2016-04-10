@@ -2,25 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.pet.lin.dao.user.IUserDAO">
-<!--
-insert
-update
-deleteById
-deleteByCondition
-deleteByProperty
-fetch
-findOne
-findList
-findAll
-queryPage
-queryList
-queryOne
-count
-selectMaxId
-updateOrSave
-selectOne
-selectList
--->
+
     <sql id="Base_Column_List">
         id,
         code,
@@ -279,42 +261,40 @@ selectList
         SELECT
         <include refid="Base_Column_List" />
         FROM user_user
-        <where>
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
 
             <if test="condition.whereSql != null">
-                and id in (#{condition.whereSql})
+                AND id in (#{condition.whereSql})
             </if>
 
             <if test="condition.id!=null">
-                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+                AND ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
             </if>
             <if test="condition.code!=null">
-                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+                AND ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
             </if>
             <if test="condition.userName!=null">
-                ${condition.groupOp}   userName  ${condition.userName.op}  #{condition.userName.data}
+                AND ${condition.groupOp}   userName  ${condition.userName.op}  #{condition.userName.data}
             </if>
             <if test="condition.password!=null">
-                ${condition.groupOp}   password  ${condition.password.op}  #{condition.password.data}
+                AND ${condition.groupOp}   password  ${condition.password.op}  #{condition.password.data}
             </if>
             <if test="condition.phone!=null">
-                ${condition.groupOp}   phone  ${condition.phone.op}  #{condition.phone.data}
+                AND ${condition.groupOp}   phone  ${condition.phone.op}  #{condition.phone.data}
             </if>
             <if test="condition.createTime!=null">
-                ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
+                AND ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
             </if>
             <if test="condition.userType!=null">
-                ${condition.groupOp}   userType  ${condition.userType.op}  #{condition.userType.data}
+                AND ${condition.groupOp}   userType  ${condition.userType.op}  #{condition.userType.data}
             </if>
             <if test="condition.salt!=null">
-                ${condition.groupOp}   salt  ${condition.salt.op}  #{condition.salt.data}
+                AND ${condition.groupOp}   salt  ${condition.salt.op}  #{condition.salt.data}
             </if>
             <if test="condition.locked!=null">
-                ${condition.groupOp}   locked  ${condition.locked.op}  #{condition.locked.data}
+                AND ${condition.groupOp}   locked  ${condition.locked.op}  #{condition.locked.data}
             </if>
-
-
-    </where>
+		</trim>
 
         <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
@@ -400,36 +380,35 @@ selectList
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(1) FROM user_user
-       <where>
+       <trim prefix="WHERE" prefixOverrides="AND | OR">
            <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
+               AND ${groupOp} id ${id.op}  #{id.data}
            </if>
            <if test="code!=null">
-               ${groupOp} code ${code.op}  #{code.data}
+               AND ${groupOp} code ${code.op}  #{code.data}
            </if>
            <if test="userName!=null">
-               ${groupOp} userName ${userName.op}  #{userName.data}
+               AND ${groupOp} userName ${userName.op}  #{userName.data}
            </if>
            <if test="password!=null">
-               ${groupOp} password ${password.op}  #{password.data}
+               AND ${groupOp} password ${password.op}  #{password.data}
            </if>
            <if test="phone!=null">
-               ${groupOp} phone ${phone.op}  #{phone.data}
+               AND ${groupOp} phone ${phone.op}  #{phone.data}
            </if>
            <if test="createTime!=null">
-               ${groupOp} createTime ${createTime.op}  #{createTime.data}
+               AND ${groupOp} createTime ${createTime.op}  #{createTime.data}
            </if>
            <if test="userType!=null">
-               ${groupOp} userType ${userType.op}  #{userType.data}
+               AND ${groupOp} userType ${userType.op}  #{userType.data}
            </if>
            <if test="salt!=null">
-               ${groupOp} salt ${salt.op}  #{salt.data}
+               AND ${groupOp} salt ${salt.op}  #{salt.data}
            </if>
            <if test="locked!=null">
-               ${groupOp} locked ${locked.op}  #{locked.data}
+               AND ${groupOp} locked ${locked.op}  #{locked.data}
            </if>
-
-       </where>
+       </trim>
     <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
     </if>

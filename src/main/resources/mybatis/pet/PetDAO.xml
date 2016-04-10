@@ -2,25 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.pet.lin.dao.pet.IPetDAO">
-<!--
-insert
-update
-deleteById
-deleteByCondition
-deleteByProperty
-fetch
-findOne
-findList
-findAll
-queryPage
-queryList
-queryOne
-count
-selectMaxId
-updateOrSave
-selectOne
-selectList
--->
+
     <sql id="Base_Column_List">
         id,
         code,
@@ -351,54 +333,52 @@ selectList
         SELECT
         <include refid="Base_Column_List" />
         FROM pet_pet
-        <where>
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
 
             <if test="condition.whereSql != null">
-                and id in (#{condition.whereSql})
+                AND id in (#{condition.whereSql})
             </if>
 
             <if test="condition.id!=null">
-                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+                AND ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
             </if>
             <if test="condition.code!=null">
-                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+                AND ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
             </if>
             <if test="condition.name!=null">
-                ${condition.groupOp}   name  ${condition.name.op}  #{condition.name.data}
+                AND ${condition.groupOp}   name  ${condition.name.op}  #{condition.name.data}
             </if>
             <if test="condition.image!=null">
-                ${condition.groupOp}   image  ${condition.image.op}  #{condition.image.data}
+                AND ${condition.groupOp}   image  ${condition.image.op}  #{condition.image.data}
             </if>
             <if test="condition.weight!=null">
-                ${condition.groupOp}   weight  ${condition.weight.op}  #{condition.weight.data}
+                AND ${condition.groupOp}   weight  ${condition.weight.op}  #{condition.weight.data}
             </if>
             <if test="condition.sex!=null">
-                ${condition.groupOp}   sex  ${condition.sex.op}  #{condition.sex.data}
+                AND ${condition.groupOp}   sex  ${condition.sex.op}  #{condition.sex.data}
             </if>
             <if test="condition.age!=null">
-                ${condition.groupOp}   age  ${condition.age.op}  #{condition.age.data}
+                AND ${condition.groupOp}   age  ${condition.age.op}  #{condition.age.data}
             </if>
             <if test="condition.description!=null">
-                ${condition.groupOp}   description  ${condition.description.op}  #{condition.description.data}
+                AND ${condition.groupOp}   description  ${condition.description.op}  #{condition.description.data}
             </if>
             <if test="condition.price!=null">
-                ${condition.groupOp}   price  ${condition.price.op}  #{condition.price.data}
+                AND ${condition.groupOp}   price  ${condition.price.op}  #{condition.price.data}
             </if>
             <if test="condition.quantity!=null">
-                ${condition.groupOp}   quantity  ${condition.quantity.op}  #{condition.quantity.data}
+                AND ${condition.groupOp}   quantity  ${condition.quantity.op}  #{condition.quantity.data}
             </if>
             <if test="condition.categoryCode!=null">
-                ${condition.groupOp}   categoryCode  ${condition.categoryCode.op}  #{condition.categoryCode.data}
+                AND ${condition.groupOp}   categoryCode  ${condition.categoryCode.op}  #{condition.categoryCode.data}
             </if>
             <if test="condition.createTime!=null">
-                ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
+                AND ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
             </if>
             <if test="condition.status!=null">
-                ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
+                AND ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
             </if>
-
-
-    </where>
+		</trim>
 
         <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
@@ -508,48 +488,47 @@ selectList
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(1) FROM pet_pet
-       <where>
+       <trim prefix="WHERE" prefixOverrides="AND | OR">
            <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
+               AND ${groupOp} id ${id.op}  #{id.data}
            </if>
            <if test="code!=null">
-               ${groupOp} code ${code.op}  #{code.data}
+               AND ${groupOp} code ${code.op}  #{code.data}
            </if>
            <if test="name!=null">
-               ${groupOp} name ${name.op}  #{name.data}
+               AND ${groupOp} name ${name.op}  #{name.data}
            </if>
            <if test="image!=null">
-               ${groupOp} image ${image.op}  #{image.data}
+               AND ${groupOp} image ${image.op}  #{image.data}
            </if>
            <if test="weight!=null">
-               ${groupOp} weight ${weight.op}  #{weight.data}
+               AND ${groupOp} weight ${weight.op}  #{weight.data}
            </if>
            <if test="sex!=null">
-               ${groupOp} sex ${sex.op}  #{sex.data}
+               AND ${groupOp} sex ${sex.op}  #{sex.data}
            </if>
            <if test="age!=null">
-               ${groupOp} age ${age.op}  #{age.data}
+               AND ${groupOp} age ${age.op}  #{age.data}
            </if>
            <if test="description!=null">
-               ${groupOp} description ${description.op}  #{description.data}
+               AND ${groupOp} description ${description.op}  #{description.data}
            </if>
            <if test="price!=null">
-               ${groupOp} price ${price.op}  #{price.data}
+               AND ${groupOp} price ${price.op}  #{price.data}
            </if>
            <if test="quantity!=null">
-               ${groupOp} quantity ${quantity.op}  #{quantity.data}
+               AND ${groupOp} quantity ${quantity.op}  #{quantity.data}
            </if>
            <if test="categoryCode!=null">
-               ${groupOp} categoryCode ${categoryCode.op}  #{categoryCode.data}
+               AND ${groupOp} categoryCode ${categoryCode.op}  #{categoryCode.data}
            </if>
            <if test="createTime!=null">
-               ${groupOp} createTime ${createTime.op}  #{createTime.data}
+               AND ${groupOp} createTime ${createTime.op}  #{createTime.data}
            </if>
            <if test="status!=null">
-               ${groupOp} status ${status.op}  #{status.data}
+               AND ${groupOp} status ${status.op}  #{status.data}
            </if>
-
-       </where>
+       </trim>
     <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
     </if>

@@ -1,0 +1,37 @@
+<!--
+  ~ Copyright (c) 2013-2014, thinkjoy Inc. All Rights Reserved.
+  ~
+  ~ Project Name: samples
+  ~ $$Id: logback.xml 14-7-27 下午6:18 $$
+  -->
+<!-- debug="true"会将log框架本身的调试信息打印出来   -->
+<configuration>
+    <!--
+    As of version 0.9.25, logback-classic ships with LevelChangePropagator, an implementation of LoggerContextListener
+    which propagates changes made to the level of any logback-classic logger onto the java.util.logging framework.
+    Such propagation eliminates the performance impact of disabled log statements. Instances of LogRecord will be sent
+    to logback (via SLF4J) only for enabled log statements. This makes it reasonable for real-world applications to use
+    the jul-to-slf4j bridge.
+    -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <logger name="org.springframework" level="debug" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="com.mkyong.helloworld" level="debug" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

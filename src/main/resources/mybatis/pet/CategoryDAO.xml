@@ -2,25 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.pet.lin.dao.pet.ICategoryDAO">
-<!--
-insert
-update
-deleteById
-deleteByCondition
-deleteByProperty
-fetch
-findOne
-findList
-findAll
-queryPage
-queryList
-queryOne
-count
-selectMaxId
-updateOrSave
-selectOne
-selectList
--->
+
     <sql id="Base_Column_List">
         id,
         code,
@@ -225,33 +207,31 @@ selectList
         SELECT
         <include refid="Base_Column_List" />
         FROM pet_category
-        <where>
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
 
             <if test="condition.whereSql != null">
-                and id in (#{condition.whereSql})
+                AND id in (#{condition.whereSql})
             </if>
 
             <if test="condition.id!=null">
-                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+                AND ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
             </if>
             <if test="condition.code!=null">
-                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+                AND ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
             </if>
             <if test="condition.name!=null">
-                ${condition.groupOp}   name  ${condition.name.op}  #{condition.name.data}
+                AND ${condition.groupOp}   name  ${condition.name.op}  #{condition.name.data}
             </if>
             <if test="condition.animalCode!=null">
-                ${condition.groupOp}   animalCode  ${condition.animalCode.op}  #{condition.animalCode.data}
+                AND ${condition.groupOp}   animalCode  ${condition.animalCode.op}  #{condition.animalCode.data}
             </if>
             <if test="condition.description!=null">
-                ${condition.groupOp}   description  ${condition.description.op}  #{condition.description.data}
+                AND ${condition.groupOp}   description  ${condition.description.op}  #{condition.description.data}
             </if>
             <if test="condition.createTime!=null">
-                ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
+                AND ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
             </if>
-
-
-    </where>
+		</trim>
 
         <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
@@ -319,27 +299,26 @@ selectList
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(1) FROM pet_category
-       <where>
+       <trim prefix="WHERE" prefixOverrides="AND | OR">
            <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
+               AND ${groupOp} id ${id.op}  #{id.data}
            </if>
            <if test="code!=null">
-               ${groupOp} code ${code.op}  #{code.data}
+               AND ${groupOp} code ${code.op}  #{code.data}
            </if>
            <if test="name!=null">
-               ${groupOp} name ${name.op}  #{name.data}
+               AND ${groupOp} name ${name.op}  #{name.data}
            </if>
            <if test="animalCode!=null">
-               ${groupOp} animalCode ${animalCode.op}  #{animalCode.data}
+               AND ${groupOp} animalCode ${animalCode.op}  #{animalCode.data}
            </if>
            <if test="description!=null">
-               ${groupOp} description ${description.op}  #{description.data}
+               AND ${groupOp} description ${description.op}  #{description.data}
            </if>
            <if test="createTime!=null">
-               ${groupOp} createTime ${createTime.op}  #{createTime.data}
+               AND ${groupOp} createTime ${createTime.op}  #{createTime.data}
            </if>
-
-       </where>
+       </trim>
     <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
     </if>

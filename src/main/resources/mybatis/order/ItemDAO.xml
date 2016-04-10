@@ -2,25 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.pet.lin.dao.order.IItemDAO">
-<!--
-insert
-update
-deleteById
-deleteByCondition
-deleteByProperty
-fetch
-findOne
-findList
-findAll
-queryPage
-queryList
-queryOne
-count
-selectMaxId
-updateOrSave
-selectOne
-selectList
--->
+
     <sql id="Base_Column_List">
         id,
         code,
@@ -225,33 +207,31 @@ selectList
         SELECT
         <include refid="Base_Column_List" />
         FROM order_item
-        <where>
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
 
             <if test="condition.whereSql != null">
-                and id in (#{condition.whereSql})
+                AND id in (#{condition.whereSql})
             </if>
 
             <if test="condition.id!=null">
-                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+                AND ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
             </if>
             <if test="condition.code!=null">
-                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+                AND ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
             </if>
             <if test="condition.orderCode!=null">
-                ${condition.groupOp}   orderCode  ${condition.orderCode.op}  #{condition.orderCode.data}
+                AND ${condition.groupOp}   orderCode  ${condition.orderCode.op}  #{condition.orderCode.data}
             </if>
             <if test="condition.petCode!=null">
-                ${condition.groupOp}   petCode  ${condition.petCode.op}  #{condition.petCode.data}
+                AND ${condition.groupOp}   petCode  ${condition.petCode.op}  #{condition.petCode.data}
             </if>
             <if test="condition.quantity!=null">
-                ${condition.groupOp}   quantity  ${condition.quantity.op}  #{condition.quantity.data}
+                AND ${condition.groupOp}   quantity  ${condition.quantity.op}  #{condition.quantity.data}
             </if>
             <if test="condition.totalPrice!=null">
-                ${condition.groupOp}   totalPrice  ${condition.totalPrice.op}  #{condition.totalPrice.data}
+                AND ${condition.groupOp}   totalPrice  ${condition.totalPrice.op}  #{condition.totalPrice.data}
             </if>
-
-
-    </where>
+		</trim>
 
         <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
@@ -319,27 +299,26 @@ selectList
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(1) FROM order_item
-       <where>
+       <trim prefix="WHERE" prefixOverrides="AND | OR">
            <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
+               AND ${groupOp} id ${id.op}  #{id.data}
            </if>
            <if test="code!=null">
-               ${groupOp} code ${code.op}  #{code.data}
+               AND ${groupOp} code ${code.op}  #{code.data}
            </if>
            <if test="orderCode!=null">
-               ${groupOp} orderCode ${orderCode.op}  #{orderCode.data}
+               AND ${groupOp} orderCode ${orderCode.op}  #{orderCode.data}
            </if>
            <if test="petCode!=null">
-               ${groupOp} petCode ${petCode.op}  #{petCode.data}
+               AND ${groupOp} petCode ${petCode.op}  #{petCode.data}
            </if>
            <if test="quantity!=null">
-               ${groupOp} quantity ${quantity.op}  #{quantity.data}
+               AND ${groupOp} quantity ${quantity.op}  #{quantity.data}
            </if>
            <if test="totalPrice!=null">
-               ${groupOp} totalPrice ${totalPrice.op}  #{totalPrice.data}
+               AND ${groupOp} totalPrice ${totalPrice.op}  #{totalPrice.data}
            </if>
-
-       </where>
+       </trim>
     <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
     </if>

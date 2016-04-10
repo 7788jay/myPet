@@ -2,25 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.pet.lin.dao.order.IOrdersDAO">
-<!--
-insert
-update
-deleteById
-deleteByCondition
-deleteByProperty
-fetch
-findOne
-findList
-findAll
-queryPage
-queryList
-queryOne
-count
-selectMaxId
-updateOrSave
-selectOne
-selectList
--->
+
     <sql id="Base_Column_List">
         id,
         userCode,
@@ -387,60 +369,58 @@ selectList
         SELECT
         <include refid="Base_Column_List" />
         FROM order_orders
-        <where>
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
 
             <if test="condition.whereSql != null">
-                and id in (#{condition.whereSql})
+                AND id in (#{condition.whereSql})
             </if>
 
             <if test="condition.id!=null">
-                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+                AND ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
             </if>
             <if test="condition.userCode!=null">
-                ${condition.groupOp}   userCode  ${condition.userCode.op}  #{condition.userCode.data}
+                AND ${condition.groupOp}   userCode  ${condition.userCode.op}  #{condition.userCode.data}
             </if>
             <if test="condition.code!=null">
-                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+                AND ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
             </if>
             <if test="condition.createTime!=null">
-                ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
+                AND ${condition.groupOp}   createTime  ${condition.createTime.op}  #{condition.createTime.data}
             </if>
             <if test="condition.payTime!=null">
-                ${condition.groupOp}   payTime  ${condition.payTime.op}  #{condition.payTime.data}
+                AND ${condition.groupOp}   payTime  ${condition.payTime.op}  #{condition.payTime.data}
             </if>
             <if test="condition.payType!=null">
-                ${condition.groupOp}   payType  ${condition.payType.op}  #{condition.payType.data}
+                AND ${condition.groupOp}   payType  ${condition.payType.op}  #{condition.payType.data}
             </if>
             <if test="condition.sendTime!=null">
-                ${condition.groupOp}   sendTime  ${condition.sendTime.op}  #{condition.sendTime.data}
+                AND ${condition.groupOp}   sendTime  ${condition.sendTime.op}  #{condition.sendTime.data}
             </if>
             <if test="condition.completeTime!=null">
-                ${condition.groupOp}   completeTime  ${condition.completeTime.op}  #{condition.completeTime.data}
+                AND ${condition.groupOp}   completeTime  ${condition.completeTime.op}  #{condition.completeTime.data}
             </if>
             <if test="condition.deliveryType!=null">
-                ${condition.groupOp}   deliveryType  ${condition.deliveryType.op}  #{condition.deliveryType.data}
+                AND ${condition.groupOp}   deliveryType  ${condition.deliveryType.op}  #{condition.deliveryType.data}
             </if>
             <if test="condition.deliveryTime!=null">
-                ${condition.groupOp}   deliveryTime  ${condition.deliveryTime.op}  #{condition.deliveryTime.data}
+                AND ${condition.groupOp}   deliveryTime  ${condition.deliveryTime.op}  #{condition.deliveryTime.data}
             </if>
             <if test="condition.deliveryCode!=null">
-                ${condition.groupOp}   deliveryCode  ${condition.deliveryCode.op}  #{condition.deliveryCode.data}
+                AND ${condition.groupOp}   deliveryCode  ${condition.deliveryCode.op}  #{condition.deliveryCode.data}
             </if>
             <if test="condition.totalPrice!=null">
-                ${condition.groupOp}   totalPrice  ${condition.totalPrice.op}  #{condition.totalPrice.data}
+                AND ${condition.groupOp}   totalPrice  ${condition.totalPrice.op}  #{condition.totalPrice.data}
             </if>
             <if test="condition.supplyCode!=null">
-                ${condition.groupOp}   supplyCode  ${condition.supplyCode.op}  #{condition.supplyCode.data}
+                AND ${condition.groupOp}   supplyCode  ${condition.supplyCode.op}  #{condition.supplyCode.data}
             </if>
             <if test="condition.description!=null">
-                ${condition.groupOp}   description  ${condition.description.op}  #{condition.description.data}
+                AND ${condition.groupOp}   description  ${condition.description.op}  #{condition.description.data}
             </if>
             <if test="condition.status!=null">
-                ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
+                AND ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
             </if>
-
-
-    </where>
+		</trim>
 
         <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
@@ -562,54 +542,53 @@ selectList
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(1) FROM order_orders
-       <where>
+       <trim prefix="WHERE" prefixOverrides="AND | OR">
            <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
+               AND ${groupOp} id ${id.op}  #{id.data}
            </if>
            <if test="userCode!=null">
-               ${groupOp} userCode ${userCode.op}  #{userCode.data}
+               AND ${groupOp} userCode ${userCode.op}  #{userCode.data}
            </if>
            <if test="code!=null">
-               ${groupOp} code ${code.op}  #{code.data}
+               AND ${groupOp} code ${code.op}  #{code.data}
            </if>
            <if test="createTime!=null">
-               ${groupOp} createTime ${createTime.op}  #{createTime.data}
+               AND ${groupOp} createTime ${createTime.op}  #{createTime.data}
            </if>
            <if test="payTime!=null">
-               ${groupOp} payTime ${payTime.op}  #{payTime.data}
+               AND ${groupOp} payTime ${payTime.op}  #{payTime.data}
            </if>
            <if test="payType!=null">
-               ${groupOp} payType ${payType.op}  #{payType.data}
+               AND ${groupOp} payType ${payType.op}  #{payType.data}
            </if>
            <if test="sendTime!=null">
-               ${groupOp} sendTime ${sendTime.op}  #{sendTime.data}
+               AND ${groupOp} sendTime ${sendTime.op}  #{sendTime.data}
            </if>
            <if test="completeTime!=null">
-               ${groupOp} completeTime ${completeTime.op}  #{completeTime.data}
+               AND ${groupOp} completeTime ${completeTime.op}  #{completeTime.data}
            </if>
            <if test="deliveryType!=null">
-               ${groupOp} deliveryType ${deliveryType.op}  #{deliveryType.data}
+               AND ${groupOp} deliveryType ${deliveryType.op}  #{deliveryType.data}
            </if>
            <if test="deliveryTime!=null">
-               ${groupOp} deliveryTime ${deliveryTime.op}  #{deliveryTime.data}
+               AND ${groupOp} deliveryTime ${deliveryTime.op}  #{deliveryTime.data}
            </if>
            <if test="deliveryCode!=null">
-               ${groupOp} deliveryCode ${deliveryCode.op}  #{deliveryCode.data}
+               AND ${groupOp} deliveryCode ${deliveryCode.op}  #{deliveryCode.data}
            </if>
            <if test="totalPrice!=null">
-               ${groupOp} totalPrice ${totalPrice.op}  #{totalPrice.data}
+               AND ${groupOp} totalPrice ${totalPrice.op}  #{totalPrice.data}
            </if>
            <if test="supplyCode!=null">
-               ${groupOp} supplyCode ${supplyCode.op}  #{supplyCode.data}
+               AND ${groupOp} supplyCode ${supplyCode.op}  #{supplyCode.data}
            </if>
            <if test="description!=null">
-               ${groupOp} description ${description.op}  #{description.data}
+               AND ${groupOp} description ${description.op}  #{description.data}
            </if>
            <if test="status!=null">
-               ${groupOp} status ${status.op}  #{status.data}
+               AND ${groupOp} status ${status.op}  #{status.data}
            </if>
-
-       </where>
+       </trim>
     <if test="orderBy!=null">
         ORDER BY ${orderBy} ${sortBy}
     </if>

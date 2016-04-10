@@ -9,6 +9,8 @@ import cn.pet.lin.utils.PageUtils;
 import cn.pet.lin.utils.enums.ERRORMSG;
 import cn.pet.lin.utils.enums.MatchTypeEnum;
 import cn.pet.lin.utils.enums.SUCCESSMSG;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/user/user")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     IUserService userService;
 
@@ -38,6 +42,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/queryPage")
     public BizData4Page<User> queryPage(UserParam param, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10") int PageSize) {
+        logger.error("This is Error message", new Exception("Testing"));
         List<User> users = userService.queryPage(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY), (pageNo - 1) * PageSize, PageSize);
         int record = userService.count(param.toSearchFieldMap(MatchTypeEnum.ALL_FUZZY));
         return PageUtils.toBizData4Page(users, pageNo, PageSize, record);
