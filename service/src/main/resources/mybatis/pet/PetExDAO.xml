@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pet.lin.dao.pet.IPetDAO">
+	<!-- 在这里存放用户自定义的映射配置（注：PetDAO.xml里各节点的ID不能在这里重复出现）  -->
+	<select id="queryPageEx" resultType="Pet">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pet_pet
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="condition.name!=null">
+				AND name like '%${condition.name}%'
+			</if>
+			<if test="condition.weight!=null">
+				AND weight = #{condition.weight}
+			</if>
+			<if test="condition.sex!=null">
+				AND sex = #{condition.sex}
+			</if>
+			<if test="condition.age!=null">
+				AND age = #{condition.age}
+			</if>
+			<if test="condition.startLife!=null and condition.startLife!=''">
+				AND age &gt; #{condition.startLife}
+			</if>
+			<if test="condition.endLife!=null and condition.endLife!=''">
+				AND age &lt; #{condition.endLife}
+			</if>
+			<if test="condition.price!=null">
+				AND price = #{condition.price}
+			</if>
+			<if test="condition.startPrice!=null and condition.startPrice!=''">
+				AND price &gt; #{condition.startPrice}
+			</if>
+			<if test="condition.endPrice!=null and condition.endPrice!=''">
+				AND price &lt; #{condition.endPrice}
+			</if>
+			<if test="condition.quantity!=null">
+				AND quantity = #{condition.quantity}
+			</if>
+			<if test="condition.categoryCode!=null">
+				AND categoryCode = #{condition.categoryCode}
+			</if>
+		</trim>
+		<if test="orderBy!=null">
+			ORDER BY ${orderBy} ${sortBy}
+		</if>
+		<if test="offset != null">
+			limit ${offset}, ${rows}
+		</if>
+	</select>
+
+	<select id="countEx" resultType="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM pet_pet
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="condition.name!=null">
+				AND name like '%${condition.name}%'
+			</if>
+			<if test="condition.weight!=null">
+				AND weight = #{condition.weight}
+			</if>
+			<if test="condition.sex!=null">
+				AND sex = #{condition.sex}
+			</if>
+			<if test="condition.age!=null">
+				AND age = #{condition.age}
+			</if>
+			<if test="condition.startLife!=null and condition.startLife!=''">
+				AND age &gt; #{condition.startLife}
+			</if>
+			<if test="condition.endLife!=null and condition.endLife!=''">
+				AND age &lt; #{condition.endLife}
+			</if>
+			<if test="condition.price!=null">
+				AND price = #{condition.price}
+			</if>
+			<if test="condition.startPrice!=null and condition.startPrice!=''">
+				AND price &gt; #{condition.startPrice}
+			</if>
+			<if test="condition.endPrice!=null and condition.endPrice!=''">
+				AND price &lt; #{condition.endPrice}
+			</if>
+			<if test="condition.quantity!=null">
+				AND quantity = #{condition.quantity}
+			</if>
+			<if test="condition.categoryCode!=null">
+				AND categoryCode = #{condition.categoryCode}
+			</if>
+		</trim>
+	</select>
+
+	<!--查询销量高的宠物-->
+	<select id="queryPetOrderSum" resultType="cn.pet.lin.pet.PetEx">
+		SELECT
+			pp.*, sum(oi.quantity) AS orderSum
+		FROM
+			order_item oi
+		LEFT JOIN pet_pet pp ON oi.petCode = pp.code
+		GROUP BY
+			oi.petCode
+		ORDER BY
+			sum(oi.quantity) DESC
+		<if test="offset != null">
+			limit ${offset}, ${rows}
+		</if>
+	</select>
+	
+</mapper>

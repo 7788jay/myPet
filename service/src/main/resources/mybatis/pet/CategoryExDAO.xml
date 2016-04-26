@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pet.lin.dao.pet.ICategoryDAO">
+	<!-- 在这里存放用户自定义的映射配置（注：CategoryDAO.xml里各节点的ID不能在这里重复出现）  -->
+
+	<select id="queryOneAndName" resultType="cn.pet.lin.pet.CategoryEx">
+		SELECT
+			pc.*,
+			pa.name AS animalName
+		FROM
+			pet_category pc
+		LEFT JOIN pet_animal pa
+		ON pc.animalCode = pa.code
+		WHERE pc.code = #{code};
+	</select>
+</mapper>
