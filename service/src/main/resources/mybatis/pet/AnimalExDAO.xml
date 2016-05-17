@@ -4,18 +4,18 @@
 <mapper namespace="cn.pet.lin.dao.pet.IAnimalDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：AnimalDAO.xml里各节点的ID不能在这里重复出现）  -->
 	
-	<resultMap id="categoryResult" type="cn.pet.lin.pet.Category">
+	<resultMap id="categoryResult" type="cn.pet.lin.domain.pet.Category">
 		<id column="id" property="ca_id"></id>
 		<result property="code" column="ca_code"></result>
 		<result property="name" column="ca_name"></result>
 		<result property="animalCode" column="ca_animalCode"></result>
 	</resultMap>
 
-	<resultMap id="animalExResult" type="cn.pet.lin.pet.AnimalEx">
+	<resultMap id="animalExResult" type="cn.pet.lin.domain.pet.AnimalEx">
 		<id property="id" column="an_id"></id>
 		<result property="code" column="an_code"></result>
 		<result property="name" column="an_name"></result>
-		<collection property="categories" ofType="cn.pet.lin.pet.Category" javaType="java.util.List" resultMap="categoryResult"></collection>
+		<collection property="categories" ofType="cn.pet.lin.domain.pet.Category" javaType="java.util.List" resultMap="categoryResult"></collection>
 	</resultMap>
 
 	<select id="getAnimalAndCategory" resultMap="animalExResult">

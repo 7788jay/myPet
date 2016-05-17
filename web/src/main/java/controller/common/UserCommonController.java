@@ -1,6 +1,6 @@
 package controller.common;
 
-import cn.pet.lin.user.User;
+import cn.pet.lin.domain.user.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

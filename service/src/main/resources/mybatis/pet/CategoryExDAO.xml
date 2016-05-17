@@ -4,7 +4,7 @@
 <mapper namespace="cn.pet.lin.dao.pet.ICategoryDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：CategoryDAO.xml里各节点的ID不能在这里重复出现）  -->
 
-	<select id="queryOneAndName" resultType="cn.pet.lin.pet.CategoryEx">
+	<select id="queryOneAndName" resultType="cn.pet.lin.domain.pet.CategoryEx">
 		SELECT
 			pc.*,
 			pa.name AS animalName

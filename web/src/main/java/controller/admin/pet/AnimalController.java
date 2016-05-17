@@ -2,9 +2,9 @@ package controller.admin.pet;
 
 import cn.pet.lin.BizData4Page;
 import cn.pet.lin.common.ResultDTO;
-import cn.pet.lin.param.pet.AnimalParam;
-import cn.pet.lin.pet.Animal;
-import cn.pet.lin.pet.AnimalEx;
+import cn.pet.lin.domain.param.pet.AnimalParam;
+import cn.pet.lin.domain.pet.Animal;
+import cn.pet.lin.domain.pet.AnimalEx;
 import cn.pet.lin.service.pet.IAnimalService;
 import cn.pet.lin.service.pet.ICategoryService;
 import cn.pet.lin.utils.CommonUtils;

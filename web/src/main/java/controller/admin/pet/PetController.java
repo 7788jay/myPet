@@ -2,11 +2,11 @@ package controller.admin.pet;
 
 import cn.pet.lin.BizData4Page;
 import cn.pet.lin.common.ResultDTO;
-import cn.pet.lin.param.pet.CategoryParam;
-import cn.pet.lin.param.pet.PetParam;
-import cn.pet.lin.pet.Category;
-import cn.pet.lin.pet.Pet;
-import cn.pet.lin.pet.PetEx;
+import cn.pet.lin.domain.param.pet.CategoryParam;
+import cn.pet.lin.domain.param.pet.PetParam;
+import cn.pet.lin.domain.pet.Category;
+import cn.pet.lin.domain.pet.Pet;
+import cn.pet.lin.domain.pet.PetEx;
 import cn.pet.lin.service.pet.ICategoryService;
 import cn.pet.lin.service.pet.IPetService;
 import cn.pet.lin.utils.CommonUtils;

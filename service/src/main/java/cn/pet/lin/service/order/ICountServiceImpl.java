@@ -1,7 +1,7 @@
 package cn.pet.lin.service.order;
 
 import cn.pet.lin.dao.order.ICountDAO;
-import cn.pet.lin.order.Count;
+import cn.pet.lin.domain.order.Count;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

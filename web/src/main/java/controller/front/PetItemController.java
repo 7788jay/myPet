@@ -1,7 +1,7 @@
 package controller.front;
 
-import cn.pet.lin.param.pet.PetParam;
-import cn.pet.lin.pet.Pet;
+import cn.pet.lin.domain.param.pet.PetParam;
+import cn.pet.lin.domain.pet.Pet;
 import cn.pet.lin.service.pet.IPetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

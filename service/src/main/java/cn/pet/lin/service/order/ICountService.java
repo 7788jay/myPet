@@ -1,14 +1,12 @@
 package cn.pet.lin.service.order;
 
-import cn.pet.lin.order.Count;
-import org.springframework.stereotype.Service;
+import cn.pet.lin.domain.order.Count;
 
 import java.util.List;
 
 /**
  * Created by lwt on 2016/4/9.
  */
-@Service
 public interface ICountService {
 
     /**

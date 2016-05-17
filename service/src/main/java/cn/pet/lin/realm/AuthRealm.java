@@ -1,7 +1,7 @@
 package cn.pet.lin.realm;
 
-import cn.pet.lin.param.user.UserParam;
-import cn.pet.lin.user.User;
+import cn.pet.lin.domain.param.user.UserParam;
+import cn.pet.lin.domain.user.User;
 import cn.pet.lin.service.user.IUserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

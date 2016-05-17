@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.pet.lin.dao.order.IItemDAO">
     <!-- 在这里存放用户自定义的映射配置（注：ItemDAO.xml里各节点的ID不能在这里重复出现）  -->
-    <resultMap id="petResultMap" type="cn.pet.lin.pet.Pet">
+    <resultMap id="petResultMap" type="cn.pet.lin.domain.pet.Pet">
         <!-- 属性名和数据库列名映射 -->
         <id property="id" column="pet_id"/>
         <result property="code" column="pet_code"/>
@@ -19,7 +19,7 @@
         <result property="categoryCode" column="categoryCode"/>
     </resultMap>
 
-    <resultMap id="itemExResultMap" type="cn.pet.lin.order.ItemEx">
+    <resultMap id="itemExResultMap" type="cn.pet.lin.domain.order.ItemEx">
         <id property="id" column="item_id"/>
         <result property="code" column="item_code"/>
         <result property="orderCode" column="orderCode"/>
@@ -27,7 +27,7 @@
         <result property="quantity" column="quantity"/>
         <result property="totalPrice" column="totalPrice"/>
         <!-- 将article的user属性映射到userResultMap -->
-        <association property="pet" javaType="cn.pet.lin.pet.Pet" resultMap="petResultMap"/>
+        <association property="pet" javaType="cn.pet.lin.domain.pet.Pet" resultMap="petResultMap"/>
     </resultMap>
 
     <select id="queryByOrderCode" resultMap="itemExResultMap">

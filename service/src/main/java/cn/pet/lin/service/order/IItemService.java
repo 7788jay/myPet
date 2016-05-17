@@ -16,8 +16,8 @@
 package cn.pet.lin.service.order;
 
 import cn.pet.lin.dao.order.IItemDAO;
-import cn.pet.lin.order.Item;
-import cn.pet.lin.order.ItemEx;
+import cn.pet.lin.domain.order.Item;
+import cn.pet.lin.domain.order.ItemEx;
 import cn.pet.lin.service.IBaseService;
 
 import java.util.List;

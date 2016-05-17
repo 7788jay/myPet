@@ -2,8 +2,8 @@ package controller.admin.pet;
 
 import cn.pet.lin.BizData4Page;
 import cn.pet.lin.common.ResultDTO;
-import cn.pet.lin.param.pet.CategoryParam;
-import cn.pet.lin.pet.Category;
+import cn.pet.lin.domain.param.pet.CategoryParam;
+import cn.pet.lin.domain.pet.Category;
 import cn.pet.lin.service.pet.ICategoryService;
 import cn.pet.lin.utils.CommonUtils;
 import cn.pet.lin.utils.PageUtils;

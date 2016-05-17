@@ -2,8 +2,8 @@ package controller.admin.user;
 
 import cn.pet.lin.BizData4Page;
 import cn.pet.lin.common.ResultDTO;
-import cn.pet.lin.param.user.UserParam;
-import cn.pet.lin.user.User;
+import cn.pet.lin.domain.param.user.UserParam;
+import cn.pet.lin.domain.user.User;
 import cn.pet.lin.service.user.IUserService;
 import cn.pet.lin.utils.PageUtils;
 import cn.pet.lin.utils.enums.ERRORMSG;

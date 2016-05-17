@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.pet.lin.dao.order.ICountDAO">
 
-    <select id="CountOrderByDays" resultType="cn.pet.lin.order.Count">
+    <select id="CountOrderByDays" resultType="cn.pet.lin.domain.order.Count">
         SELECT
         FROM_UNIXTIME(createTime/1000,'%Y-%m-%d') as date,
         count(DISTINCT oo.code) as orderSum,

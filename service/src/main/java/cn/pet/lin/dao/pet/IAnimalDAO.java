@@ -16,8 +16,8 @@
 package cn.pet.lin.dao.pet;
 
 import cn.pet.lin.dao.IBaseDAO;
-import cn.pet.lin.pet.Animal;
-import cn.pet.lin.pet.AnimalEx;
+import cn.pet.lin.domain.pet.Animal;
+import cn.pet.lin.domain.pet.AnimalEx;
 
 import java.util.List;
 

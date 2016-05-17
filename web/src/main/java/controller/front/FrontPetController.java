@@ -1,11 +1,11 @@
 package controller.front;
 
 import cn.pet.lin.BizData4Page;
-import cn.pet.lin.param.pet.PetParam;
-import cn.pet.lin.param.pet.PetParamEx;
-import cn.pet.lin.pet.CategoryEx;
-import cn.pet.lin.pet.Pet;
-import cn.pet.lin.pet.PetEx;
+import cn.pet.lin.domain.param.pet.PetParam;
+import cn.pet.lin.domain.param.pet.PetParamEx;
+import cn.pet.lin.domain.pet.CategoryEx;
+import cn.pet.lin.domain.pet.Pet;
+import cn.pet.lin.domain.pet.PetEx;
 import cn.pet.lin.service.pet.ICategoryService;
 import cn.pet.lin.service.pet.IPetService;
 import cn.pet.lin.utils.PageUtils;

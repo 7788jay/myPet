@@ -16,7 +16,7 @@
 package cn.pet.lin.dao.user;
 
 import cn.pet.lin.dao.IBaseDAO;
-import cn.pet.lin.user.Delivery;
+import cn.pet.lin.domain.user.Delivery;
 
  /**
  * 《用户收货地址表》 数据访问接口

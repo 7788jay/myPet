@@ -15,7 +15,7 @@
 
 package cn.pet.lin.service.user;
 
-import cn.pet.lin.user.User;
+import cn.pet.lin.domain.user.User;
 import cn.pet.lin.dao.user.IUserDAO;
 import cn.pet.lin.service.IBaseService;
 

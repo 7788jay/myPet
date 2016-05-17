@@ -16,8 +16,8 @@
 package cn.pet.lin.dao.pet;
 
 import cn.pet.lin.dao.IBaseDAO;
-import cn.pet.lin.pet.Pet;
-import cn.pet.lin.pet.PetEx;
+import cn.pet.lin.domain.pet.Pet;
+import cn.pet.lin.domain.pet.PetEx;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

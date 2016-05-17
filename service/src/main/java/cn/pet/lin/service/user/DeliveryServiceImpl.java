@@ -16,7 +16,7 @@
 package cn.pet.lin.service.user;
 
 import cn.pet.lin.dao.user.IDeliveryDAO;
-import cn.pet.lin.user.Delivery;
+import cn.pet.lin.domain.user.Delivery;
 import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

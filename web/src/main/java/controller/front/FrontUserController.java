@@ -1,9 +1,9 @@
 package controller.front;
 
 import cn.pet.lin.common.ResultDTO;
-import cn.pet.lin.param.user.DeliveryParam;
-import cn.pet.lin.user.Delivery;
-import cn.pet.lin.user.User;
+import cn.pet.lin.domain.param.user.DeliveryParam;
+import cn.pet.lin.domain.user.Delivery;
+import cn.pet.lin.domain.user.User;
 import cn.pet.lin.service.user.IDeliveryService;
 import cn.pet.lin.service.user.IUserService;
 import cn.pet.lin.utils.CommonUtils;

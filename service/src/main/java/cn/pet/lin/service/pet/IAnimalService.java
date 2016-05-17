@@ -15,9 +15,9 @@
 
 package cn.pet.lin.service.pet;
 
-import cn.pet.lin.pet.Animal;
+import cn.pet.lin.domain.pet.Animal;
 import cn.pet.lin.dao.pet.IAnimalDAO;
-import cn.pet.lin.pet.AnimalEx;
+import cn.pet.lin.domain.pet.AnimalEx;
 import cn.pet.lin.service.IBaseService;
 
 import java.util.List;

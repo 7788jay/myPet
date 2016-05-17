@@ -92,7 +92,7 @@
 	</select>
 
 	<!--查询销量高的宠物-->
-	<select id="queryPetOrderSum" resultType="cn.pet.lin.pet.PetEx">
+	<select id="queryPetOrderSum" resultType="cn.pet.lin.domain.pet.PetEx">
 		SELECT
 			pp.*, sum(oi.quantity) AS orderSum
 		FROM

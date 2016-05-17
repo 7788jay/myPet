@@ -16,8 +16,8 @@
 package cn.pet.lin.service.order;
 
 import cn.pet.lin.dao.order.IOrdersDAO;
-import cn.pet.lin.order.Orders;
-import cn.pet.lin.order.OrdersEx;
+import cn.pet.lin.domain.order.Orders;
+import cn.pet.lin.domain.order.OrdersEx;
 import cn.pet.lin.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

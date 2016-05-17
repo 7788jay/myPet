@@ -1,7 +1,7 @@
 package controller;
 
 import cn.pet.lin.common.ResultDTO;
-import cn.pet.lin.user.User;
+import cn.pet.lin.domain.user.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;

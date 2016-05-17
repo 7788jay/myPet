@@ -1,7 +1,7 @@
 package controller.admin.count;
 
-import cn.pet.lin.order.Count;
-import cn.pet.lin.pet.PetEx;
+import cn.pet.lin.domain.order.Count;
+import cn.pet.lin.domain.pet.PetEx;
 import cn.pet.lin.service.order.ICountService;
 import cn.pet.lin.service.pet.IPetService;
 import org.springframework.beans.factory.annotation.Autowired;

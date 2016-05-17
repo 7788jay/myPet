@@ -1,6 +1,6 @@
 package cn.pet.lin.service.pet;
 
-import cn.pet.lin.pet.AnimalEx;
+import cn.pet.lin.domain.pet.AnimalEx;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

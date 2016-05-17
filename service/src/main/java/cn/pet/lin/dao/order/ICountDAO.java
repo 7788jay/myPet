@@ -1,6 +1,6 @@
 package cn.pet.lin.dao.order;
 
-import cn.pet.lin.order.Count;
+import cn.pet.lin.domain.order.Count;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -16,8 +16,8 @@
 package cn.pet.lin.dao.order;
 
 import cn.pet.lin.dao.IBaseDAO;
-import cn.pet.lin.order.Item;
-import cn.pet.lin.order.ItemEx;
+import cn.pet.lin.domain.order.Item;
+import cn.pet.lin.domain.order.ItemEx;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

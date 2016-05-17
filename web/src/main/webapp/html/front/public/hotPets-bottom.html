@@ -11,7 +11,9 @@
                 </div>
                 <h3><a ms-attr-href="item.html?code={{el.code}}">{{el.name}}</a></h3>
                 <div class="pi-price">￥{{el.price}}</div>
-                <a href="javascript:;" ms-click="addToCart(el.code)" class="btn btn-default add2cart">加入购物车</a>
+                <a ms-if="el.status && el.quantity" href="javascript:;" ms-click="addToCart(el.code)" class="btn btn-default add2cart">加入购物车</a>
+                <a ms-if="!el.quantity" href="javascript:;" class="btn btn-default add2cart">暂时缺货</a>
+                <a ms-if="!el.status" href="javascript:;" class="btn btn-default add2cart">商品已下架</a>
                 <div class="sticker sticker-sale"></div>
             </div>
         </div>
