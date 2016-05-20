@@ -1,4 +1,4 @@
-package controller.admin.user;
+package cn.pet.lin.controller.admin.user;
 
 import cn.pet.lin.BizData4Page;
 import cn.pet.lin.common.ResultDTO;

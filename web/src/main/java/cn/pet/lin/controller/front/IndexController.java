@@ -1,4 +1,4 @@
-package controller.front;
+package cn.pet.lin.controller.front;
 
 import cn.pet.lin.domain.param.pet.PetParam;
 import cn.pet.lin.domain.pet.Pet;

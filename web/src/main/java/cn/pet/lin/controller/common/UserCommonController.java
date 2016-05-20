@@ -1,4 +1,4 @@
-package controller.common;
+package cn.pet.lin.controller.common;
 
 import cn.pet.lin.domain.user.User;
 import org.apache.shiro.SecurityUtils;

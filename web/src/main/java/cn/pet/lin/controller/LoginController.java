@@ -1,4 +1,4 @@
-package controller;
+package cn.pet.lin.controller;
 
 import cn.pet.lin.common.ResultDTO;
 import cn.pet.lin.domain.user.User;

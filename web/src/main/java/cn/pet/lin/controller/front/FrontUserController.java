@@ -1,4 +1,4 @@
-package controller.front;
+package cn.pet.lin.controller.front;
 
 import cn.pet.lin.common.ResultDTO;
 import cn.pet.lin.domain.param.user.DeliveryParam;

@@ -1,4 +1,4 @@
-package controller.admin.count;
+package cn.pet.lin.controller.admin.count;
 
 import cn.pet.lin.domain.order.Count;
 import cn.pet.lin.domain.pet.PetEx;
