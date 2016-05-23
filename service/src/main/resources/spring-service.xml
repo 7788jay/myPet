@@ -66,5 +66,6 @@
     </bean>
 
     <import resource="classpath:spring-shiro.xml"/>
+    <import resource="classpath:dubbo/dubbo-provider.xml"/>
 
 </beans>

@@ -1,6 +1,4 @@
 configure(allprojects) { project ->
-    ext.thinkjoyCommonVersion = "0.1.42-SNAPSHOT"
-    ext.thinkjoyCloudstackVersion = "0.0.29-SNAPSHOT"
     ext.springVersion = "4.1.0.RELEASE"
     ext.mysqlConnectorVersion = "5.1.26"
     ext.mybatisVersion = "3.2.2"
