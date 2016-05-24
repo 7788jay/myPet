@@ -1,5 +1,6 @@
 package cn.pet.lin.controller;
 
+import cn.pet.lin.api.rpc.IUserReader4Rpc;
 import cn.pet.lin.common.ResultDTO;
 import cn.pet.lin.domain.user.User;
 import org.apache.shiro.SecurityUtils;
@@ -8,6 +9,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/admin/login")
 public class LoginController {
+
+    @Autowired
+    IUserReader4Rpc userReader4Rpc;
 
     /**
      * 登录验证

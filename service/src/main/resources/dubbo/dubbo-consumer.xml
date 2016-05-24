@@ -8,7 +8,10 @@
 		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <description>qky dubbo 服务消费配置</description>
     <!-- 应用信息-->
-    <dubbo:application name="service"/>
+    <dubbo:application name="petConsumer"/>
     <!-- 注册中心暴露服务地址 -->
-    <dubbo:registry address="${dubbo_zk_url}" file="/tmp/dubbo.cache"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.220.128:2181" file="/tmp/dubbo.cache"/>
+
+    <dubbo:reference id="userReader4Rpc" interface="cn.pet.lin.api.rpc.IUserReader4Rpc" check="false"
+                     timeout="60000"/>
 </beans>
