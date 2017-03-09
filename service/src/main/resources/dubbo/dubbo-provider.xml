@@ -9,8 +9,6 @@
 
     <description>服务提供配置</description>
 
-    <dubbo:application name="myPet"/>
-
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry protocol="zookeeper" address="192.168.220.128:2181" />
 

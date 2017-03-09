@@ -7,8 +7,10 @@
 
 		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <description>qky dubbo 服务消费配置</description>
+
     <!-- 应用信息-->
-    <dubbo:application name="petConsumer"/>
+    <dubbo:application name="myPet"/>
+
     <!-- 注册中心暴露服务地址 -->
     <dubbo:registry protocol="zookeeper" address="192.168.220.128:2181" file="/tmp/dubbo.cache"/>
 
