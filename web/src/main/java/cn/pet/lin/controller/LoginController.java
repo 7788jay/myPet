@@ -3,6 +3,7 @@ package cn.pet.lin.controller;
 import cn.pet.lin.api.rpc.IUserReader4Rpc;
 import cn.pet.lin.common.ResultDTO;
 import cn.pet.lin.domain.user.User;
+import cn.pet.lin.service.user.IUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
 
     @Autowired
-    IUserReader4Rpc userReader4Rpc;
+    IUserService userService;
 
     /**
      * 登录验证
